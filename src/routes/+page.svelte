@@ -56,8 +56,19 @@
 </section>
 
 <section id="body-main" class="p-4">
-   <div id="main">
-
+   <div id="main" class="panel-group row">
+      <div id="dataset-panel" class="panel panel-default col">
+         <div class="panel-heading text-center">DATASET</div>
+         <div class="panel-body">Content</div>
+      </div>
+      <div class="panel panel-default col-1">
+      </div>
+      <div id="settings-panel" class="panel panel-default col">
+         <div class="panel-heading text-center">ANALYZER SETTINGS</div>
+         <div class="panel-body">Content</div>
+         <div class="panel-heading text-center">OUTPUT SETTINGS</div>
+         <div class="panel-body">Content</div>
+      </div>
    </div>
 </section>
 
@@ -76,7 +87,7 @@
       background-color: #8B5DFF;
    }
 
-   h1, h5 {
+   h1, h5, .panel-heading {
       color: #FFF7D1;
       -webkit-text-stroke-width: 1px;
       -webkit-text-stroke-color: #000000;
@@ -87,8 +98,16 @@
       -webkit-text-stroke-width: 0.75px;
    }
 
-   #main-sidebar, #footer-main {
+   .panel-heading {
+      font-size: 33px;
+   }
+
+   #main-sidebar, #footer-main, #dataset-panel, #settings-panel {
       background-color: #6A42C2;
+   }
+
+   #dataset-panel, #settings-panel {
+      border-radius: 25px;
    }
 
    /* The side navigation menu */
