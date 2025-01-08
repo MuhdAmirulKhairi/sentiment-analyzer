@@ -36,7 +36,7 @@
       </div>
    
       <!-- svelte-ignore a11y_consider_explicit_label -->
-      <button id="openBtn" type="button" on:click="{openNav()}">
+      <button  id="openBtn" type="button" on:click="{openNav()}">
          &#9776;
       </button>
 
@@ -59,15 +59,54 @@
    <div id="main" class="panel-group row">
       <div id="dataset-panel" class="panel panel-default col">
          <div class="panel-heading text-center">DATASET</div>
-         <div class="panel-body">Content</div>
+            <div class="panel-body d-flex justify-content-center">
+               <form>
+                  <div class="form-group mb-3 text-center">
+                     <label class="panel-texts" for="csv-file-upload">Upload your dataset...</label>
+                     <input 
+                        type="file" 
+                        id="csv-file-upload"
+                        class="form-control"
+                        accept=".csv"
+                        required/>
+                  </div>
+               </form>
+            </div>
       </div>
       <div class="panel panel-default col-1">
       </div>
       <div id="settings-panel" class="panel panel-default col">
-         <div class="panel-heading text-center">ANALYZER SETTINGS</div>
-         <div class="panel-body">Content</div>
-         <div class="panel-heading text-center">OUTPUT SETTINGS</div>
-         <div class="panel-body">Content</div>
+         <form class="form-group p-2">
+            <div class="panel-heading text-center">ANALYZER SETTINGS</div>
+               <div class="panel-body d-block justify-content-center">
+                  <label class="panel-texts col-8 text-center p-2" for="num-epochs">Number of epochs</label>
+                  <input class="analyzer-inputs col-3" type="number" id="num-epochs" min="1" max="20"/>
+
+                  <label class="panel-texts col-8 text-center p-2" for="domain-select">Domain</label>
+                  <select class="analyzer-inputs col-3" id="domain-select">
+                     <option value="social-media">Social media</option>
+                     <option value="customer-reviews">Customer reviews</option>
+                     <option value="online-forums">Online forums</option>
+                     <option value="education">Education</option>
+                     <option value="fiction">Fiction</option>
+                  </select>
+               </div>
+            <div class="panel-heading text-center">OUTPUT SETTINGS</div>
+               <div class="panel-body d-block justify-content-center">
+                  <label class="panel-texts col-8 text-center p-2" for="sort-by">Sort by</label>
+                  <select class="analyzer-inputs col-3" id="sort-by">
+                     <option value="positive">Positive</option>
+                     <option value="negative">Negative</option>
+                     <option value="neutral">Neutral</option>
+                  </select>
+
+                  <label class="panel-texts col-8 text-center p-2" for="num-words">Number of words</label>
+                  <input class="analyzer-inputs col-3" type="number" id="num-words" min="1" max="50"/>
+               </div>
+               <div class="text-center p-2">
+                  <button class="px-4 py-2" id="run-analyzer" type="submit">Run Analyzer</button>
+               </div>
+         </form>
       </div>
    </div>
 </section>
@@ -152,6 +191,7 @@
 
    /* Position and style the close button (top right corner) */
    .sidebarNav .closeBtn {
+      position: absolute;
       top: 10px;
       left: 10px;
       font-size: 40px;
@@ -171,7 +211,7 @@
       .sidebarNav a {font-size: 18px;}
    }
 
-   button {
+   #openBtn {
       position: absolute;
       transition-duration: 0.5s;
       background-color: #8B5DFF;
@@ -179,12 +219,32 @@
       padding: 0;
    }
 
+   #run-analyzer {
+      transition-duration: 0.5s;
+      color: #F5F5F5;
+      background-color: #2C2C2C;
+      border-radius: 11px;
+   }
+
    button:hover {
-      color: #f1f1f1;
+      color: #F1F1F1;
    }
 
    #openBtn {
       font-size: 50px;
       border: none;
+   }
+
+   .panel-texts {
+      color: #D9D9D9;
+      font-size: 20px;
+      -webkit-text-stroke-width: 0.25px;
+      -webkit-text-stroke-color: #000000;
+      text-shadow: 1px 2px 4px #000000;
+      padding-bottom: 10px;
+   }
+
+   .analyzer-inputs {
+      border-radius: 10px;
    }
 </style>
