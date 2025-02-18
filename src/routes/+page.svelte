@@ -1,30 +1,33 @@
 <script>
-   /* Set the width of the side navigation to 250px */
+   import { onMount } from "svelte";
+   import Dataset from "../lib/dataset.svelte";
+   
+   // Set the width of the side navigation to 300px when closing the nav bar
    function openNav() {
-      document.getElementById("main-sidebar").style.width = "250px";
-      document.getElementById("header-main").style.marginLeft = "250px";
-      document.getElementById("body-main").style.marginLeft = "250px";
-      document.getElementById("footer-main").style.marginLeft = "250px";
+      document.getElementById("main-sidebar").style.width = "300px";
+      document.getElementById("header-main").style.marginLeft = "300px";
+      document.getElementById("body-main").style.marginLeft = "300px";
+      document.getElementById("footer-main").style.marginLeft = "300px";
 
-      const openBtn = document.getElementById("openBtn");
-      openBtn.remove();
+      document.getElementById("openBtn").style.display = "none"; //Make the open navbar disappear
    }
 
-   /* Set the width of the side navigation to 0 */
+   // Set the width of the side navigation to 0 when closing the nav bar
    function closeNav() {
       document.getElementById("main-sidebar").style.width = "0";
       document.getElementById("header-main").style.marginLeft = "0";
       document.getElementById("body-main").style.marginLeft = "0";
       document.getElementById("footer-main").style.marginLeft = "0";
 
-      const closeBtn = document.getElementById("closeBtn");
+      document.getElementById("openBtn").style.display = "inline"; //Make the open navbar reappear
    }
 </script>
 
+<!-- Header of the applicaiton -->
 <section id="header-main" class="p-4">
    <header>
       <div id=main-sidebar class="sidebarNav">
-         <button type="button" class="closeBtn" on:click="{closeNav()}">
+         <button type="button" class="closeBtn" on:click="{closeNav}">
             &#9776;
          </button>
          <div id=history-sidebar>
@@ -34,12 +37,10 @@
             <a>History 1</a>
          </div>
       </div>
-   
-      <!-- svelte-ignore a11y_consider_explicit_label -->
-      <button  id="openBtn" type="button" on:click="{openNav()}">
+
+      <button  id="openBtn" type="button" on:click="{openNav}">
          &#9776;
       </button>
-
       <div>
          <h1 
             style="font-family: Roboto, Helvetica, sans-serif"
@@ -55,34 +56,27 @@
    </header>
 </section>
 
+<!-- Body of the main page, where it hosts the dataset upload and settings -->
 <section id="body-main" class="p-4">
    <div id="main" class="panel-group row">
-      <div id="dataset-panel" class="panel panel-default col">
+      <div id="dataset-panel" class="panel panel-default d-block col">
          <div class="panel-heading text-center">DATASET</div>
-            <div class="panel-body d-flex justify-content-center">
-               <form>
-                  <div class="form-group mb-3 text-center">
-                     <label class="panel-texts" for="csv-file-upload">Upload your dataset...</label>
-                     <input 
-                        type="file" 
-                        id="csv-file-upload"
-                        class="form-control"
-                        accept=".csv"
-                        required/>
-                  </div>
-               </form>
+            <div class="panel-body justify-content-center">
+               <label class="panel-texts col-12 text-center" for="csv-file-upload">Upload your dataset...</label>
+               <Dataset />
             </div>
       </div>
-      <div class="panel panel-default col-1">
-      </div>
-      <div id="settings-panel" class="panel panel-default col">
-         <form class="form-group p-2">
+      <div class="panel panel-default col-1"></div>
+      <div id="settings-panel" class="panel panel-default d-block col">
+         <form class="form-group">
             <div class="panel-heading text-center">ANALYZER SETTINGS</div>
-               <div class="panel-body d-block justify-content-center">
-                  <label class="panel-texts col-8 text-center p-2" for="num-epochs">Number of epochs</label>
+               <div class="panel-body justify-content-center">
+                  <label class="panel-texts col-8 text-start p-2" for="num-epochs">Number of epochs</label>
+                  <i style="font-size:24px">&#63;</i>
                   <input class="analyzer-inputs col-3" type="number" id="num-epochs" min="1" max="20"/>
 
-                  <label class="panel-texts col-8 text-center p-2" for="domain-select">Domain</label>
+                  <label class="panel-texts col-8 text-start p-2" for="domain-select">Domain</label>
+                  <i style="font-size:24px" class="fa">&#63;</i>
                   <select class="analyzer-inputs col-3" id="domain-select">
                      <option value="social-media">Social media</option>
                      <option value="customer-reviews">Customer reviews</option>
@@ -93,30 +87,33 @@
                </div>
             <div class="panel-heading text-center">OUTPUT SETTINGS</div>
                <div class="panel-body d-block justify-content-center">
-                  <label class="panel-texts col-8 text-center p-2" for="sort-by">Sort by</label>
+                  <label class="panel-texts col-8 text-start p-2" for="sort-by">Sort by</label>
+                  <i style="font-size:24px" class="fa">&#63;</i>
                   <select class="analyzer-inputs col-3" id="sort-by">
                      <option value="positive">Positive</option>
                      <option value="negative">Negative</option>
                      <option value="neutral">Neutral</option>
                   </select>
 
-                  <label class="panel-texts col-8 text-center p-2" for="num-words">Number of words</label>
+                  <label class="panel-texts col-8 text-start p-2" for="num-words">Number of words</label>
+                  <i style="font-size:24px" class="fa">&#63;</i>
                   <input class="analyzer-inputs col-3" type="number" id="num-words" min="1" max="50"/>
                </div>
                <div class="text-center p-2">
-                  <button class="px-4 py-2" id="run-analyzer" type="submit">Run Analyzer</button>
+                  <button class="px-4 py-1" id="run-analyzer" type="submit">Run Analyzer</button>
                </div>
          </form>
       </div>
    </div>
 </section>
 
+<!-- Footer which shows the related info at the bottom -->
 <section id="footer-main" class="p-4">
    <footer>
       <p
          style="font-family: Roboto, Helvetica, sans-serif"
          class="d-block text-center m-0">
-         2024 | Sentiment Analyzer by Amirul Khairi
+         2025 | Sentiment Analyzer by Amirul Khairi
       </p>
    </footer>
 </section>
@@ -134,7 +131,7 @@
    }
 
    h5 {
-      -webkit-text-stroke-width: 0.75px;
+      -webkit-text-stroke-width: 0.6px;
    }
 
    .panel-heading {
@@ -147,6 +144,7 @@
 
    #dataset-panel, #settings-panel {
       border-radius: 25px;
+      padding: 20px;
    }
 
    /* The side navigation menu */
@@ -157,7 +155,7 @@
       z-index: 1; /* Stay on top */
       top: 0; /* Stay at the top */
       left: 0;
-      background-color: #111; /* Black*/
+      background-color: #6A42C2; 
       overflow-x: hidden; /* Disable horizontal scroll */
       padding-top: 20px; /* Place content 60px from the top */
       transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
@@ -173,6 +171,11 @@
       transition: 0.3s;
    }
 
+   /* When you mouse over the navigation links, change their color */
+   .sidebarNav a:hover {
+      color: #f1f1f1;
+   }
+
    h2 {
       color: #FFF7D1;
       -webkit-text-stroke-width: 0.95px;
@@ -184,13 +187,8 @@
       font-size: 30px;
    }
 
-   /* When you mouse over the navigation links, change their color */
-   .sidebarNav a:hover {
-      color: #f1f1f1;
-   }
-
    /* Position and style the close button (top right corner) */
-   .sidebarNav .closeBtn {
+   .closeBtn {
       position: absolute;
       top: 10px;
       left: 10px;
