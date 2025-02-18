@@ -1,6 +1,8 @@
 <script>
    import { onMount } from "svelte";
+   import { goto } from "$app/navigation";
    import Dataset from "../lib/dataset.svelte";
+   import Results from "./results/+page.svelte";
    
    // Set the width of the side navigation to 300px when closing the nav bar
    function openNav() {
@@ -23,7 +25,7 @@
    }
 </script>
 
-<!-- Header of the applicaiton -->
+<!-- Header of the application -->
 <section id="header-main" class="p-4">
    <header>
       <div id=main-sidebar class="sidebarNav">
@@ -71,7 +73,7 @@
          <form class="form-group">
             <div class="panel-heading text-center">ANALYZER SETTINGS</div>
                <div class="panel-body justify-content-center">
-                  <label class="panel-texts col-8 text-start p-2" for="num-epochs">Number of epochs</label>
+                  <label class="panel-texts col-8 text-start p-2" for="num-epochs">Number of runs</label>
                   <i style="font-size:24px">&#63;</i>
                   <input class="analyzer-inputs col-3" type="number" id="num-epochs" min="1" max="20"/>
 
@@ -100,14 +102,21 @@
                   <input class="analyzer-inputs col-3" type="number" id="num-words" min="1" max="50"/>
                </div>
                <div class="text-center p-2">
-                  <button class="px-4 py-1" id="run-analyzer" type="submit">Run Analyzer</button>
+                  <button
+                     class="px-4 py-1"
+                     id="run-analyzer"
+                     type="submit"
+                     on:click={"/results"}
+                     >
+                     Run Analyzer
+                  </button>
                </div>
          </form>
       </div>
    </div>
 </section>
 
-<!-- Footer which shows the related info at the bottom -->
+<!-- Footer which shows related info at the bottom -->
 <section id="footer-main" class="p-4">
    <footer>
       <p

@@ -64,8 +64,7 @@
       max-height: 200px;
       max-width: 567px;
       overflow-y: auto;
-      display: block;
-      position: relative;
+      border-radius: 10px;
    }
    
    table {
