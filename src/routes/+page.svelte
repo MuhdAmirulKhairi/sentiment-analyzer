@@ -2,6 +2,9 @@
    import { onMount } from "svelte";
    import { goto } from "$app/navigation";
    import Dataset from "$lib/dataset.svelte";
+   import History from "$lib/history.svelte";
+   import AnalyzerSettings from "$lib/analyzerSettings.svelte";
+   import OutputSettings from "$lib/outputSettings.svelte";
    
    // Set the width of the side navigation to 300px when closing the nav bar
    function openNav() {
@@ -35,7 +38,8 @@
             <h2 style="font-family: Roboto, Helvetica, sans-serif">
                HISTORY
             </h2>
-            <a>History 1</a>
+            <!-- svelte-ignore a11y_missing_attribute -->
+            <a><History /></a>
          </div>
       </div>
 
@@ -72,33 +76,11 @@
          <form class="form-group">
             <div class="panel-heading text-center">ANALYZER SETTINGS</div>
                <div class="panel-body justify-content-center">
-                  <label class="panel-texts col-8 text-start p-2" for="num-epochs">Number of runs</label>
-                  <i style="font-size:24px">&#63;</i>
-                  <input class="analyzer-inputs col-3" type="number" id="num-epochs" min="1" max="20"/>
-
-                  <label class="panel-texts col-8 text-start p-2" for="domain-select">Domain</label>
-                  <i style="font-size:24px" class="fa">&#63;</i>
-                  <select class="analyzer-inputs col-3" id="domain-select">
-                     <option value="social-media">Social media</option>
-                     <option value="customer-reviews">Customer reviews</option>
-                     <option value="online-forums">Online forums</option>
-                     <option value="education">Education</option>
-                     <option value="fiction">Fiction</option>
-                  </select>
+                  <AnalyzerSettings />
                </div>
             <div class="panel-heading text-center">OUTPUT SETTINGS</div>
                <div class="panel-body d-block justify-content-center">
-                  <label class="panel-texts col-8 text-start p-2" for="sort-by">Sort by</label>
-                  <i style="font-size:24px" class="fa">&#63;</i>
-                  <select class="analyzer-inputs col-3" id="sort-by">
-                     <option value="positive">Positive</option>
-                     <option value="negative">Negative</option>
-                     <option value="neutral">Neutral</option>
-                  </select>
-
-                  <label class="panel-texts col-8 text-start p-2" for="num-words">Number of words</label>
-                  <i style="font-size:24px" class="fa">&#63;</i>
-                  <input class="analyzer-inputs col-3" type="number" id="num-words" min="1" max="50"/>
+                  <OutputSettings />
                </div>
                <div class="text-center p-2">
                   <button
@@ -174,12 +156,11 @@
 
    /* The navigation menu links */
    .sidebarNav a, h2 {
-      padding: 8px 8px 8px 32px;
+      padding: 6px 15px 6px 15px;
       text-decoration: none;
-      font-size: 25px;
+      font-size: 15px;
       color: #000000;
       display: block;
-      transition: 0.3s;
    }
 
    /* When you mouse over the navigation links, change their color */
