@@ -36,45 +36,53 @@
 />
 <div id="CSVTable">
    {#if CSVdata.length > 0}
-   <div class="table-container">
-      <table>
-         <thead>
-            <tr>
-               {#each Object.keys(CSVdata[0]) as head}
-                  <th>{head}</th>
-               {/each}
-            </tr>
-         </thead>
-         <tbody>
-            {#each CSVdata as row}
+   <div class="table-responsive">
+      <div class="scrollable-table">
+         <table class="table table-striped table-bordered">
+            <thead class="table-dark">
                <tr>
-                  {#each Object.values(row) as cell}
-                     <td>{cell}</td>
+                  {#each Object.keys(CSVdata[0]) as head}
+                     <th>{head}</th>
                   {/each}
                </tr>
-            {/each}
-         </tbody>
-      </table>
+            </thead>
+            <tbody class="table-light">
+               {#each CSVdata as row}
+                  <tr>
+                     {#each Object.values(row) as cell}
+                        <td>{cell}</td>
+                     {/each}
+                  </tr>
+               {/each}
+            </tbody>
+         </table>
+      </div>
    </div>
    {/if}
 </div>
 
 <style>
-   .table-container {
+   .scrollable-table {
       max-height: 200px;
-      max-width: 567px;
+      max-width: 560px;
       overflow-y: auto;
-      border-radius: 10px;
    }
    
    table {
       width: 100%;
       border-collapse: collapse;
    }
+
+   th {
+      position: sticky;
+      color: #D9D9D9;
+      border-color: #f4f4f4;
+      text-align: center;
+      font-family: Roboto, Helvetica, sans-serif;
+   }
    
-   th, td {
-      border: 1px solid #2C2C2C;
-      background-color: #f4f4f4;
+   td {
+      border-color: #f4f4f4;
       padding: 8px;
       text-align: center;
       font-family: Roboto, Helvetica, sans-serif;

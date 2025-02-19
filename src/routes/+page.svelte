@@ -1,8 +1,7 @@
 <script>
    import { onMount } from "svelte";
    import { goto } from "$app/navigation";
-   import Dataset from "../lib/dataset.svelte";
-   import Results from "./results/+page.svelte";
+   import Dataset from "$lib/dataset.svelte";
    
    // Set the width of the side navigation to 300px when closing the nav bar
    function openNav() {
@@ -153,7 +152,10 @@
 
    #dataset-panel, #settings-panel {
       border-radius: 25px;
-      padding: 20px;
+      padding-top: 40px;
+      padding-bottom: 40px;
+      padding-left: 20px;
+      padding-right: 20px;
    }
 
    /* The side navigation menu */
@@ -227,7 +229,6 @@
    }
 
    #run-analyzer {
-      transition-duration: 0.5s;
       color: #F5F5F5;
       background-color: #2C2C2C;
       border-radius: 11px;

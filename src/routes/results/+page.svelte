@@ -1,5 +1,7 @@
 <script>
    import { goto } from '$app/navigation';
+   import SentimentResult from '$lib/sentimentResult.svelte';
+   import Performance from '$lib/performance.svelte';
 </script>
 
 <!-- svelte-ignore a11y_consider_explicit_label -->
@@ -13,19 +15,23 @@
    <div class="panel-heading text-center m-0">RESULTS</div>
    <div id="sentiment-results" class="panel-group row my-3 mx-5">
       <div class="panel panel-default d-block col">
-         <label class="panel-texts col-12 text-center" for="csv-file-upload">Upload your dataset...</label>
+         <SentimentResult />
+      </div>
+   </div>
+   <div class="panel-heading text-center m-0">CHART</div>
+   <div id="sentiment-results" class="panel-group row my-3 mx-5">
+      <div class="panel panel-default d-block col">
       </div>
    </div>
    <div class="panel-heading text-center">PERFORMANCE</div>
    <div id="performance-results" class="panel-group row my-3 mx-5">
       <div class="panel panel-default d-block col">
-         <label class="panel-texts col-12 text-center" for="csv-file-upload">Upload your dataset...</label>
+         <Performance />
       </div>
    </div>
    <div class="panel-heading text-center">WORD CLOUD</div>
    <div id="wordcloud-results" class="panel-group row my-3 mx-5">
       <div class="panel panel-default d-block col">
-         <label class="panel-texts col-12 text-center" for="csv-file-upload">Upload your dataset...</label>
       </div>
    </div>
 </section>
@@ -42,7 +48,7 @@
 </section>
 
 <style>
-   #header-main, #results-main {
+   #results-main {
       background-color: #8B5DFF;
    }
 
