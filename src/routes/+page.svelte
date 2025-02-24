@@ -1,3 +1,10 @@
+<script context="module">
+   export async function load({fetch}) {
+      const response = await fetch("/.json");
+      const { users } = await response.json();
+   }
+</script>
+
 <script>
    import { onMount } from "svelte";
    import { goto } from "$app/navigation";
@@ -163,11 +170,6 @@
       font-size: 15px;
       color: #000000;
       display: block;
-   }
-
-   /* When you mouse over the navigation links, change their color */
-   .sidebarNav a:hover {
-      color: #f1f1f1;
    }
 
    h2 {
