@@ -1,3 +1,8 @@
+<script>
+   let sort_by = "none";
+   let word_cloud = 20;
+</script>
+
 <div id="output-settings">
    <table>
       <tbody>
@@ -6,7 +11,10 @@
                Sort by <i style="font-size:24px">&#63;</i>
             </td>
             <td class="right-align fs-4 col-3">
-               <select class="analyzer-inputs col-12" id="sort-by">
+               <select
+                  class="analyzer-inputs col-12"
+                  id="sort-by"
+                  bind:value={sort_by}>
                   <option value="positive">Positive</option>
                   <option value="negative">Negative</option>
                   <option value="neutral">Neutral</option>
@@ -18,7 +26,13 @@
                Number of words <i style="font-size:24px">&#63;</i>
             </td>
             <td class="right-align fs-4 col-3">
-               <input class="analyzer-inputs col-12" type="number" id="num-words" min="1" max="50"/>
+               <input
+                  class="analyzer-inputs col-12"
+                  type="number"
+                  id="num-words"
+                  min="20"
+                  max="60"
+                  bind:value={word_cloud}/>
             </td>
          </tr>
       </tbody>

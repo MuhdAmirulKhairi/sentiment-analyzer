@@ -6,7 +6,7 @@
    import AnalyzerSettings from "$lib/analyzerSettings.svelte";
    import OutputSettings from "$lib/outputSettings.svelte";
    
-   // Set the width of the side navigation to 300px when closing the nav bar
+   // Set the width of the side navigation to 300px when opening the nav bar
    function openNav() {
       document.getElementById("main-sidebar").style.width = "300px";
       document.getElementById("header-main").style.marginLeft = "300px";
@@ -31,20 +31,20 @@
 <section id="header-main" class="p-4">
    <header>
       <div id=main-sidebar class="sidebarNav">
+         <!-- svelte-ignore a11y_consider_explicit_label -->
          <button type="button" class="closeBtn" on:click="{closeNav}">
-            &#9776;
+            <img src="/navbarButton.png" alt="navbar button"/>
          </button>
          <div id=history-sidebar>
             <h2 style="font-family: Roboto, Helvetica, sans-serif">
                HISTORY
             </h2>
-            <!-- svelte-ignore a11y_missing_attribute -->
-            <a><History /></a>
+            <a href="/results"><History /></a>
          </div>
       </div>
 
       <button  id="openBtn" type="button" on:click="{openNav}">
-         &#9776;
+         <img src="/navbarButton.png" alt="navbar button"/>
       </button>
       <div>
          <h1 
@@ -83,14 +83,15 @@
                   <OutputSettings />
                </div>
                <div class="text-center p-2">
-                  <button
-                     class="px-4 py-1"
-                     id="run-analyzer"
-                     type="submit"
-                     on:click={"/results"}
-                     >
-                     Run Analyzer
-                  </button>
+                  <a href="/results">
+                     <button
+                        class="px-4 py-1"
+                        id="run-analyzer"
+                        type="submit"
+                        >
+                        Run Analyzer
+                     </button>
+                  </a>
                </div>
          </form>
       </div>
@@ -101,7 +102,8 @@
 <section id="footer-main" class="p-4">
    <footer>
       <p
-         style="font-family: Roboto, Helvetica, sans-serif"
+         style="font-family: Roboto, Helvetica, sans-serif;
+                color: #2C2C2C;"
          class="d-block text-center m-0">
          2025 | Sentiment Analyzer by Amirul Khairi
       </p>
@@ -174,19 +176,16 @@
       -webkit-text-stroke-color: #000000;
       text-shadow: 1px 2px 4px #000000;
       margin: 0;
-      padding-left: 65px;
-      padding-right: 65px;
+      padding-left: 90px;
+      padding-bottom: 30px;
       font-size: 30px;
    }
 
    /* Position and style the close button (top right corner) */
    .closeBtn {
       position: absolute;
-      top: 10px;
-      left: 10px;
-      font-size: 40px;
       border: none;
-      background-color: #6A42C2;
+      background: none;
    }
 
    /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
@@ -204,7 +203,7 @@
    #openBtn {
       position: absolute;
       transition-duration: 0.5s;
-      background-color: #8B5DFF;
+      background: none;
       float: left;
       padding: 0;
    }
@@ -231,9 +230,5 @@
       -webkit-text-stroke-color: #000000;
       text-shadow: 1px 2px 4px #000000;
       padding-bottom: 10px;
-   }
-
-   .analyzer-inputs {
-      border-radius: 10px;
    }
 </style>

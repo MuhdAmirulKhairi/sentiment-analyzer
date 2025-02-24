@@ -1,3 +1,8 @@
+<script>
+   let num_runs = 1;
+   let domain_select = "none";
+</script>
+
 <div id="analyzer-settings">
    <table>
       <tbody>
@@ -6,7 +11,13 @@
                Number of runs <i style="font-size:24px">&#63;</i>
             </td>
             <td class="right-align fs-4 col-5">
-               <input class="analyzer-inputs col-11" type="number" id="num-epochs" min="1" max="20"/>
+               <input 
+                  class="analyzer-inputs col-11"
+                  type="number"
+                  id="num-runs"
+                  min="1"
+                  max="20"
+                  bind:value={num_runs}/>
             </td>
          </tr>
          <tr>
@@ -14,7 +25,10 @@
                Domain <i style="font-size:24px">&#63;</i>
             </td>
             <td class="right-align fs-4 col-5">
-               <select class="analyzer-inputs col-11" id="domain-select">
+               <select
+                  class="analyzer-inputs col-11"
+                  id="domain-select"
+                  bind:value={domain_select}>
                   <option value="social-media">Social media</option>
                   <option value="customer-reviews">Customer reviews</option>
                   <option value="online-forums">Online forums</option>
