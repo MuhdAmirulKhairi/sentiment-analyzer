@@ -1,11 +1,17 @@
+<script>
+   export let download_link = "";
+</script>
+
 <div class="text-center p-2">
-   <button
-      class="px-4 py-1 download-button"
-      id="download-results"
-      type="submit"
-      >
-      Download
-   </button>
+   <a href={download_link} download>
+      <button
+         class="px-4 py-1 download-button"
+         id="download-results"
+         type="submit"
+         >
+         Download
+      </button>
+   </a>
 </div>
 
 <style>

@@ -12,20 +12,29 @@
       </thead>
       <tbody>
          <tr>
-            <td class="fs-2">Precision <i style="font-size:24px">&#63;</i></td>
+            <td class="fs-2">Precision 
+               <p style="font-size:26px; display: inline;"
+                  title="Measures how many predicted positives are correct">&#63;</p>
+            </td>
             <td class="right-align fs-2">0</td>
          </tr>
          <tr>
-            <td class="fs-2">Recall <i style="font-size:24px">&#63;</i></td>
+            <td class="fs-2">Recall 
+               <p style="font-size:26px; display: inline;"
+                  title="Measures how many actual positives are correctly identified">&#63;</p>
+            </td>
             <td class="right-align fs-2">0</td>
          </tr>
          <tr>
-            <td class="fs-2">F1 Score <i style="font-size:24px">&#63;</i></td>
+            <td class="fs-2">F1 Score 
+               <p style="font-size:26px; display: inline;"
+                  title="Evaluates system correctness and completeness in prediction">&#63;</p>
+            </td>
             <td class="right-align fs-2">0</td>
          </tr>
       </tbody>
    </table>
-   <DownloadButton />
+   <DownloadButton download_link=""/>
 </div>
 
 <style>

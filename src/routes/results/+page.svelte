@@ -1,7 +1,8 @@
 <script>
-   import { goto } from '$app/navigation';
    import SentimentResult from '$lib/sentimentResult.svelte';
+   import Chart from "$lib/chart.svelte";
    import Performance from '$lib/performance.svelte';
+   import WordCloud from '$lib/wordCloud.svelte';
 </script>
 
 <a href="/">
@@ -20,6 +21,7 @@
    <div class="panel-heading text-center m-0">CHART</div>
    <div id="sentiment-results" class="panel-group row my-3 mx-5">
       <div class="panel panel-default d-block col">
+         <Chart />
       </div>
    </div>
    <div class="panel-heading text-center">PERFORMANCE</div>
@@ -31,6 +33,7 @@
    <div class="panel-heading text-center">WORD CLOUD</div>
    <div id="wordcloud-results" class="panel-group row my-3 mx-5">
       <div class="panel panel-default d-block col">
+         <WordCloud />
       </div>
    </div>
 </section>

@@ -33,7 +33,7 @@
          </table>
       </div>
    </div>
-   <DownloadButton />
+   <DownloadButton download_link=""/>
 </div>
 
 <style>

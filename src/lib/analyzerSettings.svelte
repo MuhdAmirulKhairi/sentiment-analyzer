@@ -8,7 +8,10 @@
       <tbody>
          <tr>
             <td class="fs-4 col-7">
-               Number of runs <i style="font-size:24px">&#63;</i>
+               Number of runs 
+               <p style="font-size:24px;
+                         display: inline;"
+                  title="Runs the data through the system at a number of times (can take longer if used a higher number)">&#63;</p>
             </td>
             <td class="right-align fs-4 col-5">
                <input 
@@ -22,7 +25,10 @@
          </tr>
          <tr>
             <td class="fs-4 col-7">
-               Domain <i style="font-size:24px">&#63;</i>
+               Domain
+               <p style="font-size:24px;
+                         display: inline;"
+                  title="Select which domain is suitable for this dataset">&#63;</p>
             </td>
             <td class="right-align fs-4 col-5">
                <select

@@ -8,7 +8,10 @@
       <tbody>
          <tr>
             <td class="fs-4 col-9">
-               Sort by <i style="font-size:24px">&#63;</i>
+               Sort by
+               <p style="font-size:24px;
+                         display: inline;"
+                  title="Sort the sentiment outputs in different order">&#63;</p>
             </td>
             <td class="right-align fs-4 col-3">
                <select
@@ -23,7 +26,11 @@
          </tr>
          <tr>
             <td class="fs-4 col-9">
-               Number of words <i style="font-size:24px">&#63;</i>
+               Number of words
+               <p style="font-size:24px;
+                         display: inline;"
+                  title="Displays the top most common sentiment in the word cloud">
+                  &#63;</p>
             </td>
             <td class="right-align fs-4 col-3">
                <input
