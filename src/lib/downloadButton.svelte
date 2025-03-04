@@ -3,15 +3,14 @@
 </script>
 
 <div class="text-center p-2">
-   <a href={download_link} download>
-      <button
-         class="px-4 py-1 download-button"
-         id="download-results"
-         type="submit"
-         >
-         Download
-      </button>
-   </a>
+   <button
+      class="px-4 py-1 download-button"
+      id="download-results"
+      type="submit"
+      on:click={download_link}
+      >
+      Download
+   </button>
 </div>
 
 <style>
