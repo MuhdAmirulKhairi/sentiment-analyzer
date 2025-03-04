@@ -2,7 +2,7 @@
    import DownloadButton from "./downloadButton.svelte";
 
    function downloadCSV() {
-      let table = document.querySelector("table");
+      let table = document.getElementById("sentiment-results-table");
       let rows = Array.from(table.querySelectorAll("tr"));
 
       let csv_content = "data:text/csv;charset=utf-8,";

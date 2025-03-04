@@ -1,8 +1,28 @@
 <script>
    import DownloadButton from "./downloadButton.svelte";
+
+   function downloadCSV() {
+      let table = document.getElementById("performance-table");
+      let rows = Array.from(table.querySelectorAll("tr"));
+
+      let csv_content = "data:text/csv;charset=utf-8,";
+      csv_content = csv_content + rows.map(row => {
+         let cells = Array.from(row.querySelectorAll("th, td"));
+         return cells.map(cell => `"${cell.innerText}"`).join(",");
+      }).join("\n");
+
+      let encoded = encodeURI(csv_content);
+      let link = document.createElement("a");
+
+      link.setAttribute("href", encoded);
+      link.setAttribute("download", "performance_results.csv");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+   }
 </script>
 
-<div id="performance" class="mx-5">
+<div id="performance-table" class="mx-5">
    <table>
       <thead>
          <tr>
@@ -34,11 +54,11 @@
          </tr>
       </tbody>
    </table>
-   <DownloadButton download_link=""/>
+   <DownloadButton download_link={downloadCSV}/>
 </div>
 
 <style>
-   #performance {
+   #performance-table {
       padding: 25px;
       font-family: Roboto, Helvetica, sans-serif;
    }
