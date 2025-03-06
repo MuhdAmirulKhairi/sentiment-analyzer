@@ -64,11 +64,11 @@
 <style>
    .scrollable-table {
       max-height: 200px;
-      max-width: 560px;
       overflow-y: auto;
    }
    
    table {
+      table-layout: fixed;
       width: 100%;
       border-collapse: collapse;
    }
@@ -79,6 +79,9 @@
       border-color: #f4f4f4;
       text-align: center;
       font-family: Roboto, Helvetica, sans-serif;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      white-space: normal;
    }
    
    td {
@@ -86,5 +89,8 @@
       padding: 8px;
       text-align: center;
       font-family: Roboto, Helvetica, sans-serif;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      white-space: normal;
    }
 </style>

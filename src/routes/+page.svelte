@@ -15,22 +15,36 @@
    
    // Set the width of the side navigation to 300px when opening the nav bar
    function openNav() {
-      document.getElementById("main-sidebar").style.width = "300px";
-      document.getElementById("header-main").style.marginLeft = "300px";
-      document.getElementById("body-main").style.marginLeft = "300px";
-      document.getElementById("footer-main").style.marginLeft = "300px";
+      let sidebar = document.getElementById("main-sidebar");
 
+      if (window.innerWidth <= 768) {
+         sidebar.style.width = "100%";
+         sidebar.style.height = "100vh";
+         sidebar.style.position = "fixed";
+      } else {
+         sidebar.style.width = "300px";
+         // document.getElementById("header-main").style.marginLeft = "300px";
+         // document.getElementById("body-main").style.marginLeft = "300px";
+         // document.getElementById("footer-main").style.marginLeft = "300px";
+      }
+
+      document.body.classList.add("no-scroll");
       document.getElementById("openBtn").style.display = "none"; //Make the open navbar disappear
+      sidebar.setAttribute("data-open", "true");
    }
 
    // Set the width of the side navigation to 0 when closing the nav bar
    function closeNav() {
-      document.getElementById("main-sidebar").style.width = "0";
-      document.getElementById("header-main").style.marginLeft = "0";
-      document.getElementById("body-main").style.marginLeft = "0";
-      document.getElementById("footer-main").style.marginLeft = "0";
+      let sidebar = document.getElementById("main-sidebar");
+      sidebar.style.width = "0";
 
+      // document.getElementById("header-main").style.marginLeft = "0";
+      // document.getElementById("body-main").style.marginLeft = "0";
+      // document.getElementById("footer-main").style.marginLeft = "0";
+
+      document.body.classList.remove("no-scroll");
       document.getElementById("openBtn").style.display = "inline"; //Make the open navbar reappear
+      sidebar.setAttribute("data-open", "false");
    }
 </script>
 
@@ -70,16 +84,17 @@
 
 <!-- Body of the main page, where it hosts the dataset upload and settings -->
 <section id="body-main" class="p-4">
-   <div id="main" class="panel-group row">
-      <div id="dataset-panel" class="panel panel-default d-block col">
+   <div id="main" class="panel-group row justify-content-center">
+      <div id="dataset-panel" class="panel panel-default d-block col-md-5 col-12">
          <div class="panel-heading text-center">DATASET</div>
             <div class="panel-body justify-content-center">
                <label class="panel-texts col-12 text-center" for="csv-file-upload">Upload your dataset...</label>
                <Dataset />
             </div>
       </div>
-      <div class="panel panel-default col-1"></div>
-      <div id="settings-panel" class="panel panel-default d-block col">
+      <div class="panel panel-default col-md-1 d-none d-md-block"></div>
+      <div class="d-block d-md-none my-3"></div> 
+      <div id="settings-panel" class="panel panel-default d-block col-md-5 col-12">
          <form class="form-group">
             <div class="panel-heading text-center">ANALYZER SETTINGS</div>
                <div class="panel-body justify-content-center">
@@ -151,16 +166,16 @@
 
    /* The side navigation menu */
    .sidebarNav {
-      height: 100%; /* 100% Full-height */
+      height: 100vh; /* 100% Full-height */
       width: 0; /* 0 width - change this with JavaScript */
       position: fixed; /* Stay in place */
-      z-index: 1; /* Stay on top */
       top: 0; /* Stay at the top */
       left: 0;
       background-color: #6A42C2; 
-      overflow-x: hidden; /* Disable horizontal scroll */
+      overflow-y: auto; /* Disable horizontal scroll */
       padding-top: 20px; /* Place content 60px from the top */
-      transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+      transition: 0.5s ease-in-out; /* 0.5 second transition effect to slide in the sidenav */
+      z-index: 999;
    }
 
    /* The navigation menu links */
@@ -196,10 +211,24 @@
       padding: 20px;
    }
 
+   #header-main, #body-main.no-scroll {
+      overflow: hidden;
+   }
+
    /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
    @media screen and (max-height: 450px) {
       .sidebarNav {padding-top: 15px;}
       .sidebarNav a {font-size: 18px;}
+   }
+
+   @media screen and (max-width: 768px) {
+      .sidebarNav[data-open = "true"] {
+         width: 100% !important;
+      }
+   }
+
+   body.no-scroll {
+      overflow: hidden;
    }
 
    #openBtn {
