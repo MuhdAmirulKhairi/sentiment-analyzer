@@ -22,7 +22,7 @@
    }
 </script>
 
-<div id="sentiment-results-table" class="mx-5">
+<div id="sentiment-results-table">
    <div class="table-responsive">
       <div class="scrollable-table">
          <table class="table table-striped table-bordered">
@@ -34,6 +34,21 @@
                </tr>
             </thead>
             <tbody class="table-light">
+               <tr>
+                  <td>Text</td>
+                  <td>Sentiment</td>
+                  <td>Labels</td>
+               </tr>
+               <tr>
+                  <td>Text</td>
+                  <td>Sentiment</td>
+                  <td>Labels</td>
+               </tr>
+               <tr>
+                  <td>Text</td>
+                  <td>Sentiment</td>
+                  <td>Labels</td>
+               </tr>
                <tr>
                   <td>Text</td>
                   <td>Sentiment</td>

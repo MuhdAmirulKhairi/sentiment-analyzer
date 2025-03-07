@@ -22,7 +22,7 @@
    }
 </script>
 
-<div id="performance-table" class="mx-5">
+<div id="performance-table">
    <table>
       <thead>
          <tr>

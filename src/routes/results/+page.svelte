@@ -19,7 +19,7 @@
       </div>
    </div>
    <div class="panel-heading text-center m-0">CHART</div>
-   <div id="sentiment-results" class="panel-group row my-3 mx-5">
+   <div id="chart-results" class="panel-group row my-3 mx-5">
       <div class="panel panel-default d-block col">
          <Chart />
       </div>
@@ -54,11 +54,11 @@
       background-color: #8B5DFF;
    }
 
-   #sentiment-results, #wordcloud-results, #footer-main {
+   #sentiment-results, #chart-results, #wordcloud-results, #footer-main {
       background-color: #6A42C2;
    }
 
-   #sentiment-results, #wordcloud-results {
+   #sentiment-results, #chart-results, #wordcloud-results {
       border-radius: 25px;
       padding: 20px;
    }
@@ -78,5 +78,14 @@
       padding: 0px;
       margin: 15px;
       border: none;
+   }
+
+   @media screen and (max-width: 768px) {
+      #sentiment-results, #chart-results, #performance-results, #wordcloud-results {
+         padding-right: 0;
+         padding-left: 0;
+         padding-top: 2px;
+         padding-bottom: 2px;
+      }
    }
 </style>

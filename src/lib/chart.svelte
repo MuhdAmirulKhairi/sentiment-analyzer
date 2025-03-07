@@ -2,9 +2,9 @@
    import DownloadButton from "./downloadButton.svelte";
 </script>
 
-<div id="chart" class="mx-5">
+<div id="chart">
    <img src="https://www.myqbook.com/userfiles/The%20bar%20graph%20below%20shows%20the%20colors%20of%20toy%20trains%20bought%20from%20a%20store%20last%20year.gif" alt="chart"/>
-   <p class="fs-5 text-center">Right click on the image to save to device.</p>
+   <p class="text-center">Right click on the image to save to device.</p>
 </div>
 
 <style>
@@ -20,6 +20,21 @@
    }
 
    p {
+      font-size: 25px;
       font-weight: bold;
+   }
+
+   @media screen and (max-width: 768px) {
+      #chart {
+         padding: 10px;
+      }
+
+      img {
+         padding: 5px;
+      }
+
+      p {
+         font-size: 13px;
+      }
    }
 </style>
