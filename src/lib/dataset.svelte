@@ -2,6 +2,7 @@
    import Papa from "papaparse";
 
    let CSVdata = [];
+   let selectedColumns = ["text", "sentiment"] // Specified the columns to be displayed
 
    function handleFileUploads(event) {
       const uploadedFile = event.target.files[0];
@@ -16,7 +17,13 @@
                header: true,
                skipEmptyLines: true,
                complete: function(result) {
-                  CSVdata = [...result.data];
+                  // Filter unwanted columns
+                  CSVdata = result.data
+                              .filter(row => row.text && row.sentiment)
+                              .map(row => ({
+                                 text: row.text,
+                                 sentiment: row.sentiment
+                              }));
                },
             });
          };
@@ -41,17 +48,15 @@
          <table class="table table-striped table-bordered">
             <thead class="table-dark">
                <tr>
-                  {#each Object.keys(CSVdata[0]) as head}
-                     <th>{head}</th>
-                  {/each}
+                  <th>Text</th>
+                  <th>Sentiment</th>
                </tr>
             </thead>
             <tbody class="table-light">
                {#each CSVdata as row}
                   <tr>
-                     {#each Object.values(row) as cell}
-                        <td>{cell}</td>
-                     {/each}
+                     <td>{row.text}</td>
+                     <td>{row.sentiment}</td>
                   </tr>
                {/each}
             </tbody>
