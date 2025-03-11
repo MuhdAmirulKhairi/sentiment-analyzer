@@ -1,7 +1,8 @@
 <script>
    import Papa from "papaparse";
+   import { writable } from "svelte/store";
 
-   let CSVdata = [];
+   export let CSVdata = writable([]); // Stores dataset globally
    let selectedColumns = ["text", "sentiment"] // Specified the columns to be displayed
 
    function handleFileUploads(event) {

@@ -1,10 +1,20 @@
 <script>
    import DownloadButton from "./downloadButton.svelte";
+   import WordCloud from "wordcloud";
+
+   export let wordCloud;
+   let cloudCanvas;
+
+   $: wordCloud.length > 0 && WordCloud(cloudCanvas, {
+      list: wordCloud.map(w => [w.word, w.count]),
+      gridSize: 16,
+      weightFactor: 5
+   });
 </script>
 
 
 <div id="word-cloud">
-   <img src="https://randomdeterminism.wordpress.com/wp-content/uploads/2010/08/wordcloud-externalfilter-wordcloud.png" alt="word cloud"/>
+   <canvas bind:this={cloudCanvas}></canvas>
    <p class="text-center">Right click on the image to save to device.</p>
 </div>
 
@@ -13,7 +23,7 @@
       padding: 25px;
    }
 
-   img {
+   canvas {
       display: block;
       margin: auto auto;
       width: 80%;
@@ -30,7 +40,7 @@
          padding: 10px;
       }
 
-      img {
+      canvas {
          padding: 5px;
       }
 

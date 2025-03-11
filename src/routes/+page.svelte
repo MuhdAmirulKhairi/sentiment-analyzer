@@ -1,17 +1,16 @@
-<script context="module">
-   export async function load({fetch}) {
-      const response = await fetch("/.json");
-      const { users } = await response.json();
-   }
-</script>
-
 <script>
    import { onMount } from "svelte";
    import { goto } from "$app/navigation";
+
    import Dataset from "$lib/dataset.svelte";
    import History from "$lib/history.svelte";
    import AnalyzerSettings from "$lib/analyzerSettings.svelte";
    import OutputSettings from "$lib/outputSettings.svelte";
+
+   let num_runs = 1;
+   let domain_select = "none";
+   let sort_by = "none";
+   let word_cloud = 20;
    
    // Set the width of the side navigation to 300px when opening the nav bar
    function openNav() {
@@ -23,9 +22,6 @@
          sidebar.style.position = "fixed";
       } else {
          sidebar.style.width = "300px";
-         // document.getElementById("header-main").style.marginLeft = "300px";
-         // document.getElementById("body-main").style.marginLeft = "300px";
-         // document.getElementById("footer-main").style.marginLeft = "300px";
       }
 
       document.body.classList.add("no-scroll");
@@ -38,13 +34,45 @@
       let sidebar = document.getElementById("main-sidebar");
       sidebar.style.width = "0";
 
-      // document.getElementById("header-main").style.marginLeft = "0";
-      // document.getElementById("body-main").style.marginLeft = "0";
-      // document.getElementById("footer-main").style.marginLeft = "0";
-
       document.body.classList.remove("no-scroll");
       document.getElementById("openBtn").style.display = "inline"; //Make the open navbar reappear
       sidebar.setAttribute("data-open", "false");
+   }
+
+   // Handles data submission to the Python backend
+   async function runAnalyzer(event) {
+      event.preventDefault(); // Prevent default form submission
+
+      //Retrieve values from dataset, analyzer settings, output settings
+      let settings = {
+         num_runs: num_runs,
+         domain_select: domain_select,
+         sort_by: sort_by,
+         word_cloud: word_cloud
+      };
+
+      console.log("Running analysis with: ", settings)
+
+      try {
+         let response = await fetch("/api/analyze", {
+            method: 'POST',
+            headers: {
+               "Content-Type": "application/json",
+            },
+            body: JSON.stringify(settings),
+         });
+
+         if (response.ok) {
+            console.log("Analysis completed!");
+            goto("/results"); // Redirect after success
+         }
+         else {
+            console.error("Error: ", response.status);
+         }
+      }
+      catch (error) {
+         console.error("Fetch failed: ", error);
+      }
    }
 </script>
 
@@ -95,25 +123,23 @@
       <div class="panel panel-default col-md-1 d-none d-md-block"></div>
       <div class="d-block d-md-none my-3"></div> 
       <div id="settings-panel" class="panel panel-default d-block col-md-5 col-12">
-         <form class="form-group">
+         <form class="form-group" on:submit="{runAnalyzer}">
             <div class="panel-heading text-center">ANALYZER SETTINGS</div>
                <div class="panel-body justify-content-center">
-                  <AnalyzerSettings />
+                  <AnalyzerSettings bind:num_runs bind:domain_select />
                </div>
             <div class="panel-heading text-center">OUTPUT SETTINGS</div>
                <div class="panel-body d-block justify-content-center">
-                  <OutputSettings />
+                  <OutputSettings bind:sort_by bind:word_cloud />
                </div>
                <div class="text-center p-2">
-                  <a href="/results">
-                     <button
-                        class="px-4 py-1"
-                        id="run-analyzer"
-                        type="submit"
-                        >
-                        Run Analyzer
-                     </button>
-                  </a>
+                  <button
+                     class="px-4 py-1"
+                     id="run-analyzer"
+                     type="submit"
+                     >
+                     Run Analyzer
+                  </button>
                </div>
          </form>
       </div>

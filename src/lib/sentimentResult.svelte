@@ -1,6 +1,11 @@
 <script>
    import DownloadButton from "./downloadButton.svelte";
 
+   export let sentiments = [];
+   let sortBy = "all";
+
+   $: filteredSentiments = sentiments.filter(s => sortBy === "all" || s.sentiment === sortBy)
+
    function downloadCSV() {
       let table = document.getElementById("sentiment-results-table");
       let rows = Array.from(table.querySelectorAll("tr"));
@@ -29,41 +34,16 @@
             <thead class="table-dark">
                <tr>
                   <th class="col-8">Text</th>
-                  <th>Sentiment</th>
                   <th>Labels</th>
                </tr>
             </thead>
             <tbody class="table-light">
-               <tr>
-                  <td>Text</td>
-                  <td>Sentiment</td>
-                  <td>Labels</td>
-               </tr>
-               <tr>
-                  <td>Text</td>
-                  <td>Sentiment</td>
-                  <td>Labels</td>
-               </tr>
-               <tr>
-                  <td>Text</td>
-                  <td>Sentiment</td>
-                  <td>Labels</td>
-               </tr>
-               <tr>
-                  <td>Text</td>
-                  <td>Sentiment</td>
-                  <td>Labels</td>
-               </tr>
-               <tr>
-                  <td>Text</td>
-                  <td>Sentiment</td>
-                  <td>Labels</td>
-               </tr>
-               <tr>
-                  <td>Text</td>
-                  <td>Sentiment</td>
-                  <td>Labels</td>
-               </tr>
+               {#each filteredSentiments as s}
+                  <tr>
+                     <td>{s.text}</td>
+                     <td>{s.sentiment}</td>
+                  </tr>
+               {/each}
             </tbody>
          </table>
       </div>

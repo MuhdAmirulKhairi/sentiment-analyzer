@@ -1,9 +1,27 @@
 <script>
-   import DownloadButton from "./downloadButton.svelte";
+   import { onMount } from "svelte";
+   import Chart from "chart.js/auto";
+
+   export let sentimentCounts;
+   let chartCanvas;
+
+   onMount(() => {
+      new Chart(chartCanvas, {
+         type: "bar",
+         data: {
+            labels: ["Positive", "Negative", "Neutral"],
+            datasets: [{
+               label: "Sentiment Counts",
+               data: [sentimentCounts.positive, sentimentCounts.negative, sentimentCounts.neutral],
+               backgroundColor: ["green", "red", "gray"]
+            }]
+         }
+      });  
+   });
 </script>
 
 <div id="chart">
-   <img src="https://www.myqbook.com/userfiles/The%20bar%20graph%20below%20shows%20the%20colors%20of%20toy%20trains%20bought%20from%20a%20store%20last%20year.gif" alt="chart"/>
+   <canvas bind:this={chartCanvas}></canvas>
    <p class="text-center">Right click on the image to save to device.</p>
 </div>
 
@@ -12,7 +30,7 @@
       padding: 25px;
    }
 
-   img {
+   canvas {
       display: block;
       margin: auto auto;
       width: 80%;
@@ -29,7 +47,7 @@
          padding: 10px;
       }
 
-      img {
+      canvas {
          padding: 5px;
       }
 

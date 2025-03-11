@@ -1,11 +1,13 @@
 <script>
-   let sort_by = "none";
-   let word_cloud = 20;
+   // Store sorting and word cloud settings
+   export let sort_by;
+   export let word_cloud;
 </script>
 
 <div id="output-settings">
    <table>
       <tbody>
+         <!-- Sort by -->
          <tr>
             <td class="fs-4 col-9">
                Sort by
@@ -17,13 +19,15 @@
                <select
                   class="analyzer-inputs col-12"
                   id="sort-by"
-                  bind:value={sort_by}>
+                  on:change={(e) => sort_by.set(e.target.value)}>
                   <option value="positive">Positive</option>
                   <option value="negative">Negative</option>
                   <option value="neutral">Neutral</option>
                </select>
             </td>
          </tr>
+
+         <!-- Number of words in cloud -->
          <tr>
             <td class="fs-4 col-9">
                Number of words
@@ -39,7 +43,7 @@
                   id="num-words"
                   min="20"
                   max="60"
-                  bind:value={word_cloud}/>
+                  on:input={(e) => word_cloud.set(+e.target.value)}/>
             </td>
          </tr>
       </tbody>

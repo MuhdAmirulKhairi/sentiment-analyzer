@@ -1,17 +1,19 @@
 <script>
-   let num_runs = 1;
-   let domain_select = "none";
+   // Store number of runs and selected domain
+   export let num_runs;
+   export let domain_select;
 </script>
 
 <div id="analyzer-settings">
    <table>
       <tbody>
+         <!-- Number of runs -->
          <tr>
             <td class="fs-4 col-7">
                Number of runs 
                <p style="font-size:24px;
                          display: inline;"
-                  title="Runs the data through the system at a number of times (can take longer if used a higher number)">&#63;</p>
+                  title="Runs the data through the system at a number of times to increase accuracy (can take longer if used a higher number)">&#63;</p>
             </td>
             <td class="right-align fs-4 col-5">
                <input 
@@ -20,9 +22,10 @@
                   id="num-runs"
                   min="1"
                   max="20"
-                  bind:value={num_runs}/>
+                  on:input={(e) => num_runs.set(+e.target.value)}/>
             </td>
          </tr>
+         <!-- Domain selection -->
          <tr>
             <td class="fs-4 col-7">
                Domain
@@ -34,7 +37,7 @@
                <select
                   class="analyzer-inputs col-11"
                   id="domain-select"
-                  bind:value={domain_select}>
+                  on:change={(e) => domain_select.set(e.target.value)}>
                   <option value="social-media">Social media</option>
                   <option value="customer-reviews">Customer reviews</option>
                   <option value="online-forums">Online forums</option>

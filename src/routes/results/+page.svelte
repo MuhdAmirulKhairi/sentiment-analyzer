@@ -1,8 +1,33 @@
 <script>
+   import { onMount } from 'svelte';
+   
    import SentimentResult from '$lib/sentimentResult.svelte';
    import Chart from "$lib/chart.svelte";
    import Performance from '$lib/performance.svelte';
    import WordCloud from '$lib/wordCloud.svelte';
+
+   let sentiments = [];
+   let sentimentCounts = { positive: 0, negative: 0, neutral: 0};
+   let performance = { precision: 0, recall: 0, f1_score: 0};
+   let word_cloud = [];
+
+   async function fetchResults() {
+      const response = await fetch("http://localhost:8000/analyze_sentiment", {
+         method: "POST",
+         headers: { "Content-Type": "application/json"},
+         body: JSON.stringify({ texts: ["example text 1", "example text 2"] }) // Will replace with actual texts
+      });
+
+      if (response.ok) {
+         const data = await response.json();
+         sentiments = data.sentiments;
+         sentimentsCounts = data.sentiment_counts;
+         performance = data.performance;
+         wordCloud = data.word_cloud;
+      }
+   }
+
+   onMount(fetchResults);
 </script>
 
 <a href="/">
@@ -15,25 +40,25 @@
    <div class="panel-heading text-center m-0">RESULTS</div>
    <div id="sentiment-results" class="panel-group row my-3 mx-5">
       <div class="panel panel-default d-block col">
-         <SentimentResult />
+         <SentimentResult {sentiments}/>
       </div>
    </div>
    <div class="panel-heading text-center m-0">CHART</div>
    <div id="chart-results" class="panel-group row my-3 mx-5">
       <div class="panel panel-default d-block col">
-         <Chart />
+         <Chart {sentimentCounts}/>
       </div>
    </div>
    <div class="panel-heading text-center">PERFORMANCE</div>
    <div id="performance-results" class="panel-group row my-3 mx-5">
       <div class="panel panel-default d-block col">
-         <Performance />
+         <Performance {performance}/>
       </div>
    </div>
    <div class="panel-heading text-center">WORD CLOUD</div>
    <div id="wordcloud-results" class="panel-group row my-3 mx-5">
       <div class="panel panel-default d-block col">
-         <WordCloud />
+         <WordCloud {word_cloud}/>
       </div>
    </div>
 </section>
