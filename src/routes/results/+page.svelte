@@ -1,5 +1,6 @@
 <script>
    import { onMount } from 'svelte';
+   import { page } from "$app/stores";
    
    import SentimentResult from '$lib/sentimentResult.svelte';
    import Chart from "$lib/chart.svelte";
@@ -10,13 +11,25 @@
    let sentimentCounts = { positive: 0, negative: 0, neutral: 0};
    let performance = { precision: 0, recall: 0, f1_score: 0};
    let word_cloud = [];
+   let loading = true;
 
    async function fetchResults() {
-      const response = await fetch("http://localhost:8000/analyze_sentiment", {
-         method: "POST",
-         headers: { "Content-Type": "application/json"},
-         body: JSON.stringify({ texts: ["example text 1", "example text 2"] }) // Will replace with actual texts
-      });
+      loading = true;
+      const id = $page.params.id; // Check if there is an ID in the URL
+
+      let response;
+      if (id) {
+         // Fetch results
+         response = await fetch(`http://localhost:8000/api/get_history/${id}`);
+      }
+      else {
+         // Fetch fresh analysis
+         response = await fetch("http://localhost:8000/analyze_sentiment", {
+            method: "POST",
+            headers: { "Content-Type": "application/json"},
+            body: JSON.stringify({ texts: ["example text 1", "example text 2"] }) // Will replace with actual texts
+         });
+      }
 
       if (response.ok) {
          const data = await response.json();
@@ -36,32 +49,36 @@
    </button>
 </a>
 
-<section id="results-main" class="p-4">
-   <div class="panel-heading text-center m-0">RESULTS</div>
-   <div id="sentiment-results" class="panel-group row my-3 mx-5">
-      <div class="panel panel-default d-block col">
-         <SentimentResult {sentiments}/>
+{#if loading}
+   <p>Loading results...</p>
+{:else}
+   <section id="results-main" class="p-4">
+      <div class="panel-heading text-center m-0">RESULTS</div>
+      <div id="sentiment-results" class="panel-group row my-3 mx-5">
+         <div class="panel panel-default d-block col">
+            <SentimentResult {sentiments}/>
+         </div>
       </div>
-   </div>
-   <div class="panel-heading text-center m-0">CHART</div>
-   <div id="chart-results" class="panel-group row my-3 mx-5">
-      <div class="panel panel-default d-block col">
-         <Chart {sentimentCounts}/>
+      <div class="panel-heading text-center m-0">CHART</div>
+      <div id="chart-results" class="panel-group row my-3 mx-5">
+         <div class="panel panel-default d-block col">
+            <Chart {sentimentCounts}/>
+         </div>
       </div>
-   </div>
-   <div class="panel-heading text-center">PERFORMANCE</div>
-   <div id="performance-results" class="panel-group row my-3 mx-5">
-      <div class="panel panel-default d-block col">
-         <Performance {performance}/>
+      <div class="panel-heading text-center">PERFORMANCE</div>
+      <div id="performance-results" class="panel-group row my-3 mx-5">
+         <div class="panel panel-default d-block col">
+            <Performance {performance}/>
+         </div>
       </div>
-   </div>
-   <div class="panel-heading text-center">WORD CLOUD</div>
-   <div id="wordcloud-results" class="panel-group row my-3 mx-5">
-      <div class="panel panel-default d-block col">
-         <WordCloud {word_cloud}/>
+      <div class="panel-heading text-center">WORD CLOUD</div>
+      <div id="wordcloud-results" class="panel-group row my-3 mx-5">
+         <div class="panel panel-default d-block col">
+            <WordCloud {word_cloud}/>
+         </div>
       </div>
-   </div>
-</section>
+   </section>
+{/if}
 
 <!-- Footer which shows related info at the bottom -->
 <section id="footer-main" class="p-4">

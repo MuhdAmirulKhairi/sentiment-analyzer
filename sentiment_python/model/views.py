@@ -8,6 +8,7 @@ import json
 import torch
 import collections
 import nltk
+import uuid
 
 from nltk.corpus import stopwords
 from transformers import BertTokenizer, BertForSequenceClassification
@@ -15,6 +16,8 @@ from sklearn.metrics import precision_score, recall_score, f1_score
 
 # Ensures NLTK stopwords are downloaded
 nltk.download('stopwords')
+
+HISTORY_FILE = ("history.json")
 
 # Load a pre-trained BERT model and tokenizer
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
@@ -85,6 +88,17 @@ def analyze_sentiment(request):
          word_freq = collections.Counter(all_words)
          top_words = word_freq.most_common(20)
 
+         history_entry = {
+            "id": str(uuid.uuid4()), # Assigns unique history ID
+            "date": "1/1/1970", # Will replace with actual time
+            "dataset": data.get("dataset", "Unknown"),
+            "domain": data.get("domain_select", "None"),
+            "sort_by": data.get("sort_by", "None"),
+            "word_cloud": data.get("word_cloud", 20)
+         }
+
+         save_history(history_entry)
+
          return JsonResponse({
             "sentiments": sentiments,
             "sentiment_counts": sentiment_counts,
@@ -96,3 +110,31 @@ def analyze_sentiment(request):
          return JsonResponse({'error': str(exp)}, status = 500)
       
    return JsonResponse({'error': 'Invalid request'}, status = 400)
+
+def save_history(entry):
+   # Save history entry into a file
+   try:
+      if os.path.exists(HISTORY_FILE):
+         with open(HISTORY_FILE, "r") as file:
+            history = json.load(file)
+      else:
+         history = []
+
+      history.append(entry)
+
+      with open(HISTORY_FILE, "w") as file:
+         json.dump(history, file, indent = 4)
+
+   except Exception as exp:
+      print(f"Error saving history: {exp}")
+
+@csrf_exempt
+def get_history(request):
+   # Returns the saved analysis history
+   if os.path.exists(HISTORY_FILE):
+      with open(HISTORY_FILE, "r") as file:
+         history = json.load(file)
+   else:
+      history = []
+
+   return JsonResponse({"history": history})

@@ -11,6 +11,7 @@
    let domain_select = "none";
    let sort_by = "none";
    let word_cloud = 20;
+   let history = [];
    
    // Set the width of the side navigation to 300px when opening the nav bar
    function openNav() {
@@ -74,6 +75,21 @@
          console.error("Fetch failed: ", error);
       }
    }
+
+   async function fetchHistory() {
+      try {
+         const response = await fetch("/api/get_history");
+         if (response.ok) {
+            const data = await response.json();
+            history = data.history;
+         }
+      }
+      catch (error) {
+         console.error("Error fetching history: ", error);
+      }
+   }
+
+   onMount(fetchHistory);
 </script>
 
 <!-- Header of the application -->
@@ -88,7 +104,13 @@
             <h2 style="font-family: Roboto, Helvetica, sans-serif">
                HISTORY
             </h2>
-            <a href="/results"><History /></a>
+            {#if history.length === 0}
+               <p class="fw-bold fs-5 px-2">No history available</p>
+            {:else}
+               {#each history as entry}
+                  <a href="/results/{entry.id}"><History {entry}/></a>
+               {/each}
+            {/if}
          </div>
       </div>
 
