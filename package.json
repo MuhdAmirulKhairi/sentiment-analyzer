@@ -16,7 +16,9 @@
 		"vite": "^5.4.11"
 	},
 	"dependencies": {
+		"chart.js": "^4.4.8",
 		"papaparse": "^5.5.2",
-		"svelte-spa-router": "^4.0.1"
+		"svelte-spa-router": "^4.0.1",
+		"wordcloud": "^1.2.3"
 	}
 }

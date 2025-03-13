@@ -2,10 +2,10 @@
    import DownloadButton from "./downloadButton.svelte";
    import WordCloud from "wordcloud";
 
-   export let wordCloud;
+   export let wordCloud = [];
    let cloudCanvas;
 
-   $: wordCloud.length > 0 && WordCloud(cloudCanvas, {
+   $: wordCloud && wordCloud.length > 0 && WordCloud(cloudCanvas, {
       list: wordCloud.map(w => [w.word, w.count]),
       gridSize: 16,
       weightFactor: 5

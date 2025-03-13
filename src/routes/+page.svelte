@@ -81,7 +81,7 @@
 
    async function fetchHistory() {
       try {
-         const response = await fetch("/api/get_history");
+         const response = await fetch("http://127.0.0.1:8000/api/get_history");
          if (response.ok) {
             const data = await response.json();
             history = data.history;

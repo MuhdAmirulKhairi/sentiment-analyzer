@@ -15,6 +15,18 @@
                data: [sentimentCounts.positive, sentimentCounts.negative, sentimentCounts.neutral],
                backgroundColor: ["green", "red", "gray"]
             }]
+         },
+         options: {
+            scales: {
+               x: {
+                  grid: { color: "white" },
+                  ticks: { color: "white" }
+               },
+               y: {
+                  grid: { color: "white"},
+                  ticks: { color: "white"}
+               }       
+            }
          }
       });  
    });

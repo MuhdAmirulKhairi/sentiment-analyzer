@@ -20,11 +20,11 @@
       let response;
       if (id) {
          // Fetch results
-         response = await fetch(`http://localhost:5173/api/get_history/${id}`);
+         response = await fetch(`http://127.0.0.1:8000/api/get_history/${id}`);
       }
       else {
          // Fetch fresh analysis
-         response = await fetch("http://localhost:5173/analyze_sentiment", {
+         response = await fetch("http://127.0.0.1:8000/api/analyze_sentiment/", {
             method: "POST",
             headers: { "Content-Type": "application/json"},
             body: JSON.stringify({ texts: ["example text 1", "example text 2"] }) // Will replace with actual texts
@@ -34,9 +34,10 @@
       if (response.ok) {
          const data = await response.json();
          sentiments = data.sentiments;
-         sentimentsCounts = data.sentiment_counts;
+         sentimentCounts = data.sentiment_counts;
          performance = data.performance;
-         wordCloud = data.word_cloud;
+         word_cloud = data.word_cloud || [];
+         loading = false;
       }
    }
 
@@ -50,7 +51,9 @@
 </a>
 
 {#if loading}
-   <p>Loading results...</p>
+   <section id="loading-results">
+      <p>Loading results...</p>
+   </section>
 {:else}
    <section id="results-main" class="p-4">
       <div class="panel-heading text-center m-0">RESULTS</div>
@@ -92,8 +95,13 @@
 </section>
 
 <style>
-   #results-main {
+   #results-main, #loading-results {
       background-color: #8B5DFF;
+   }
+
+   #loading-results {
+      width: 100vw;
+      height: 100vh;
    }
 
    #sentiment-results, #chart-results, #wordcloud-results, #footer-main {
@@ -120,6 +128,14 @@
       padding: 0px;
       margin: 15px;
       border: none;
+   }
+
+   #loading-results p {
+      margin: 0;
+      font-size: 25px;
+      text-align: center;
+      padding: 25px;
+      font-weight: bold;
    }
 
    @media screen and (max-width: 768px) {
