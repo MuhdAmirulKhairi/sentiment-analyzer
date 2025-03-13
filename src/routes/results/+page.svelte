@@ -20,11 +20,11 @@
       let response;
       if (id) {
          // Fetch results
-         response = await fetch(`http://localhost:8000/api/get_history/${id}`);
+         response = await fetch(`http://localhost:5173/api/get_history/${id}`);
       }
       else {
          // Fetch fresh analysis
-         response = await fetch("http://localhost:8000/analyze_sentiment", {
+         response = await fetch("http://localhost:5173/analyze_sentiment", {
             method: "POST",
             headers: { "Content-Type": "application/json"},
             body: JSON.stringify({ texts: ["example text 1", "example text 2"] }) // Will replace with actual texts

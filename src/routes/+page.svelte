@@ -7,6 +7,7 @@
    import AnalyzerSettings from "$lib/analyzerSettings.svelte";
    import OutputSettings from "$lib/outputSettings.svelte";
 
+   // Set default values
    let num_runs = 1;
    let domain_select = "none";
    let sort_by = "none";
@@ -49,13 +50,14 @@
          num_runs: num_runs,
          domain_select: domain_select,
          sort_by: sort_by,
-         word_cloud: word_cloud
+         word_cloud: word_cloud,
+         texts: ["sample texts"]
       };
 
       console.log("Running analysis with: ", settings)
 
       try {
-         let response = await fetch("/api/analyze", {
+         let response = await fetch("http://127.0.0.1:8000/api/analyze_sentiment/", {
             method: 'POST',
             headers: {
                "Content-Type": "application/json",
@@ -68,7 +70,8 @@
             goto("/results"); // Redirect after success
          }
          else {
-            console.error("Error: ", response.status);
+            let error_data = await response.json()
+            console.error("Error: ", response.status, error_data);
          }
       }
       catch (error) {

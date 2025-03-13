@@ -19,7 +19,7 @@
                <select
                   class="analyzer-inputs col-12"
                   id="sort-by"
-                  on:change={(e) => sort_by.set(e.target.value)}>
+                  bind:value={sort_by}>
                   <option value="positive">Positive</option>
                   <option value="negative">Negative</option>
                   <option value="neutral">Neutral</option>
@@ -43,7 +43,7 @@
                   id="num-words"
                   min="20"
                   max="60"
-                  on:input={(e) => word_cloud.set(+e.target.value)}/>
+                  bind:value={word_cloud}/>
             </td>
          </tr>
       </tbody>

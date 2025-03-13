@@ -22,7 +22,7 @@
                   id="num-runs"
                   min="1"
                   max="20"
-                  on:input={(e) => num_runs.set(+e.target.value)}/>
+                  bind:value={num_runs}/>
             </td>
          </tr>
          <!-- Domain selection -->
@@ -37,7 +37,7 @@
                <select
                   class="analyzer-inputs col-11"
                   id="domain-select"
-                  on:change={(e) => domain_select.set(e.target.value)}>
+                  bind:value={domain_select}>
                   <option value="social-media">Social media</option>
                   <option value="customer-reviews">Customer reviews</option>
                   <option value="online-forums">Online forums</option>
