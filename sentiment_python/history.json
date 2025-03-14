@@ -1,255 +1,31 @@
 [
     {
-        "id": "0a4b17ed-1a10-4947-b804-bbb896892187",
-        "date": "1/1/1970",
+        "id": "92b47a2a-711d-4f44-856e-7ce712774e96",
+        "date": "2025-03-14T11:35:47.469815",
         "dataset": "Unknown",
-        "domain": "social-media",
+        "domain": "customer-reviews",
         "sort_by": "positive",
         "word_cloud": 20
     },
     {
-        "id": "25f0a0e0-7c06-4821-9676-03bd48fdf54c",
-        "date": "1/1/1970",
+        "id": "b59e1a85-5aec-4c61-baa7-6b033470bacc",
+        "date": "2025-03-14T11:35:49.412956",
         "dataset": "Unknown",
-        "domain": "social-media",
+        "domain": "None",
+        "sort_by": "None",
+        "word_cloud": 20
+    },
+    {
+        "id": "01d2f134-df55-4526-ac70-cfa7159399a0",
+        "date": "2025-03-14T11:37:58.609018",
+        "dataset": "Unknown",
+        "domain": "customer-reviews",
         "sort_by": "positive",
         "word_cloud": 23
     },
     {
-        "id": "76be5c3b-691b-49f3-89f4-9438a963be35",
-        "date": "1/1/1970",
-        "dataset": "Unknown",
-        "domain": "social-media",
-        "sort_by": "positive",
-        "word_cloud": 20
-    },
-    {
-        "id": "b5369695-df9b-42fd-ae99-dd5539e67880",
-        "date": "1/1/1970",
-        "dataset": "Unknown",
-        "domain": "social-media",
-        "sort_by": "positive",
-        "word_cloud": 20
-    },
-    {
-        "id": "0133d0dc-2764-46d4-aca0-630dee4f5690",
-        "date": "1/1/1970",
-        "dataset": "Unknown",
-        "domain": "social-media",
-        "sort_by": "positive",
-        "word_cloud": 20
-    },
-    {
-        "id": "3a5bfc9c-f3d2-40ea-b7fb-c89677ee6927",
-        "date": "1/1/1970",
-        "dataset": "Unknown",
-        "domain": "social-media",
-        "sort_by": "positive",
-        "word_cloud": 20
-    },
-    {
-        "id": "e3040c77-440d-42d0-a17e-8a7d0457dea2",
-        "date": "1/1/1970",
-        "dataset": "Unknown",
-        "domain": "social-media",
-        "sort_by": "positive",
-        "word_cloud": 20
-    },
-    {
-        "id": "9a3d7e19-bbd4-4f92-8afe-d227a60d4860",
-        "date": "1/1/1970",
-        "dataset": "Unknown",
-        "domain": "None",
-        "sort_by": "None",
-        "word_cloud": 20
-    },
-    {
-        "id": "bc9a6291-44fa-49da-8b6e-6b139c6712bd",
-        "date": "1/1/1970",
-        "dataset": "Unknown",
-        "domain": "none",
-        "sort_by": "none",
-        "word_cloud": 20
-    },
-    {
-        "id": "84d68576-ed88-4262-99f3-1a473e709d3d",
-        "date": "1/1/1970",
-        "dataset": "Unknown",
-        "domain": "None",
-        "sort_by": "None",
-        "word_cloud": 20
-    },
-    {
-        "id": "8e0362c7-4fab-4067-922f-1b2b37bb0b99",
-        "date": "1/1/1970",
-        "dataset": "Unknown",
-        "domain": "social-media",
-        "sort_by": "positive",
-        "word_cloud": 20
-    },
-    {
-        "id": "c9e3decd-713f-446e-af75-df713cb8dc0b",
-        "date": "1/1/1970",
-        "dataset": "Unknown",
-        "domain": "None",
-        "sort_by": "None",
-        "word_cloud": 20
-    },
-    {
-        "id": "77e974e2-c5b2-49fc-b0e0-794f8f2f1fca",
-        "date": "1/1/1970",
-        "dataset": "Unknown",
-        "domain": "social-media",
-        "sort_by": "positive",
-        "word_cloud": 20
-    },
-    {
-        "id": "364a2d7c-eae3-4873-af05-87390187382e",
-        "date": "1/1/1970",
-        "dataset": "Unknown",
-        "domain": "None",
-        "sort_by": "None",
-        "word_cloud": 20
-    },
-    {
-        "id": "37a741a1-6896-4b8e-9793-ee9a14bf63a4",
-        "date": "1/1/1970",
-        "dataset": "Unknown",
-        "domain": "None",
-        "sort_by": "None",
-        "word_cloud": 20
-    },
-    {
-        "id": "c243cc87-a7d9-4211-b4b1-4394ceea6093",
-        "date": "1/1/1970",
-        "dataset": "Unknown",
-        "domain": "None",
-        "sort_by": "None",
-        "word_cloud": 20
-    },
-    {
-        "id": "fd312d7e-ca25-4372-8b3a-2270e3d5188d",
-        "date": "1/1/1970",
-        "dataset": "Unknown",
-        "domain": "social-media",
-        "sort_by": "positive",
-        "word_cloud": 20
-    },
-    {
-        "id": "2bf3f7ed-399e-42c6-b192-e651fa1cf679",
-        "date": "1/1/1970",
-        "dataset": "Unknown",
-        "domain": "None",
-        "sort_by": "None",
-        "word_cloud": 20
-    },
-    {
-        "id": "09bf7028-9190-4ccc-81ff-053c1d365f16",
-        "date": "1/1/1970",
-        "dataset": "Unknown",
-        "domain": "None",
-        "sort_by": "None",
-        "word_cloud": 20
-    },
-    {
-        "id": "217bf7a6-3a1e-41d9-9a6e-1d24d50ccd3e",
-        "date": "1/1/1970",
-        "dataset": "Unknown",
-        "domain": "social-media",
-        "sort_by": "positive",
-        "word_cloud": 20
-    },
-    {
-        "id": "a930e017-f523-4e77-b1da-13842795d1bf",
-        "date": "1/1/1970",
-        "dataset": "Unknown",
-        "domain": "None",
-        "sort_by": "None",
-        "word_cloud": 20
-    },
-    {
-        "id": "ac163644-4b2f-4832-922e-b102210e76c9",
-        "date": "1/1/1970",
-        "dataset": "Unknown",
-        "domain": "social-media",
-        "sort_by": "positive",
-        "word_cloud": 20
-    },
-    {
-        "id": "c02b3a29-babd-46ef-a84c-34c92c7c9e4d",
-        "date": "1/1/1970",
-        "dataset": "Unknown",
-        "domain": "social-media",
-        "sort_by": "positive",
-        "word_cloud": 20
-    },
-    {
-        "id": "17d3c65f-a079-46a2-9417-6a84b7d8c2d4",
-        "date": "1/1/1970",
-        "dataset": "Unknown",
-        "domain": "None",
-        "sort_by": "None",
-        "word_cloud": 20
-    },
-    {
-        "id": "fc7314ed-7e5b-4d2f-8944-18dcc4626165",
-        "date": "1/1/1970",
-        "dataset": "Unknown",
-        "domain": "none",
-        "sort_by": "none",
-        "word_cloud": 20
-    },
-    {
-        "id": "670cb012-d1f2-463f-ad54-415a6921fc5d",
-        "date": "1/1/1970",
-        "dataset": "Unknown",
-        "domain": "None",
-        "sort_by": "None",
-        "word_cloud": 20
-    },
-    {
-        "id": "7f991bd8-12d0-4bd5-a6a7-911ade99a22b",
-        "date": "1/1/1970",
-        "dataset": "Unknown",
-        "domain": "none",
-        "sort_by": "none",
-        "word_cloud": 20
-    },
-    {
-        "id": "34868277-e51f-4a82-b758-b588102e83ac",
-        "date": "1/1/1970",
-        "dataset": "Unknown",
-        "domain": "None",
-        "sort_by": "None",
-        "word_cloud": 20
-    },
-    {
-        "id": "b94a7ce9-6d37-4368-a5ef-14640890cbd0",
-        "date": "1/1/1970",
-        "dataset": "Unknown",
-        "domain": "none",
-        "sort_by": "none",
-        "word_cloud": 20
-    },
-    {
-        "id": "476e4a18-f597-459a-a237-367285b4684d",
-        "date": "1/1/1970",
-        "dataset": "Unknown",
-        "domain": "None",
-        "sort_by": "None",
-        "word_cloud": 20
-    },
-    {
-        "id": "1a4e8997-0715-493b-b9d0-44075d2dfa81",
-        "date": "1/1/1970",
-        "dataset": "Unknown",
-        "domain": "none",
-        "sort_by": "none",
-        "word_cloud": 20
-    },
-    {
-        "id": "cdb237bd-6f3a-45d1-b4df-3f21bd473f63",
-        "date": "1/1/1970",
+        "id": "12c125fa-c29f-4836-843e-bd87a26c6a2d",
+        "date": "2025-03-14T11:37:59.554050",
         "dataset": "Unknown",
         "domain": "None",
         "sort_by": "None",

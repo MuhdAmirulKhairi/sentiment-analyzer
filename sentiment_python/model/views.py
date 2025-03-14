@@ -13,6 +13,7 @@ import uuid
 from nltk.corpus import stopwords
 from transformers import BertTokenizer, BertForSequenceClassification
 from sklearn.metrics import precision_score, recall_score, f1_score
+from datetime import datetime
 
 # Ensures NLTK stopwords are downloaded
 nltk.download('stopwords')
@@ -90,7 +91,7 @@ def analyze_sentiment(request):
 
          history_entry = {
             "id": str(uuid.uuid4()), # Assigns unique history ID
-            "date": "1/1/1970", # Will replace with actual time
+            "date": datetime.now().isoformat(), # Will replace with actual time
             "dataset": data.get("dataset", "Unknown"),
             "domain": data.get("domain_select", "None"),
             "sort_by": data.get("sort_by", "None"),
@@ -138,3 +139,54 @@ def get_history(request):
       history = []
 
    return JsonResponse({"history": history})
+
+@csrf_exempt
+def get_history_entry(request, entry_id):
+   # Fetches specific history entry
+   if os.path.exists(HISTORY_FILE):
+      with open(HISTORY_FILE, "r") as file:
+         history = json.load(file)
+
+      # Find the entry with the given ID
+      entry = next((item for item in history if item["id"] == entry_id), None)
+
+      if entry:
+         return JsonResponse(entry)
+      else:
+         return JsonResponse({"error": "History entry not found."}, status = 404)
+
+   return JsonResponse({"error": "History not found"}, status = 404)
+
+@csrf_exempt
+def delete_history_entry(request, entry_id):
+   # Deletes a specific history id
+   try:
+      if os.path.exists(HISTORY_FILE):
+         with open(HISTORY_FILE, "r") as file:
+            history = json.load(file)
+
+         # Filter out the entry given by ID
+         history = [entry for entry in history if entry["id"] != entry_id]
+
+         # Save updated history
+         with open(HISTORY_FILE, "w") as file:
+            json.dump(history, file, indent = 4)
+
+         return JsonResponse({"message": "History deleted."})
+      
+      return JsonResponse({"message": "History file not found."})
+   
+   except Exception as exp:
+      return JsonResponse({"error": str(exp)}, status = 500)
+   
+@csrf_exempt
+def clear_all_history(request):
+   # Deletes all history entries
+   try:
+      if os.path.exists(HISTORY_FILE):
+         os.remove(HISTORY_FILE)
+      
+      return JsonResponse({"message": "All history cleared."})
+   
+   except Exception as exp:
+      return JsonResponse({"error": str(exp)}, status = 500)
