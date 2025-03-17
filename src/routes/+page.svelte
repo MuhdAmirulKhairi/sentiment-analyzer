@@ -107,13 +107,7 @@
             <h2 style="font-family: Roboto, Helvetica, sans-serif">
                HISTORY
             </h2>
-            {#if history.length === 0}
-               <p class="fw-bold fs-5 px-2">No history available</p>
-            {:else}
-               {#each history as entry}
-                  <a href="/results/{entry.id}"><History {entry}/></a>
-               {/each}
-            {/if}
+            <div id="history-entry"><History {history}/></div>
          </div>
       </div>
 
@@ -230,7 +224,7 @@
    }
 
    /* The navigation menu links */
-   .sidebarNav a, h2 {
+   h2 {
       padding: 6px 15px 6px 15px;
       text-decoration: none;
       font-size: 15px;
@@ -269,7 +263,6 @@
    /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
    @media screen and (max-height: 450px) {
       .sidebarNav {padding-top: 15px;}
-      .sidebarNav a {font-size: 18px;}
    }
 
    @media screen and (max-width: 768px) {
@@ -312,5 +305,10 @@
       -webkit-text-stroke-color: #000000;
       text-shadow: 1px 2px 4px #000000;
       padding-bottom: 10px;
+   }
+
+   #history-entry {
+      margin-left: 10px;
+      margin-right: 10px;
    }
 </style>

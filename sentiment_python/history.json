@@ -1,31 +1,15 @@
 [
     {
-        "id": "92b47a2a-711d-4f44-856e-7ce712774e96",
-        "date": "2025-03-14T11:35:47.469815",
+        "id": "89451bb2-9d29-4c47-babe-df0b62124309",
+        "date": "2025-03-17T14:04:26.730813",
         "dataset": "Unknown",
-        "domain": "customer-reviews",
-        "sort_by": "positive",
+        "domain": "none",
+        "sort_by": "none",
         "word_cloud": 20
     },
     {
-        "id": "b59e1a85-5aec-4c61-baa7-6b033470bacc",
-        "date": "2025-03-14T11:35:49.412956",
-        "dataset": "Unknown",
-        "domain": "None",
-        "sort_by": "None",
-        "word_cloud": 20
-    },
-    {
-        "id": "01d2f134-df55-4526-ac70-cfa7159399a0",
-        "date": "2025-03-14T11:37:58.609018",
-        "dataset": "Unknown",
-        "domain": "customer-reviews",
-        "sort_by": "positive",
-        "word_cloud": 23
-    },
-    {
-        "id": "12c125fa-c29f-4836-843e-bd87a26c6a2d",
-        "date": "2025-03-14T11:37:59.554050",
+        "id": "8db160e7-2405-4216-8776-0239e778bfde",
+        "date": "2025-03-17T14:04:28.498487",
         "dataset": "Unknown",
         "domain": "None",
         "sort_by": "None",

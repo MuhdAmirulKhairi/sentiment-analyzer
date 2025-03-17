@@ -1,7 +1,5 @@
 <script>
-   import { onMount } from "svelte";
-
-   let history = [];
+   export let history = [];
 
    async function fetchHistory() {
       try {
@@ -54,8 +52,6 @@
          console.error("Error clearing history.", error);
       }
    }
-
-   onMount(fetchHistory);
 
    function formatDate(dateString) {
       if (!dateString) return "Unknown date"; // Handles missing dates
