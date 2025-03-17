@@ -53,6 +53,7 @@ def analyze_sentiment(request):
          predictions = []
          sentiment_counts = {"positive": 0, "negative": 0, "neutral": 0}
          all_words = []
+         result_id = str(uuid.uuid4())
 
          for text in texts:
             inputs = tokenizer(text,
@@ -93,7 +94,7 @@ def analyze_sentiment(request):
          top_words = word_freq.most_common(20)
 
          history_entry = {
-            "id": str(uuid.uuid4()), # Assigns unique history ID
+            "id": result_id, # Assigns unique history ID
             "date": datetime.now().isoformat(), # Will replace with actual time
             "dataset": data.get("dataset", "Unknown"),
             "domain": data.get("domain_select", "None"),
@@ -104,6 +105,7 @@ def analyze_sentiment(request):
          save_history(history_entry)
 
          return JsonResponse({
+            "id": result_id,
             "sentiments": sentiments,
             "sentiment_counts": sentiment_counts,
             "performance": {"precision": precision, "recall": recall, "f1_score": f1},

@@ -66,8 +66,9 @@
          });
 
          if (response.ok) {
+            let data = await response.json();
             console.log("Analysis completed!");
-            goto("/results"); // Redirect after success
+            goto(`/results/${data.id}`); // Redirect after success
          }
          else {
             let error_data = await response.json()
