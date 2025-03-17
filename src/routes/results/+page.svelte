@@ -18,25 +18,36 @@
       const id = $page.params.id; // Check if there is an ID in the URL
 
       let response;
-      if (id) {
-         // Fetch results
-         response = await fetch(`http://127.0.0.1:8000/api/get_history/${id}`);
-      }
-      else {
-         // Fetch fresh analysis
-         response = await fetch("http://127.0.0.1:8000/api/analyze_sentiment/", {
-            method: "POST",
-            headers: { "Content-Type": "application/json"},
-            body: JSON.stringify({ texts: ["example text 1", "example text 2"] }) // Will replace with actual texts
-         });
-      }
+      try {
+         if (id) {
+            // Fetch results
+            response = await fetch(`http://127.0.0.1:8000/api/get_history/${id}`);
+         }
+         else {
+            // Fetch fresh analysis
+            response = await fetch("http://127.0.0.1:8000/api/analyze_sentiment/", {
+               method: "POST",
+               headers: { "Content-Type": "application/json"},
+               body: JSON.stringify({ texts: ["example text 1", "example text 2"] }) // Will replace with actual texts
+            });
+         }
 
-      if (response.ok) {
-         const data = await response.json();
-         sentiments = data.sentiments;
-         sentimentCounts = data.sentiment_counts;
-         performance = data.performance;
-         word_cloud = data.word_cloud || [];
+         // Included fallback values
+         if (response.ok) {
+            const data = await response.json();
+            sentiments = data.sentiments || [];
+            sentimentCounts = data.sentiment_counts || { positive: 0, negative: 0, neutral: 0};
+            performance = data.performance || { precision: 0, recall: 0, f1_score: 0};
+            word_cloud = data.word_cloud || [];
+         }
+         else {
+            console.error("Error fetching data:", response.status);
+         }
+      }
+      catch (error) {
+         console.error("Error in fetching data.", error);
+      }
+      finally {
          loading = false;
       }
    }

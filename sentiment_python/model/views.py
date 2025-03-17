@@ -81,9 +81,12 @@ def analyze_sentiment(request):
             all_words.extend(words)
 
          # Process the performance metrics
-         precision = precision_score(predictions, [1] * len(predictions), average = "binary", zero_division = 0)
-         recall = recall_score(predictions, [1] * len(predictions), average = "binary", zero_division = 0)
-         f1 = f1_score(predictions, [1] * len(predictions), average = "binary", zero_division = 0)
+         try:
+            precision = precision_score(predictions, [1] * len(predictions), average = "binary", zero_division = 0)
+            recall = recall_score(predictions, [1] * len(predictions), average = "binary", zero_division = 0)
+            f1 = f1_score(predictions, [1] * len(predictions), average = "binary", zero_division = 0)
+         except Exception:
+            precision, recall, f1 = 0, 0, 0 # Fallback values
          
          # Process word cloud frequencies
          word_freq = collections.Counter(all_words)
@@ -130,15 +133,28 @@ def save_history(entry):
       print(f"Error saving history: {exp}")
 
 @csrf_exempt
-def get_history(request):
+def get_history(request, entry_id = None):
    # Returns the saved analysis history
-   if os.path.exists(HISTORY_FILE):
+   try:
+      if not os.path.exists(HISTORY_FILE):
+         return JsonResponse({"error": "No history found."}, status = 404)
+      
       with open(HISTORY_FILE, "r") as file:
          history = json.load(file)
-   else:
-      history = []
 
-   return JsonResponse({"history": history})
+      if entry_id:
+         # Filter for specific history entry
+         entry = next((h for h in history if h["id"] == entry_id), None)
+
+         if entry:
+            return JsonResponse(entry)
+         else:
+            return JsonResponse({"error": "History entry not found"}, status = 404)
+         
+      return JsonResponse({"history": history})
+
+   except Exception as exp:
+      return JsonResponse({"error": str(exp)}, status = 500)
 
 @csrf_exempt
 def get_history_entry(request, entry_id):

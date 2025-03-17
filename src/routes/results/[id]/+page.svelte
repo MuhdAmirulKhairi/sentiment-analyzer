@@ -21,12 +21,13 @@
         try {
             const response = await fetch(`http://127.0.0.1:8000/api/get_history/${id}`);
 
+            // Include fallback values
             if (response.ok) {
-                const data = await response.json();
-                sentiments = data.sentiments;
-                sentimentCounts = data.sentiment_counts;
-                performance = data.performance;
-                word_cloud = data.word_cloud || [];
+               const data = await response.json();
+               sentiments = data.sentiments || [];
+               sentimentCounts = data.sentiment_counts || { positive: 0, negative: 0, neutral: 0};
+               performance = data.performance || { precision: 0, recall: 0, f1_score: 0};
+               word_cloud = data.word_cloud || [];
             }
             else if (response.status === 404) {
                 error_message = "404, history not found.";
@@ -36,7 +37,7 @@
             }
         }
         catch (error) {
-            console.error("Error fetching history.");
+            console.error("Error fetching history.", error);
         }
         finally {
             loading = false;

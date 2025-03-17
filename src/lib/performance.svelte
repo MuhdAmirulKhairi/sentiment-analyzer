@@ -38,21 +38,21 @@
                <p style="font-size:26px; display: inline;"
                   title="Measures how many predicted positives are correct">&#63;</p>
             </td>
-            <td class="right-align fs-2">{performance.precision.toFixed(2)}</td>
+            <td class="right-align fs-2">{performance?.precision?.toFixed(2) || 'N/A'}</td>
          </tr>
          <tr>
             <td class="fs-2">Recall 
                <p style="font-size:26px; display: inline;"
                   title="Measures how many actual positives are correctly identified">&#63;</p>
             </td>
-            <td class="right-align fs-2">{performance.recall.toFixed(2)}</td>
+            <td class="right-align fs-2">{performance?.recall?.toFixed(2) || 'N/A'}</td>
          </tr>
          <tr>
             <td class="fs-2">F1 Score 
                <p style="font-size:26px; display: inline;"
                   title="Evaluates system correctness and completeness in prediction">&#63;</p>
             </td>
-            <td class="right-align fs-2">{performance.f1_score.toFixed(2)}</td>
+            <td class="right-align fs-2">{performance?.f1_score?.toFixed(2) || 'N/A'}</td>
          </tr>
       </tbody>
    </table>
