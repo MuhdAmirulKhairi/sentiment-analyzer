@@ -79,7 +79,6 @@
             <p class="sub-history">Dataset: {entry.dataset}</p>
             <p class="sub-history">Domain: {entry.domain}</p>
             <p class="sub-history">Sort by: {entry.sort_by}</p>
-            <p class="sub-history">Word cloud numbers: {entry.word_cloud}</p>
          </div>
          <button on:click={() => deleteHistoryEntry(entry.id)} class="delete-btn px-4 py-1">Delete</button>
       </div>

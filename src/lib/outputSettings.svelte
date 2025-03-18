@@ -20,9 +20,9 @@
                   class="analyzer-inputs col-12"
                   id="sort-by"
                   bind:value={sort_by}>
-                  <option value="positive">Positive</option>
-                  <option value="negative">Negative</option>
-                  <option value="neutral">Neutral</option>
+                  <option value="Positive">Positive</option>
+                  <option value="Negative">Negative</option>
+                  <option value="Neutral">Neutral</option>
                </select>
             </td>
          </tr>

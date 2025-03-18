@@ -1,8 +1,7 @@
 <script>
    import Papa from "papaparse";
-   import { writable } from "svelte/store";
+   import { CSVdata } from "$lib/stores";
 
-   export let CSVdata = writable([]); // Stores dataset globally
    let selectedColumns = ["text", "sentiment"] // Specified the columns to be displayed
 
    function handleFileUploads(event) {
@@ -19,12 +18,13 @@
                skipEmptyLines: true,
                complete: function(result) {
                   // Filter unwanted columns
-                  CSVdata = result.data
-                              .filter(row => row.text && row.sentiment)
-                              .map(row => ({
-                                 text: row.text,
-                                 sentiment: row.sentiment
-                              }));
+                  CSVdata.set(result.data
+                                    .filter(row => row.text && row.sentiment)
+                                    .map(row => ({
+                                       text: row.text,
+                                       sentiment: row.sentiment || "Unknown"
+                                    }))
+                  );
                },
             });
          };
@@ -43,7 +43,7 @@
    on:change={handleFileUploads}
 />
 <div id="CSVTable">
-   {#if CSVdata.length > 0}
+   {#if $CSVdata.length > 0}
    <div class="table-responsive">
       <div class="scrollable-table">
          <table class="table table-striped table-bordered">
@@ -54,7 +54,7 @@
                </tr>
             </thead>
             <tbody class="table-light">
-               {#each CSVdata as row}
+               {#each $CSVdata as row}
                   <tr>
                      <td>{row.text}</td>
                      <td>{row.sentiment}</td>

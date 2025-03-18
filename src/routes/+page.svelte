@@ -3,6 +3,7 @@
    import { goto } from "$app/navigation";
 
    import Dataset from "$lib/dataset.svelte";
+   import { CSVdata } from "$lib/stores";
    import History from "$lib/history.svelte";
    import AnalyzerSettings from "$lib/analyzerSettings.svelte";
    import OutputSettings from "$lib/outputSettings.svelte";
@@ -13,6 +14,8 @@
    let sort_by = "none";
    let word_cloud = 20;
    let history = [];
+   let dataset_array = [];
+   let isLoading = false;
    
    // Set the width of the side navigation to 300px when opening the nav bar
    function openNav() {
@@ -41,9 +44,19 @@
       sidebar.setAttribute("data-open", "false");
    }
 
+   CSVdata.subscribe(value => dataset_array = value)
+
    // Handles data submission to the Python backend
    async function runAnalyzer(event) {
       event.preventDefault(); // Prevent default form submission
+
+      const dataset = $CSVdata;
+      if (!dataset.length) {
+         alert("No dataset uploaded!");
+         return;
+      }
+
+      isLoading = true; // Show loading popup
 
       //Retrieve values from dataset, analyzer settings, output settings
       let settings = {
@@ -51,7 +64,7 @@
          domain_select: domain_select,
          sort_by: sort_by,
          word_cloud: word_cloud,
-         texts: ["sample texts"]
+         texts: dataset.map(row => row.text)
       };
 
       console.log("Running analysis with: ", settings)
@@ -62,7 +75,7 @@
             headers: {
                "Content-Type": "application/json",
             },
-            body: JSON.stringify(settings),
+            body: JSON.stringify(settings)
          });
 
          if (response.ok) {
@@ -77,6 +90,9 @@
       }
       catch (error) {
          console.error("Fetch failed: ", error);
+      }
+      finally {
+         isLoading = false;
       }
    }
 
@@ -164,6 +180,14 @@
          </form>
       </div>
    </div>
+   {#if isLoading}
+      <div class="loading-overlay">
+         <div class="loading-popup fs-2">
+            <p>Processing...</p>
+            <div class="loader"></div>
+         </div>
+      </div>
+   {/if}
 </section>
 
 <!-- Footer which shows related info at the bottom -->
@@ -311,5 +335,51 @@
    #history-entry {
       margin-left: 10px;
       margin-right: 10px;
+   }
+
+   .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(139, 93, 255, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+   }
+
+   .loading-popup {
+      background: #6A42C2;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      padding-left: 100px;
+      padding-right: 100px;
+      border-radius: 10px;
+      text-align: center;
+   }
+
+   .loading-popup p {
+      color: #D9D9D9;
+      -webkit-text-stroke-width: 0.25px;
+      -webkit-text-stroke-color: #000000;
+      text-shadow: 1px 2px 4px #000000;
+      padding-bottom: 10px;
+   }
+
+   .loader {
+      border: 5px solid #D9D9D9;
+      border-top: 5px solid #6A42C2;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 10px auto;
+   }
+
+   @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
    }
 </style>

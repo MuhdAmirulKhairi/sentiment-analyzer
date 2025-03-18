@@ -38,11 +38,11 @@
                   class="analyzer-inputs col-11"
                   id="domain-select"
                   bind:value={domain_select}>
-                  <option value="social-media">Social media</option>
-                  <option value="customer-reviews">Customer reviews</option>
-                  <option value="online-forums">Online forums</option>
-                  <option value="education">Education</option>
-                  <option value="fiction">Fiction</option>
+                  <option value="Social media">Social media</option>
+                  <option value="Customer reviews">Customer reviews</option>
+                  <option value="Online forums">Online forums</option>
+                  <option value="Education">Education</option>
+                  <option value="Fiction">Fiction</option>
                </select>
             </td>
          </tr>

@@ -15,33 +15,29 @@
 
    async function fetchResults() {
       loading = true;
-      const id = $page.params.id; // Check if there is an ID in the URL
+      let id;
+      page.subscribe(($page) => {
+         id = $page.params.id;
+      });
 
-      let response;
+      console.log("Fetching ID: ", id);
+
       try {
-         if (id) {
-            // Fetch results
-            response = await fetch(`http://127.0.0.1:8000/api/get_history/${id}`);
-         }
-         else {
-            // Fetch fresh analysis
-            response = await fetch("http://127.0.0.1:8000/api/analyze_sentiment/", {
-               method: "POST",
-               headers: { "Content-Type": "application/json"},
-               body: JSON.stringify({ texts: ["example text 1", "example text 2"] }) // Will replace with actual texts
-            });
-         }
+         let response = await fetch(`http://127.0.0.1:8000/api/get_history/${id}`);
 
-         // Included fallback values
          if (response.ok) {
-            const data = await response.json();
+            let data = await response.json();
+            console.log("Fetched: ", data);
+
             sentiments = data.sentiments || [];
             sentimentCounts = data.sentiment_counts || { positive: 0, negative: 0, neutral: 0};
             performance = data.performance || { precision: 0, recall: 0, f1_score: 0};
             word_cloud = data.word_cloud || [];
+
+            console.log("Parsed sentiments: ", sentiments)
          }
          else {
-            console.error("Error fetching data:", response.status);
+            console.error("Error fetching data: ", response.status)
          }
       }
       catch (error) {

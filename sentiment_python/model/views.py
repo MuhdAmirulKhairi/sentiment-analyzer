@@ -82,12 +82,9 @@ def analyze_sentiment(request):
             all_words.extend(words)
 
          # Process the performance metrics
-         try:
-            precision = precision_score(predictions, [1] * len(predictions), average = "binary", zero_division = 0)
-            recall = recall_score(predictions, [1] * len(predictions), average = "binary", zero_division = 0)
-            f1 = f1_score(predictions, [1] * len(predictions), average = "binary", zero_division = 0)
-         except Exception:
-            precision, recall, f1 = 0, 0, 0 # Fallback values
+         precision = precision_score(predictions, [1] * len(predictions), average = "binary", zero_division = 0)
+         recall = recall_score(predictions, [1] * len(predictions), average = "binary", zero_division = 0)
+         f1 = f1_score(predictions, [1] * len(predictions), average = "binary", zero_division = 0)
          
          # Process word cloud frequencies
          word_freq = collections.Counter(all_words)
@@ -99,18 +96,15 @@ def analyze_sentiment(request):
             "dataset": data.get("dataset", "Unknown"),
             "domain": data.get("domain_select", "None"),
             "sort_by": data.get("sort_by", "None"),
-            "word_cloud": data.get("word_cloud", 20)
-         }
-
-         save_history(history_entry)
-
-         return JsonResponse({
-            "id": result_id,
             "sentiments": sentiments,
             "sentiment_counts": sentiment_counts,
             "performance": {"precision": precision, "recall": recall, "f1_score": f1},
             "word_cloud": [{"word": word, "count": count} for word, count in top_words]
-         })
+         }
+
+         save_history(history_entry)
+
+         return JsonResponse(history_entry)
       
       except Exception as exp:
          return JsonResponse({'error': str(exp)}, status = 500)
