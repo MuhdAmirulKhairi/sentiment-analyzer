@@ -3,7 +3,7 @@
    import { goto } from "$app/navigation";
 
    import Dataset from "$lib/dataset.svelte";
-   import { CSVdata } from "$lib/stores";
+   import { CSVdata, datasetName } from "$lib/stores";
    import History from "$lib/history.svelte";
    import AnalyzerSettings from "$lib/analyzerSettings.svelte";
    import OutputSettings from "$lib/outputSettings.svelte";
@@ -15,6 +15,7 @@
    let word_cloud = 20;
    let history = [];
    let dataset_array = [];
+   let dataset_name = "";
    let isLoading = false;
    
    // Set the width of the side navigation to 300px when opening the nav bar
@@ -44,7 +45,8 @@
       sidebar.setAttribute("data-open", "false");
    }
 
-   CSVdata.subscribe(value => dataset_array = value)
+   CSVdata.subscribe(value => dataset_array = value);
+   datasetName.subscribe(value => dataset_name = value);
 
    // Handles data submission to the Python backend
    async function runAnalyzer(event) {
@@ -60,6 +62,7 @@
 
       //Retrieve values from dataset, analyzer settings, output settings
       let settings = {
+         dataset_name: dataset_name || "Unnamed Dataset",
          num_runs: num_runs,
          domain_select: domain_select,
          sort_by: sort_by,

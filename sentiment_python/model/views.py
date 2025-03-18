@@ -93,7 +93,7 @@ def analyze_sentiment(request):
          history_entry = {
             "id": result_id, # Assigns unique history ID
             "date": datetime.now().isoformat(), # Will replace with actual time
-            "dataset": data.get("dataset", "Unknown"),
+            "dataset": data.get("dataset_name", "Unnamed Dataset"),
             "domain": data.get("domain_select", "None"),
             "sort_by": data.get("sort_by", "None"),
             "sentiments": sentiments,

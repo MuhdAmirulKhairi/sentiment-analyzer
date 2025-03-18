@@ -1,6 +1,6 @@
 <script>
    import Papa from "papaparse";
-   import { CSVdata } from "$lib/stores";
+   import { CSVdata, datasetName } from "$lib/stores";
 
    let selectedColumns = ["text", "sentiment"] // Specified the columns to be displayed
 
@@ -8,6 +8,8 @@
       const uploadedFile = event.target.files[0];
 
       if (uploadedFile) {
+         datasetName.set(uploadedFile.name);
+
          const reader = new FileReader();
          
          reader.onload = (x) => {
@@ -19,11 +21,11 @@
                complete: function(result) {
                   // Filter unwanted columns
                   CSVdata.set(result.data
-                                    .filter(row => row.text && row.sentiment)
-                                    .map(row => ({
-                                       text: row.text,
-                                       sentiment: row.sentiment || "Unknown"
-                                    }))
+                                 .filter(row => row.text && row.sentiment)
+                                 .map(row => ({
+                                    text: row.text,
+                                    sentiment: row.sentiment || "Unknown"
+                                 }))
                   );
                },
             });
