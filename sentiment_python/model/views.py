@@ -11,7 +11,7 @@ import nltk
 import uuid
 
 from nltk.corpus import stopwords
-from transformers import BertTokenizer, BertForSequenceClassification
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from sklearn.metrics import precision_score, recall_score, f1_score
 from datetime import datetime
 
@@ -21,8 +21,8 @@ nltk.download('stopwords')
 HISTORY_FILE = ("history.json")
 
 # Load a pre-trained BERT model and tokenizer
-tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-model = BertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels = 2)
+tokenizer = AutoTokenizer.from_pretrained('finiteautomata/bertweet-base-sentiment-analysis')
+model = AutoModelForSequenceClassification.from_pretrained('finiteautomata/bertweet-base-sentiment-analysis')
 model.eval()
 
 @csrf_exempt
@@ -66,9 +66,9 @@ def analyze_sentiment(request):
                outputs = model(**inputs)
                prediction = torch.argmax(outputs.logits, dim = 1).item()
          
-            if prediction == 1:
+            if prediction == 2:
                sentiment = 'positive'
-            elif prediction == -1:
+            elif prediction == 0:
                sentiment = 'negative'
             else:
                sentiment = 'neutral'
@@ -82,9 +82,9 @@ def analyze_sentiment(request):
             all_words.extend(words)
 
          # Process the performance metrics
-         precision = precision_score(predictions, [1] * len(predictions), average = "binary", zero_division = 0)
-         recall = recall_score(predictions, [1] * len(predictions), average = "binary", zero_division = 0)
-         f1 = f1_score(predictions, [1] * len(predictions), average = "binary", zero_division = 0)
+         precision = precision_score(predictions, predictions, average = "macro", zero_division = 0)
+         recall = recall_score(predictions, predictions, average = "macro", zero_division = 0)
+         f1 = f1_score(predictions, predictions, average = "macro", zero_division = 0)
          
          # Process word cloud frequencies
          word_freq = collections.Counter(all_words)

@@ -1,0 +1,2099 @@
+[
+    {
+        "id": "85fbc44c-6930-49f0-8c64-1e30199645a0",
+        "date": "2025-03-19T17:32:54.729040",
+        "dataset": "sentiment_analysis.csv",
+        "domain": "Social media",
+        "sort_by": "Positive",
+        "sentiments": [
+            {
+                "text": "What a great day!!! Looks like dream.",
+                "sentiment": "positive"
+            },
+            {
+                "text": "I feel sorry, I miss you here in the sea beach",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Don't angry me",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "We attend in the class just for listening teachers reading on slide. Just Nonsence  ",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Those who want to go, let them go",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Its night 2 am, feeling neutral",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "2 am feedings for the baby are fun when he is all smiles and coos",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Soooo high",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " Both of you",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Today first time I arrive in the boat. Its amazing journey",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Love is something like E=MC^2 rules",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "I really really like the song Cardigan by Taylor Swift",
+                "sentiment": "positive"
+            },
+            {
+                "text": "My Sharpie is running DANGERously low on ink",
+                "sentiment": "negative"
+            },
+            {
+                "text": "i want to go to music tonight but i lost my voice.",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Always somewhere I miss you where I have been",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Don't distrube me",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "I don't care, who are you and what can you do",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "i`ve been sick for the past few days ",
+                "sentiment": "negative"
+            },
+            {
+                "text": "I'm come back home, my past job, its really good time for me",
+                "sentiment": "positive"
+            },
+            {
+                "text": "I will never fall in love until I found you",
+                "sentiment": "positive"
+            },
+            {
+                "text": " oh Maya, I`m so sorry!!  I hope you find her soon!! ",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Playing with kids, its amazing",
+                "sentiment": "positive"
+            },
+            {
+                "text": "is cleaning the house for her family who is comming later today..",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "I tried to shtdown my pc and accenditenly I click in the restart button. Its really disgusting",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Follow me, I will follow you too",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Its amazing game, I playing everyday",
+                "sentiment": "positive"
+            },
+            {
+                "text": "  I`m sorry.",
+                "sentiment": "negative"
+            },
+            {
+                "text": "I'm in the village now and there hardly found internate, feeling gloomy",
+                "sentiment": "negative"
+            },
+            {
+                "text": "juss came back from Barisal",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Went to sleep and there is a power cut in the village. ",
+                "sentiment": "negative"
+            },
+            {
+                "text": "How looks like our company new logo?",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "I buy Sophie's world book, I'm really so happy",
+                "sentiment": "positive"
+            },
+            {
+                "text": " If it is any consolation I got my BMI tested hahaha it says I am obesed  well so much for being unhappy for about 10 minutes.",
+                "sentiment": "positive"
+            },
+            {
+                "text": " That`s very funny.  Cute kids.",
+                "sentiment": "positive"
+            },
+            {
+                "text": " Ahhh, I slept through the game.  I`m gonna try my best to watch tomorrow though. I hope we play Army.",
+                "sentiment": "negative"
+            },
+            {
+                "text": "My semester final exam is complete. Hurray!!!",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Born and raised in NYC and living in Texas for the past 10 years!  I still miss NY",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "just in case you wonder, we are really busy today and this coming with with adding tons of new blogs and updates stay tuned",
+                "sentiment": "positive"
+            },
+            {
+                "text": "i`m soooooo sleeeeepy!!! the last day o` school was today....sniffle....",
+                "sentiment": "negative"
+            },
+            {
+                "text": " romance zero is funny",
+                "sentiment": "positive"
+            },
+            {
+                "text": " Car not happy, big big dent in boot! Hoping theyre not going to write it off, crossing fingers and waiting",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Yor are so unromantic",
+                "sentiment": "negative"
+            },
+            {
+                "text": "MAYDAY?!",
+                "sentiment": "positive"
+            },
+            {
+                "text": " I`d rather do the early run..but I am a morning runner",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " I love to! But I`m only available from 5pm.  and where dear?",
+                "sentiment": "positive"
+            },
+            {
+                "text": "The girl in the hair salon asked me 'Shall I trim your eyebrows!' How old do I feel?",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " i talk to you",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "im soo bored, I don't like this music video",
+                "sentiment": "negative"
+            },
+            {
+                "text": "this concert is amazing",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Had nicotine replacement patch on for 4 hours. So far, so good, but I did sleep for most of those 4 hours. Getting a bit twitchy now",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Its raining, I need an umbrella ",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "should be sleeping.  lost my voice a couple day ago.",
+                "sentiment": "negative"
+            },
+            {
+                "text": "I'm depressed, I'm thinking about suicide, what I need to do now?",
+                "sentiment": "negative"
+            },
+            {
+                "text": " I`ve heard this fall. I`m waiting too!",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "I saw an amazing nightmare yesterday night",
+                "sentiment": "positive"
+            },
+            {
+                "text": "I AM SUCH A CREEPER  I feel disappointed because of it.",
+                "sentiment": "negative"
+            },
+            {
+                "text": "I have bad headech, what I need to do now",
+                "sentiment": "negative"
+            },
+            {
+                "text": "happy mother`s day to all moms out there. Mothers are our real hero",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Grabbing coffee from  then making mom breakfast",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "im thinking that im going to have fun tonight",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Yesterday was most valuable day for me",
+                "sentiment": "positive"
+            },
+            {
+                "text": " Haha I know, I cant handle the fame!  and thank you!",
+                "sentiment": "positive"
+            },
+            {
+                "text": "One suggestion for me is, be up to date",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Always love everyone, love all animals. Most important love your parents",
+                "sentiment": "positive"
+            },
+            {
+                "text": "I'm playing minecraft video game. I'm addicated to it.",
+                "sentiment": "positive"
+            },
+            {
+                "text": "See you in the cloud",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "What a great day!!! Looks like dream.",
+                "sentiment": "positive"
+            },
+            {
+                "text": "I feel sorry, I miss you here in the sea beach",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Don't angry me",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "We attend in the class just for listening teachers reading on slide. Just Nonsence  ",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Those who want to go, let them go",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Its night 2 am, feeling neutral",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "2 am feedings for the baby are fun when he is all smiles and coos",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Soooo high",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " Both of you",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Today first time I arrive in the boat. Its amazing journey",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Love is something like E=MC^2 rules",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "I really really like the song Cardigan by Taylor Swift",
+                "sentiment": "positive"
+            },
+            {
+                "text": "My Sharpie is running DANGERously low on ink",
+                "sentiment": "negative"
+            },
+            {
+                "text": "i want to go to music tonight but i lost my voice.",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Always somewhere I miss you where I have been",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Don't distrube me",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "I don't care, who are you and what can you do",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "i`ve been sick for the past few days ",
+                "sentiment": "negative"
+            },
+            {
+                "text": "I'm come back home, my past job, its really good time for me",
+                "sentiment": "positive"
+            },
+            {
+                "text": "I will never fall in love until I found you",
+                "sentiment": "positive"
+            },
+            {
+                "text": " oh Maya, I`m so sorry!!  I hope you find her soon!! ",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Playing with kids, its amazing",
+                "sentiment": "positive"
+            },
+            {
+                "text": "is cleaning the house for her family who is comming later today..",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "I tried to shtdown my pc and accenditenly I click in the restart button. Its really disgusting",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Follow me, I will follow you too",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Its amazing game, I playing everyday",
+                "sentiment": "positive"
+            },
+            {
+                "text": "  I`m sorry.",
+                "sentiment": "negative"
+            },
+            {
+                "text": "I'm in the village now and there hardly found internate, feeling gloomy",
+                "sentiment": "negative"
+            },
+            {
+                "text": "juss came back from Barisal",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Went to sleep and there is a power cut in the village. ",
+                "sentiment": "negative"
+            },
+            {
+                "text": "How looks like our company new logo?",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "I buy Sophie's world book, I'm really so happy",
+                "sentiment": "positive"
+            },
+            {
+                "text": " If it is any consolation I got my BMI tested hahaha it says I am obesed  well so much for being unhappy for about 10 minutes.",
+                "sentiment": "positive"
+            },
+            {
+                "text": " That`s very funny.  Cute kids.",
+                "sentiment": "positive"
+            },
+            {
+                "text": " Ahhh, I slept through the game.  I`m gonna try my best to watch tomorrow though. I hope we play Army.",
+                "sentiment": "negative"
+            },
+            {
+                "text": "My semester final exam is complete. Hurray!!!",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Born and raised in NYC and living in Texas for the past 10 years!  I still miss NY",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "just in case you wonder, we are really busy today and this coming with with adding tons of new blogs and updates stay tuned",
+                "sentiment": "positive"
+            },
+            {
+                "text": "i`m soooooo sleeeeepy!!! the last day o` school was today....sniffle....",
+                "sentiment": "negative"
+            },
+            {
+                "text": " romance zero is funny",
+                "sentiment": "positive"
+            },
+            {
+                "text": " Car not happy, big big dent in boot! Hoping theyre not going to write it off, crossing fingers and waiting",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Yor are so unromantic",
+                "sentiment": "negative"
+            },
+            {
+                "text": "MAYDAY?!",
+                "sentiment": "positive"
+            },
+            {
+                "text": " I`d rather do the early run..but I am a morning runner",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " I love to! But I`m only available from 5pm.  and where dear?",
+                "sentiment": "positive"
+            },
+            {
+                "text": "The girl in the hair salon asked me 'Shall I trim your eyebrows!' How old do I feel?",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " i talk to you",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Grabbing coffee from  then making mom breakfast",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "im thinking that im going to have fun tonight....and maybe some changes are coming",
+                "sentiment": "positive"
+            },
+            {
+                "text": " thanks. before the major chop.",
+                "sentiment": "positive"
+            },
+            {
+                "text": " Haha I know, I cant handle the fame!  and thank you!",
+                "sentiment": "positive"
+            },
+            {
+                "text": "just got up and updated my ipod",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "I still loving you, you are my love",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Lets go, its time to play cricket match",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Hey everyone, do you watch cricket match between eng vs aus yesterday",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Australia cricket team I love you",
+                "sentiment": "positive"
+            },
+            {
+                "text": " which means you`re just going to have to come back to vancouver and have it our way! hahah",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Feeling smooth like chrome",
+                "sentiment": "positive"
+            },
+            {
+                "text": "feeling gloomy",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Today we will go a concert",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "i need coffee too.",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " Sounds like me",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Bad day  The day you realize what mess you`ve put me through will be one of the happiest days of my life...",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Walking to class. I hate not having a bike....especially mine.",
+                "sentiment": "negative"
+            },
+            {
+                "text": "I'm start learning machine learning",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "failed inspection. ",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Lets sing a song",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "happy father`s day to all the father in the world.",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Today, my semester final exam was really great",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Really great day",
+                "sentiment": "positive"
+            },
+            {
+                "text": "The exception for a short dude",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Congratulation for your achievement",
+                "sentiment": "positive"
+            },
+            {
+                "text": "If you followed us recently, PLEASE dont be offended that we haven`t followed back. We hit our limit. ",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " Yes i work 9 to 5 ",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " Hmmm, maybe that`s what they meant. ",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Done at the spa   now meeting vic for some late lunch!",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Happy monday  up and about going to tavares today. Hope everyone has a blessed day!",
+                "sentiment": "positive"
+            },
+            {
+                "text": " Always have wanted to go to university",
+                "sentiment": "positive"
+            },
+            {
+                "text": " Thanks",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Really great football match",
+                "sentiment": "positive"
+            },
+            {
+                "text": "  that`s why I need to be there",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Okay so I`m dedicating my 300th tweet to the fact that I`m going to the Apple store because there is a HUGE crack on the glass screen!",
+                "sentiment": "negative"
+            },
+            {
+                "text": " If only we could ever actually be allowed to stay here and do that",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " Let me know how that turns out!!",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " was that sass I detect?  As long as it isn`t back sass! Haha",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " yeah I was thinking about that ,ahaha",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Today is our EEE day",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "I`m not sleeping at all until  accepts my appology",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "I'm studying in psychology",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " I live for pain, bring it on",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "okay, i`m out for a while  back later!",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "We visited worlds longest sea beach, Its really amazing time for us",
+                "sentiment": "positive"
+            },
+            {
+                "text": "almost died. Laptop screen was set to 100% brightness after I reinstalled Windows Vista. ",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Waiting for tish to get off. Got to drive my moms CRV to pick her up all my myself and duckie. First time",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "your attitude looks like autistics child",
+                "sentiment": "negative"
+            },
+            {
+                "text": "going to shower because i don`t want to smell at school tomorrow",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Do you know sign languages",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " Since the demise of Woolworths it isn`t easy to find reasonably priced pick n mix anywhere",
+                "sentiment": "negative"
+            },
+            {
+                "text": "may the fourth be with you! happy star wars day",
+                "sentiment": "positive"
+            },
+            {
+                "text": "just got home from work",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " Yes it does. Please dont` go. If you die I will cry.. which normally leads to small animals getting harmed",
+                "sentiment": "negative"
+            },
+            {
+                "text": "writing report cards  soooo tired but what an amazing day. check it out on fb soon!",
+                "sentiment": "positive"
+            },
+            {
+                "text": " it was only once for my big brother",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "good news: finally finished my bachelor degree",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Well good morning all, What a wonderful day in the neighborhood  Thanks for all those that are now following another 60 this morning",
+                "sentiment": "positive"
+            },
+            {
+                "text": "yesterday I'm watch a movie, that\u2019s was really motivated for me",
+                "sentiment": "positive"
+            },
+            {
+                "text": "  hope he is ok!",
+                "sentiment": "positive"
+            },
+            {
+                "text": "can`t school just be done already? it hurts too much... seeing him every day",
+                "sentiment": "negative"
+            },
+            {
+                "text": "I waited, listening to wind blowing through the tumbleweed? Are none of you old enough to know what to do when someone says 'Crackerack'?",
+                "sentiment": "negative"
+            },
+            {
+                "text": " Hell Yeah!",
+                "sentiment": "positive"
+            },
+            {
+                "text": " HIM shirt at dinner? Do you need to ask??  Does it actually have Ville on it?",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " i know!!",
+                "sentiment": "positive"
+            },
+            {
+                "text": " Smelly? Noooo. I love alex Vixon",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Went to a party last night. GREAT MINDS THINK ALIKE  Anyway, happy birthday",
+                "sentiment": "positive"
+            },
+            {
+                "text": " Happy birthday! Just woke up on this side of Earth, so wishes are bit late",
+                "sentiment": "positive"
+            },
+            {
+                "text": "thank you for teaching me values and to be a better person each day  I LOVE SO MUCH, YOU`RE THE BEST MUM IN THE WORLD",
+                "sentiment": "positive"
+            },
+            {
+                "text": "HAPPY MOTHERS DAY.!",
+                "sentiment": "positive"
+            },
+            {
+                "text": " laughs I`m glad that you have self confidence - it`s a wonderful trait to have  I`ll applaud extra loud for it, okay?",
+                "sentiment": "positive"
+            },
+            {
+                "text": "  Thanks",
+                "sentiment": "positive"
+            },
+            {
+                "text": "twittering after 2 days!",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Getting ready for week  Its too nice today to be stuck inside working!",
+                "sentiment": "positive"
+            },
+            {
+                "text": "I am tres depressed",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Felt like ****, behaved like my son; ate to compensate. Pigged out on home-roasted sugar almonds. Painful tum, threw up, still feel sick.",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Happy Mothers Day people. i love my mom a lot still",
+                "sentiment": "positive"
+            },
+            {
+                "text": " I`m sorry to hear that.",
+                "sentiment": "negative"
+            },
+            {
+                "text": " That`s awesome dude, yay for surprise celebrities!  I got to meet him a few years ago, he was soooo friendly.",
+                "sentiment": "positive"
+            },
+            {
+                "text": " it makes me happy to hear a girl talk, or tweet, about the nba. but... could you give my nuggets some love?!",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Is getting the hang of Twitter.",
+                "sentiment": "positive"
+            },
+            {
+                "text": "You know your neck is jacked up when you are forced to pay for parking bc you can`t turn you head to parallel park in the free spaces...",
+                "sentiment": "negative"
+            },
+            {
+                "text": "I want it BACK NOW!",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Going to miss my roomie ... We will no longer be roomies starting tomorrow",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "bathing with two little angels, Keyla and Janice.",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " Yep, finished, chocked full of spelling and grammatical errors, but I`m cleaning it up tomorrow and popping it up  hehe",
+                "sentiment": "positive"
+            },
+            {
+                "text": " HAHAHHA lol true that! i always remember my BD but i can never remember what date or even day it is",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Family is here,hanging with them",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Watching Ellen Love her!! then doing the dishes  and tanning ...it`s gorgeous out!",
+                "sentiment": "positive"
+            },
+            {
+                "text": " what`s goin on hun?  I`m worried about you",
+                "sentiment": "negative"
+            },
+            {
+                "text": " Im not bannished... but I am at work till 6",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " Morning! If I get to see it, I`ll let you know. Right now, I`m going to go see Wolverine.",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Grabbing coffee from  then making mom breakfast",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "im thinking that im going to have fun tonight....and maybe some changes are coming",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Grabbing coffee from  then making mom breakfast",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "im thinking that im going to have fun tonight....and maybe some changes are coming",
+                "sentiment": "positive"
+            },
+            {
+                "text": " thanks. before the major chop.",
+                "sentiment": "positive"
+            },
+            {
+                "text": " Haha I know, I cant handle the fame!  and thank you!",
+                "sentiment": "positive"
+            },
+            {
+                "text": "just got up and updated my ipod",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " yes! sober HAHAHA tanghaling tapat dude! haha WILD. i don`t knowwww  plan plan  before you go to US!",
+                "sentiment": "positive"
+            },
+            {
+                "text": " We never miss ICarly - my son has a huge crush on Miranda",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Saw James carville in the store today. His head is really that bald",
+                "sentiment": "negative"
+            },
+            {
+                "text": "I love blue and programming",
+                "sentiment": "positive"
+            },
+            {
+                "text": " which means you`re just going to have to come back to vancouver and have it our way! hahah",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Feeling smooth like chrome",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Errors are red but my life is looks like blue film",
+                "sentiment": "negative"
+            },
+            {
+                "text": "downloading songs while trying to sneak a lil homework in too, which should be my main priority not songs lol",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Errors are red but my life is blue, I love rose and your lips baby",
+                "sentiment": "positive"
+            },
+            {
+                "text": " Sounds like me",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Bad day  The day you realize what mess you`ve put me through will be one of the happiest days of my life...",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Walking to class. I hate not having a bike....especially mine.",
+                "sentiment": "negative"
+            },
+            {
+                "text": "sounds good",
+                "sentiment": "positive"
+            },
+            {
+                "text": "failed inspection. Did you know you can pass wo/oven, but not wo/anti-tip bracket, which is only sold w/oven? This is worse than taxes.",
+                "sentiment": "negative"
+            },
+            {
+                "text": "JONAS BROTHERS - Live to party.                It`s rocking so hard     I love the song,",
+                "sentiment": "positive"
+            },
+            {
+                "text": "happy mother`s day to all the mothers in the world.",
+                "sentiment": "positive"
+            },
+            {
+                "text": "I've got a fever, can you chcek, a good song, I'm listening this song everytime",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Fun night! Listened through the next episode of this turkey drama",
+                "sentiment": "positive"
+            },
+            {
+                "text": "The exception for a short dude: Larenz fineass Tate yum",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Screw the reviews, I thought Wolverine was awesome. But not enough Dominic Monaghan for my liking.",
+                "sentiment": "negative"
+            },
+            {
+                "text": "If you followed us recently, PLEASE dont be offended that we haven`t followed back. We hit our limit.   Hopefully we will be free soon.",
+                "sentiment": "positive"
+            },
+            {
+                "text": " Yes i work 6 to 3...",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " Hmmm, maybe that`s what they meant. They eluded to something brand new but you know how the media is",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Done at the spa   now meeting vic for some late lunch!",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Happy monday  up and about going to tavares today. Hope everyone has a blessed day!",
+                "sentiment": "positive"
+            },
+            {
+                "text": " Always have wanted to go to Oz",
+                "sentiment": "positive"
+            },
+            {
+                "text": " Thx",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "I love this youtube tutorial",
+                "sentiment": "positive"
+            },
+            {
+                "text": "  that`s why I need to be there...To represent the Blackberries",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Okay so I`m dedicating my 300th tweet to the fact that I`m going to the Apple store because there is a HUGE crack on the glass screen!",
+                "sentiment": "negative"
+            },
+            {
+                "text": " If only we could ever actually be allowed to stay here and do that",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " Let me know how that turns out!!",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " was that sass I detect?  As long as it isn`t back sass! Haha",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " yeah I was thinking about that ,ahaha",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " Dont know whether that helps. Google it to know more",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "I`m not sleeping at all until  accepts my appology",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Wolverine Was BOSS! Seriously, And Will.I.Am Was In It, What The **** ??",
+                "sentiment": "positive"
+            },
+            {
+                "text": " I live for pain, bring it on",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "okay, i`m out for a while  back later!",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "  #powerblog What is this powerblog challenge you keep talking about?  I`m a newbie follower",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "almost died. Laptop screen was set to 100% brightness after I reinstalled Windows Vista. Got a headache now  #insanedefaults",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Waiting for tish to get off. Got to drive my moms CRV to pick her up all my myself and duckie. First time",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Trying to decide on a movie with the friends.. not going to well! lol :p  No bible study 2nite, which means ****-day cake  buy my own??",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "going to shower because i don`t want to smell at school tomorrow",
+                "sentiment": "negative"
+            },
+            {
+                "text": " Sigh... you know I am...",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "discovered cause of a bug in the new  4 build. Publishing bug fix now, hopefully new beta by tomorrow",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Here are 4 FREE notebooks to know machine learning well",
+                "sentiment": "positive"
+            },
+            {
+                "text": "just got home from work.... and is chugging down a big bottle of apple juice.",
+                "sentiment": "positive"
+            },
+            {
+                "text": " Yes it does. Please dont` go. If you die I will cry.. which normally leads to small animals getting harmed",
+                "sentiment": "negative"
+            },
+            {
+                "text": "writing report cards  soooo tired but what an amazing day. check it out on fb soon!",
+                "sentiment": "positive"
+            },
+            {
+                "text": " it was only once for my big brother...and I`m done now",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "good news: finally finished my workout that has been paused for 6 hours. bad news: my resistance band is torn",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Well good morning all, What a wonderful day in the neighborhood  Thanks for all those that are now following another 60 this morning",
+                "sentiment": "positive"
+            },
+            {
+                "text": "FTSK and Mercy Mercedes were amazing tonight.. as always",
+                "sentiment": "positive"
+            },
+            {
+                "text": "  hope he is ok!",
+                "sentiment": "positive"
+            },
+            {
+                "text": "can`t school just be done already? it hurts too much... seeing him every day",
+                "sentiment": "negative"
+            },
+            {
+                "text": "I waited, listening to wind blowing through the tumbleweed? Are none of you old enough to know what to do when someone says 'Crackerack'?",
+                "sentiment": "negative"
+            },
+            {
+                "text": " Hell Yeah!",
+                "sentiment": "positive"
+            },
+            {
+                "text": " HIM shirt at dinner? Do you need to ask??  Does it actually have Ville on it?",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " i know!!",
+                "sentiment": "positive"
+            },
+            {
+                "text": " huh what the ****? Smelly? Noooo. I love alex Vixon",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Went to a party last night. Dindin and I showed up in matching outfits ) GREAT MINDS THINK ALIKE ) Anyway, happy birthday, ate lara",
+                "sentiment": "positive"
+            },
+            {
+                "text": " Happy b-day! Just woke up on this side of Earth, so wishes are bit late",
+                "sentiment": "positive"
+            },
+            {
+                "text": "thank you for teaching me values and to be a better person each day  I LOVE SO MUCH, YOU`RE THE BEST MUM IN THE WORLD",
+                "sentiment": "positive"
+            },
+            {
+                "text": "HAPPY MOTHERS DAY.!",
+                "sentiment": "positive"
+            },
+            {
+                "text": " *laughs* I`m glad that you have self confidence - it`s a wonderful trait to have  I`ll applaud extra loud for it, okay?",
+                "sentiment": "positive"
+            },
+            {
+                "text": "  Thanks",
+                "sentiment": "positive"
+            },
+            {
+                "text": "twittering after 2 days!",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Getting ready for week  Its too nice today to be stuck inside working!",
+                "sentiment": "positive"
+            },
+            {
+                "text": "I am tres depressed",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Felt like ****, behaved like my son; ate to compensate. Pigged out on home-roasted sugar almonds. Painful tum, threw up, still feel sick.",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Happy Mothers Day people. i love my mom a lot still",
+                "sentiment": "positive"
+            },
+            {
+                "text": " I`m sorry to hear that.",
+                "sentiment": "negative"
+            },
+            {
+                "text": " That`s awesome dude, yay for surprise celebrities!  I got to meet him a few years ago, he was soooo friendly.",
+                "sentiment": "positive"
+            },
+            {
+                "text": " it makes me happy to hear a girl talk, or tweet, about the nba. but... could you give my nuggets some love?!",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Is getting the hang of Twitter.",
+                "sentiment": "positive"
+            },
+            {
+                "text": "You know your neck is jacked up when you are forced to pay for parking bc you can`t turn you head to parallel park in the free spaces...",
+                "sentiment": "negative"
+            },
+            {
+                "text": "I want it BACK NOW!",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Going to miss my roomie ... We will no longer be roomies starting tomorrow",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "bathing with two little angels, Keyla and Janice.",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " Yep, finished, chocked full of spelling and grammatical errors, but I`m cleaning it up tomorrow and popping it up  hehe",
+                "sentiment": "positive"
+            },
+            {
+                "text": " HAHAHHA lol true that! i always remember my BD but i can never remember what date or even day it is",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Family is here,hanging with them",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Watching Ellen Love her!! then doing the dishes  and tanning ...it`s gorgeous out!",
+                "sentiment": "positive"
+            },
+            {
+                "text": " what`s goin on hun?  I`m worried about you",
+                "sentiment": "negative"
+            },
+            {
+                "text": " Im not bannished... but I am at work till 6",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " Morning! If I get to see it, I`ll let you know. Right now, I`m going to go see Wolverine.",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " red top tabloids, build em up, knock em down",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "tonight in party w/ my girls (minus vita)",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "  why not now you made me sad I thought you`d be jumping for joy",
+                "sentiment": "negative"
+            },
+            {
+                "text": " Simple my",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "The pics I just uploaded are the baby pics of my cats. Missy is now an adult and a pretty little kitty, but Batty is in kitten heaven now",
+                "sentiment": "positive"
+            },
+            {
+                "text": " I saw the play of it here, it was amazing",
+                "sentiment": "positive"
+            },
+            {
+                "text": "i am glad to break my twitter virginity with you two.",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Dinner with the fam... I have missed them",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Live That`s what I want. More the better. Bound to be a few bad eggs though, but they will soon learn.",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Hell yeah Kellynn got a Twitter. Finally.",
+                "sentiment": "positive"
+            },
+            {
+                "text": " I know   It was worth a shot, though!",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Just opened a facebook account, I`m a little confused I don`t really get it. Twitter seems much better",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Ship. I`m stuck.",
+                "sentiment": "negative"
+            },
+            {
+                "text": "DUSTBIN BABY ON AT 11.30 Cannot wait  x",
+                "sentiment": "positive"
+            },
+            {
+                "text": " Not going to dwell on it. It happened, it`s passed. Just a shame as he was so supportive! Such is life!  x",
+                "sentiment": "negative"
+            },
+            {
+                "text": "whats the day going on",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "It looks like the office TV DOES get MLB Network",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Home empty handed.  No comics found today.  I shall now indulge in my cupcakes from Magnolia Bakery.",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Laying in bed til workkk... Oh the life. Definitely pinched a nerve.",
+                "sentiment": "negative"
+            },
+            {
+                "text": "today is a busy day. exhausting!",
+                "sentiment": "negative"
+            },
+            {
+                "text": " I was going to go on Sunday, but now I`ve got too much going on that weekend",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " Sorry to hear ur flight got cancelled  that blows!!!",
+                "sentiment": "negative"
+            },
+            {
+                "text": "ohh my tooth is hurts ohh  im sad it very hurts",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Before I get too distracted, I`d like to thank my new followers for taking the trouble to follow me! And to my others: feelin the love",
+                "sentiment": "positive"
+            },
+            {
+                "text": " u think u have bills Ha!Ii just finished paying mine that`s y I`m broke",
+                "sentiment": "negative"
+            },
+            {
+                "text": " Not sure it didn`t say it was 2 big. I jst saw the pics of u on ur last bday. You looked so pretty!! I miss you!!",
+                "sentiment": "positive"
+            },
+            {
+                "text": "sore throat. Planning the TET outing to Marwell though...good times",
+                "sentiment": "positive"
+            },
+            {
+                "text": "mcfly gig last nightt omg it was amazin didnt sit down through the whole thing  mcfly did you see me and ma best mate we were in tutus",
+                "sentiment": "positive"
+            },
+            {
+                "text": "2 days without sleep and now a migraine. I thought life postR01 was meant to be relaxing",
+                "sentiment": "negative"
+            },
+            {
+                "text": " There!",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "?sucks!?..",
+                "sentiment": "negative"
+            },
+            {
+                "text": " whens the sway sway winner announced?",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " K will check it out...",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " doing pretty well, up and wide awake",
+                "sentiment": "positive"
+            },
+            {
+                "text": "i want to wake up early, and get a coffee tomorrow (today) !  it`s going to be a busyy day! but have to keep writing.. booo whoo!",
+                "sentiment": "negative"
+            },
+            {
+                "text": "I Miss Daddy and Mommy",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "My dog is officially depressed that my brother`s dogs are gone. He doesn`t want to go outside and when we did, he play half-heartedly.",
+                "sentiment": "negative"
+            },
+            {
+                "text": "I just realized that I can`t forward text msgs with my iPhone.",
+                "sentiment": "negative"
+            },
+            {
+                "text": "My frist post... Off to find a new car for my parents, exciting!",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Argh noo! Missed The Killers on Wossy!  That sucks! Missed out on Brandon. Total failure! Anyone know if it`s repeated? Must investigate!",
+                "sentiment": "negative"
+            },
+            {
+                "text": "seriously bored without anyone to talk to... but not tired enough for sleep",
+                "sentiment": "negative"
+            },
+            {
+                "text": " I am lost. Please help me find a good home.",
+                "sentiment": "negative"
+            },
+            {
+                "text": "It`s a Peter & Gordon morning  -> And I, go to pieces and I wanna hide / Go to pieces and I almost die / Ever... ? http://blip.fm/~5yk38",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Ok so I`ve now got a bit of a bad back after lifting all drum hardware into my car   downer.",
+                "sentiment": "negative"
+            },
+            {
+                "text": " LMAO... Smh!  that one threw me off.",
+                "sentiment": "negative"
+            },
+            {
+                "text": " oh nice going!",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Is getting ready for work... Working all weekend",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Gonna celebrate Mothers Day with the family but gonna start the partying tonite",
+                "sentiment": "positive"
+            },
+            {
+                "text": " i agree with you!",
+                "sentiment": "positive"
+            },
+            {
+                "text": " I only do computers. Am hopeless at everything else",
+                "sentiment": "negative"
+            },
+            {
+                "text": "90 degrees, gross skies, and thunderstorms...perfect match for my mood  lol",
+                "sentiment": "positive"
+            },
+            {
+                "text": "_2nd aww thanks!",
+                "sentiment": "positive"
+            },
+            {
+                "text": " Sorry RB is on PS3 for me",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "I saw amazing heeels. But they were too big",
+                "sentiment": "positive"
+            },
+            {
+                "text": "I just stuck my finger down my throat and there are a bunch of bumps on my tongue & throat.",
+                "sentiment": "negative"
+            },
+            {
+                "text": "dang last url went down  ? http://blip.fm/~7aigm",
+                "sentiment": "negative"
+            },
+            {
+                "text": " ohoh i missed all ur tweets  im gonna have to stay awake all night to see the announcement now, **** time difference",
+                "sentiment": "negative"
+            },
+            {
+                "text": " Damnit all. That sucks.  You were one of the ones I thought I`d drag back lol",
+                "sentiment": "negative"
+            },
+            {
+                "text": " my boss. She`s moving to NYC",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "this is sooo crazy i have fever..",
+                "sentiment": "negative"
+            },
+            {
+                "text": "is spending her Saturday morning taking notes for a research essay because some stupid **** recalled the book I`m using. Not fair",
+                "sentiment": "negative"
+            },
+            {
+                "text": "I think i need some new friends",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " Looking forward to your gig in Ireland!!!  See ya there!",
+                "sentiment": "positive"
+            },
+            {
+                "text": "I' watching a movie name Adimurie",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "aww  you loooove me",
+                "sentiment": "positive"
+            },
+            {
+                "text": "is hungry, twitter.  i want food.",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "awesome lucky you",
+                "sentiment": "positive"
+            },
+            {
+                "text": " yea, i should know.. but tell me EVERYTHING!  ps: send me direct messages telling..   haha",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " haha im jewish, i love that one",
+                "sentiment": "positive"
+            },
+            {
+                "text": "had a great time out in the beer garden wit the boyos !! I think the sun got to me a bit though, feel a bit ill !!",
+                "sentiment": "positive"
+            },
+            {
+                "text": " l`m on 3 days too matt. No fun this weekend.",
+                "sentiment": "negative"
+            },
+            {
+                "text": " u really don`t think so?  maybe ur right....lol. btw what phone u using? think u told me b4...i might have an app for u",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " I feel your pain. Mine is the same way",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "comes home in two days",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " Sadly no. It didn`t come with one...",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Cant wait to see my boy tomorrow",
+                "sentiment": "positive"
+            },
+            {
+                "text": " ehhh no. just a check up. I have a dentist app next week though. getting my molar pulled/root canal.",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " aww I miss driving down elmwood",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Omg Wango Tango was **** AWSOME! I love my baby for taking me",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Version 2 of our live, interactive Trans-Siberian ticket planner is launched",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "_30439 I really wish I could go!",
+                "sentiment": "positive"
+            },
+            {
+                "text": " yeah real hard, but I know you`ll get by with it... smile",
+                "sentiment": "positive"
+            },
+            {
+                "text": " I`m 25 in december that`s not good at all next big birthday is 30  after 21 it flys by for sure",
+                "sentiment": "negative"
+            },
+            {
+                "text": "  This has made my night!!  Way too funny!!",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Woo CAVS.  Happy Mother`s Day!",
+                "sentiment": "positive"
+            },
+            {
+                "text": " I make that same face when I get home and your mom is watching soaps.",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "I have to go to work now.",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " I can`t believe you went and got boba without me.",
+                "sentiment": "negative"
+            },
+            {
+                "text": "  And to you too, how are you today?",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " Thanks for the warm welcome! We didn`t make plans   because our arrival time was so up in the air.",
+                "sentiment": "positive"
+            },
+            {
+                "text": "19 days and counting",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " sorry  friends - I`m swamped with deadlines right now and we have family visiting to boot! No charades for me.",
+                "sentiment": "negative"
+            },
+            {
+                "text": "BRAINFREEZE",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Just discovered a shortcoming of Gravity. When you use Twitpic (integrated) it doesn`t subtract the pic URL from the 140 character limit",
+                "sentiment": "negative"
+            },
+            {
+                "text": "My sunburn is peeling,",
+                "sentiment": "negative"
+            },
+            {
+                "text": "perky purple nail polish isn`t as perky when its chipped",
+                "sentiment": "negative"
+            },
+            {
+                "text": "http://twitpic.com/4sx96 - before they put a CAMERA in the smokers pit.  i can no longer vandalize that door, without being caught.",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Laying ALONE!! Since Mook`s soo comfy in his f`n play pen. I thought it was ill at first now I don`t have no one to cuddle with...",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "I hate the dentist",
+                "sentiment": "negative"
+            },
+            {
+                "text": " nothing aimed at you, just joining in...sorry",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "I`m taking a twitter break. Cell is dying",
+                "sentiment": "negative"
+            },
+            {
+                "text": " qood morninq",
+                "sentiment": "positive"
+            },
+            {
+                "text": "writing my english original writing storyyyyy. and listening to `a little respect` by erasure  aaaaaah.",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "needs more followers",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "I wish I could get my nails done  stupid job",
+                "sentiment": "negative"
+            },
+            {
+                "text": "The little wormy from labyrinth sadly passed away today but its ok as hes still around in a happy ghost form aww  http://twitpic.com/67aim",
+                "sentiment": "positive"
+            },
+            {
+                "text": " the 'no pants' idea could be the new attempt world-wide to attract business back to the airlines.",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " Have a good one",
+                "sentiment": "positive"
+            },
+            {
+                "text": " yep infact she is popular, miss india 99, talented film actress .... and lot more",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Dosen`t Want To Go To Work Tomorrow",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Daniel has won DSDS. His voice is great.",
+                "sentiment": "positive"
+            },
+            {
+                "text": "I need blood O negative",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "was hoping to go to Red Lobster this weekend",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "_x_ATL u mean jack barakat`s?! wow so have u ever gone to his house? Hehe i mean ur ssoo lucky to have the address!",
+                "sentiment": "positive"
+            },
+            {
+                "text": "I sure do hope it becomes 4:20 this afternoon ...",
+                "sentiment": "positive"
+            },
+            {
+                "text": " it means that you are now FAMOUS. Congrats!",
+                "sentiment": "positive"
+            },
+            {
+                "text": "My phone passed away yesterday.. He jumped off the table  Searching for a new phone...",
+                "sentiment": "negative"
+            },
+            {
+                "text": "I have such fantastic friends, including several ones met through here! thanks for being in my life - you are such amazing people!",
+                "sentiment": "positive"
+            },
+            {
+                "text": "tamlyn wishes she was as cool as my sock draw",
+                "sentiment": "positive"
+            },
+            {
+                "text": " so no rice or crusty bread with the chili .... aawww",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "  We are of like minds this evening , my dear!",
+                "sentiment": "positive"
+            },
+            {
+                "text": "come and save me from my packing please?!",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Yes, I love tea. If that makes me typically English then so be it",
+                "sentiment": "positive"
+            },
+            {
+                "text": " a mouth for sure",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "_dec0de I finally just have 1 hour of history... at 3.00 pm! but I went to my highschool at 8.00 am to make some homework with a friend",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " pancakes!! with lemon and sugar thanks!",
+                "sentiment": "positive"
+            },
+            {
+                "text": " Si, no bueno  I guess I just don`t entertain him ",
+                "sentiment": "negative"
+            },
+            {
+                "text": "I`m so hunrgy right now and these heels kill me I can hardly walk in them",
+                "sentiment": "negative"
+            },
+            {
+                "text": "both electronic keys stopped working. there is no keyhole! cant get in my car. so much for technology",
+                "sentiment": "negative"
+            },
+            {
+                "text": " Yay, three followers! Good to know more than one person in this big wide world likes fishies.",
+                "sentiment": "positive"
+            },
+            {
+                "text": "'my name is Tony!!!!!! ...not hey!!!!' -  poor tony",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Goodmorning",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Took a shift tomorrow.    I don`t really feel like working right now.",
+                "sentiment": "negative"
+            },
+            {
+                "text": " I love mine, too . happy mother\u00c3\u00af\u00c2\u00bf\u00c2\u00bds day to your mom , John Taylor  . much love to you, too .",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Saw a black snake in the garden.  Went back for a picture and it was gone",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "http://twitpic.com/4wukt - We bought Ludi her own rug. Dogs are the best",
+                "sentiment": "positive"
+            },
+            {
+                "text": "No waterfront anymore   faccia luna and clarendon will have to do",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "loves her mum very much! Happy Mothers Day to all the wonderful mothers out there",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Slipped up and caught the flu  feeling like poop!",
+                "sentiment": "negative"
+            },
+            {
+                "text": "i have an urge to play wow but i have to wait 2 weeks til im at my dads! 5+47DAYS TIL MCFLY, im so excited  (L)",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Ok ... the passengers ... no one is alive ... they`re all dead ... you just don`t know it til the end ... then you cry ...",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Discovered  and  are sharing on G reader with me and didn`t even know it. Sigh.... I`m such a G reader newb.",
+                "sentiment": "positive"
+            },
+            {
+                "text": "is chilled out tonite, so cannot spew venom or write funny. Seems like these are the only 2 styles she has",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " If u do, please pray 4 me.  Lord knows I need it.",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "aaaaaw i want to live in the USA",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Morning tweeple",
+                "sentiment": "positive"
+            },
+            {
+                "text": " Hey, I didn`t get any !!!",
+                "sentiment": "negative"
+            },
+            {
+                "text": " Now you only have 2 hours to sleep...  - Rest if you need it.",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "  That makes my day so much better, it`s been a rough one. Did I mention I love the new photo!",
+                "sentiment": "positive"
+            },
+            {
+                "text": "I don`t want to sit at home on prom night. Someone hang out with me",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Is heading home from foot surgery and wishing she had a boyfriend to come over and cuddle with",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "concert tonight  chackin out and not coming tomorrow!",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " what happened? I thought you were coming back today....",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " lol dammit  well then next time then",
+                "sentiment": "negative"
+            },
+            {
+                "text": " lol. just don`t ever forget me",
+                "sentiment": "positive"
+            },
+            {
+                "text": " Still jealous",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Me at Forever 21  Ethan couldn`t be there",
+                "sentiment": "negative"
+            },
+            {
+                "text": "NOW IM SAD BUT IM NOT GIVING IN FIRST..I DIDNT DO NOTHING!!!!    :**-(",
+                "sentiment": "negative"
+            },
+            {
+                "text": "this week of mine was not easy!  but finally it`s over! (:",
+                "sentiment": "positive"
+            },
+            {
+                "text": "   Wow what a beautiful picture... and by the way....I am straight....just wanted to let you know!!!     Bella",
+                "sentiment": "positive"
+            },
+            {
+                "text": "In Arch. Drawing. Checking out MVCC`s CAD degree. Looks good to me",
+                "sentiment": "positive"
+            },
+            {
+                "text": " 'there are people and then there are pencils' some are sharp, some are not and some can be sharpened  my pencil philosophy.....",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "just about to go home. I`m usually `mr. positive` but this has been one of those daze. well, 15 mins until tomorrow!",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " but you always have lee. Let`s go to Paris",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " you know you want to come keep me company whilst mum`s at her friends for the night  it`s such a nice evening!",
+                "sentiment": "positive"
+            },
+            {
+                "text": "cooking with my dad  having lots of fun in the kitchen together",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Bouncing Rush makes me feel nauseous",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Off to Woolsery this morning to (hopefully) see North Molton U16 clinch the North Devon League title. Lovely day for it",
+                "sentiment": "positive"
+            },
+            {
+                "text": "playing singstar without my fave duetter",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "  you`re missing out, bb! i`m such a cereal nut, i think i like every kind available.",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " That`s just weird... :\\  Oh, and what was it you were drawing for me?",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Just woke up :o mums singing to her new gn`r cd replacement i bought because im a good daughter",
+                "sentiment": "positive"
+            },
+            {
+                "text": "The birds are out,, oh man... That`s NOT cool && I didn`t sleep yet for the night!!!",
+                "sentiment": "negative"
+            },
+            {
+                "text": "250 miles down, only 1750 to go. Thats ok, u2 on the radio alwas helps.",
+                "sentiment": "positive"
+            },
+            {
+                "text": "My Street Fighter IV skills are lacking, can`t beat Seth on easy.",
+                "sentiment": "negative"
+            },
+            {
+                "text": " FIL 461 with cool people like me",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Good Morning!!! Work and then it`s ESPN`s Sunday night Baseball. hopefully it won`t get rained out",
+                "sentiment": "positive"
+            },
+            {
+                "text": " i think it`s under a honeymoon by the good life -- either that or it`s under a honey moon by joseph arthur.",
+                "sentiment": "positive"
+            },
+            {
+                "text": "my son got stung by a bug for the first time  his little finger is slightly swollen.",
+                "sentiment": "negative"
+            },
+            {
+                "text": " it was hours ago i came in.... and it`s only now i realised when i went to buy something online",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " oh just referring to our lil exchange on LJ with regards to twitter archive postings.",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Bumping dj opus in the drunk in the car.  lmao. Don`t act like u don`t know.",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Why kiss the feet of the people who kick you when you can be anything that you want to?  morning everyone! Hope you have the best day ever",
+                "sentiment": "positive"
+            },
+            {
+                "text": "Here`s a brief preview:   OMG James is creepy in that role! I`m scared of him",
+                "sentiment": "negative"
+            },
+            {
+                "text": "I`m missing crab legs and attending my going away instead!",
+                "sentiment": "negative"
+            },
+            {
+                "text": "Hicks are mean!",
+                "sentiment": "negative"
+            },
+            {
+                "text": "gettn ready to take a trip to Jersey my dad`s not doing so good, he needs a new heart~whoeva see`s this please say a prayer for my dad",
+                "sentiment": "negative"
+            },
+            {
+                "text": "back soon, need to run to the shops and cut the grass",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "I`m up. I have a plan to transform my bedroom today. Random.",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "Home until tomorrow. Did my running and spinning. Now time for chiropractor, laundry, shopping, and visiting family. Missing nathan",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " thats another sponsor",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " And most of us are going to be stuck in an office, some without windows",
+                "sentiment": "negative"
+            },
+            {
+                "text": " No it`s not sad. Should make you proud",
+                "sentiment": "positive"
+            },
+            {
+                "text": "   Sorry, we`ll try to keep it down.",
+                "sentiment": "negative"
+            },
+            {
+                "text": "is home alone.. Doing hw",
+                "sentiment": "neutral"
+            },
+            {
+                "text": "According to , a quarter of families under six live in poverty.",
+                "sentiment": "negative"
+            },
+            {
+                "text": "the plan to not spend money is not going well",
+                "sentiment": "negative"
+            },
+            {
+                "text": "uploading all my bamboozle pictures of facebook",
+                "sentiment": "neutral"
+            },
+            {
+                "text": " congratulations ! you guys finish a month early than we do. booo",
+                "sentiment": "positive"
+            },
+            {
+                "text": " actually, I wish I was back in Tahoe.  I miss it there.",
+                "sentiment": "positive"
+            }
+        ],
+        "sentiment_counts": {
+            "positive": 200,
+            "negative": 135,
+            "neutral": 164
+        },
+        "performance": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1_score": 1.0
+        },
+        "word_cloud": [
+            {
+                "word": "i`m",
+                "count": 45
+            },
+            {
+                "word": "day",
+                "count": 31
+            },
+            {
+                "word": "love",
+                "count": 30
+            },
+            {
+                "word": "like",
+                "count": 28
+            },
+            {
+                "word": "going",
+                "count": 27
+            },
+            {
+                "word": "really",
+                "count": 22
+            },
+            {
+                "word": "happy",
+                "count": 22
+            },
+            {
+                "word": "know",
+                "count": 20
+            },
+            {
+                "word": "go",
+                "count": 19
+            },
+            {
+                "word": "back",
+                "count": 19
+            },
+            {
+                "word": "got",
+                "count": 19
+            },
+            {
+                "word": "im",
+                "count": 19
+            },
+            {
+                "word": "want",
+                "count": 16
+            },
+            {
+                "word": "good",
+                "count": 16
+            },
+            {
+                "word": "amazing",
+                "count": 15
+            },
+            {
+                "word": "new",
+                "count": 15
+            },
+            {
+                "word": "it`s",
+                "count": 15
+            },
+            {
+                "word": "miss",
+                "count": 14
+            },
+            {
+                "word": "time",
+                "count": 14
+            },
+            {
+                "word": "get",
+                "count": 14
+            }
+        ]
+    }
+]
