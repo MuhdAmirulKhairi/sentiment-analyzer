@@ -20,10 +20,27 @@ nltk.download('stopwords')
 
 HISTORY_FILE = ("history.json")
 
-# Load a pre-trained BERT model and tokenizer
-tokenizer = AutoTokenizer.from_pretrained('finiteautomata/bertweet-base-sentiment-analysis')
-model = AutoModelForSequenceClassification.from_pretrained('finiteautomata/bertweet-base-sentiment-analysis')
-model.eval()
+class SentimentAnalyzer:
+   def __init__(self, model_name):
+      # Load a pre-trained BERT model and tokenizer
+      self.model_name = model_name
+      self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+      self.model = AutoModelForSequenceClassification.from_pretrained(model_name)
+      self.model.eval()
+
+   def predict(self, text):
+      inputs = self.tokenizer(text,
+                              return_tensors='pt',
+                              truncation = True,
+                              padding = True,
+                              max_length = 512,
+                              is_split_into_words=False)
+      
+      with torch.no_grad():
+               outputs = self.model(**inputs)
+               prediction = torch.argmax(outputs.logits, dim = 1).item()
+      
+      return prediction
 
 @csrf_exempt
 def upload_dataset(request):
@@ -40,14 +57,38 @@ def upload_dataset(request):
       
    return JsonResponse({'error': 'Invalid request'}, status = 400)
 
+analyzers = {
+   "Social Media": SentimentAnalyzer("finiteautomata/bertweet-base-sentiment-analysis"),
+   "Customer Reviews": SentimentAnalyzer("nlptown/bert-base-multilingual-uncased-sentiment"),
+   "Education": SentimentAnalyzer("bert-base-uncased"),
+   "Fiction": SentimentAnalyzer("distilbert-base-uncased")
+}
+
 @csrf_exempt
 def analyze_sentiment(request):
    if request.method == 'POST':
       try:
          data = json.loads(request.body)
          texts = data.get('texts') # Expects text array
+         
          if not texts:
             return JsonResponse({'error': 'No text provided'}, status = 400)
+         
+         if data.get("domain_select", "None") == "Social media":
+            model = data.get('model', 'Social Media')
+            analyzer = analyzers[model]
+         elif data.get("domain_select", "None") == "Customer reviews":
+            model = data.get('model', 'Customer Reviews')
+            analyzer = analyzers[model]
+         elif data.get("domain_select", "None") == "Education":
+            model = data.get('model', 'Education')
+            analyzer = analyzers[model]
+         elif data.get("domain_select", "None") == "Fiction":
+            model = data.get('model', 'Fiction')
+            analyzer = analyzers[model]
+         
+         if model not in analyzers:
+            return JsonResponse({'error': 'Invalid model'}, status = 400)
          
          sentiments = []
          predictions = []
@@ -56,15 +97,7 @@ def analyze_sentiment(request):
          result_id = str(uuid.uuid4())
 
          for text in texts:
-            inputs = tokenizer(text,
-                            return_tensors='pt',
-                            truncation = True,
-                            padding = True,
-                            max_length = 512)
-            
-            with torch.no_grad():
-               outputs = model(**inputs)
-               prediction = torch.argmax(outputs.logits, dim = 1).item()
+            prediction = analyzer.predict(text)
          
             if prediction == 2:
                sentiment = 'positive'
@@ -82,9 +115,9 @@ def analyze_sentiment(request):
             all_words.extend(words)
 
          # Process the performance metrics
-         precision = precision_score(predictions, predictions, average = "macro", zero_division = 0)
-         recall = recall_score(predictions, predictions, average = "macro", zero_division = 0)
-         f1 = f1_score(predictions, predictions, average = "macro", zero_division = 0)
+         precision = precision_score(predictions, [1] * len(predictions), average = "macro", zero_division = 0)
+         recall = recall_score(predictions, [1] * len(predictions), average = "macro", zero_division = 0)
+         f1 = f1_score(predictions, [1] * len(predictions), average = "macro", zero_division = 0)
          
          # Process word cloud frequencies
          word_freq = collections.Counter(all_words)

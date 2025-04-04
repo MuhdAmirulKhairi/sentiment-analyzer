@@ -210,6 +210,10 @@
       background-color: #8B5DFF;
    }
 
+   #body-main {
+      height: 75vh;
+   }
+
    h1, h5, .panel-heading {
       color: #FFF7D1;
       -webkit-text-stroke-width: 1px;

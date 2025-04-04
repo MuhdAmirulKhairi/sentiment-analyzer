@@ -40,7 +40,6 @@
                   bind:value={domain_select}>
                   <option value="Social media">Social media</option>
                   <option value="Customer reviews">Customer reviews</option>
-                  <option value="Online forums">Online forums</option>
                   <option value="Education">Education</option>
                   <option value="Fiction">Fiction</option>
                </select>
