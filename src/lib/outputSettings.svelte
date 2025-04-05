@@ -42,7 +42,7 @@
                   type="number"
                   id="num-words"
                   min="20"
-                  max="60"
+                  max="45"
                   bind:value={word_cloud}/>
             </td>
          </tr>

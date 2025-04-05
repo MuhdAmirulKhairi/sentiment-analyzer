@@ -9,7 +9,7 @@
    import OutputSettings from "$lib/outputSettings.svelte";
 
    // Set default values
-   let num_runs = 1;
+   //let num_runs = 1;
    let domain_select = "none";
    let sort_by = "none";
    let word_cloud = 20;
@@ -63,7 +63,7 @@
       //Retrieve values from dataset, analyzer settings, output settings
       let settings = {
          dataset_name: dataset_name || "Unnamed Dataset",
-         num_runs: num_runs,
+         //num_runs: num_runs,
          domain_select: domain_select,
          sort_by: sort_by,
          word_cloud: word_cloud,
@@ -165,7 +165,8 @@
          <form class="form-group" on:submit="{runAnalyzer}">
             <div class="panel-heading text-center">ANALYZER SETTINGS</div>
                <div class="panel-body justify-content-center">
-                  <AnalyzerSettings bind:num_runs bind:domain_select />
+                  <AnalyzerSettings bind:domain_select />
+                  <!-- bind:num_runs -->
                </div>
             <div class="panel-heading text-center">OUTPUT SETTINGS</div>
                <div class="panel-body d-block justify-content-center">

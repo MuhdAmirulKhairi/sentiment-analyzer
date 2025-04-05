@@ -2,29 +2,35 @@
    import DownloadButton from "./downloadButton.svelte";
    import WordCloud from "wordcloud";
    import { onMount } from "svelte";
+    import { draw } from "svelte/transition";
 
    export let wordCloud = [];
    let cloudCanvas;
 
-   // Re-run the word cloud drawing when wordCloud data changes
-   $: {
-      if(wordCloud && wordCloud.length > 0) {
+   // Function to draw word cloud
+   function drawWordCloud() {
+      if (cloudCanvas && wordCloud && wordCloud.length > 0) {
+         cloudCanvas.width = cloudCanvas.width; // Clear canvas
          WordCloud(cloudCanvas, {
             list: wordCloud.map(w => [w.word, w.count]),
             gridSize: 16,
             weightFactor: 5,
             color: "#000000",
-            backgroundColor: "#ffffff"
+            backgroundColor: "#ffffff",
+            weightFactor: (size) => size * 0.5
          });
       }
    }
 
-   // Clear the canvas before drawing a new word cloud
+   // Run the function
    onMount(() => {
-      if (cloudCanvas) {
-         cloudCanvas.width = cloudCanvas.width; // Clears the canvas
-      }
+      drawWordCloud();
    })
+
+   // Redraw if word cloud changes
+   $: if (cloudCanvas && wordCloud && wordCloud.length > 0) {
+      drawWordCloud();
+   }
 </script>
 
 

@@ -121,7 +121,9 @@ def analyze_sentiment(request):
          
          # Process word cloud frequencies
          word_freq = collections.Counter(all_words)
-         top_words = word_freq.most_common(20)
+         top_words = word_freq.most_common(data.get("word_cloud", 20))
+         max_count = top_words[0][1] if top_words else 1
+         normalized_words = [{"word": word, "count": count / max_count * 100} for word, count in top_words]
 
          history_entry = {
             "id": result_id, # Assigns unique history ID
@@ -132,7 +134,7 @@ def analyze_sentiment(request):
             "sentiments": sentiments,
             "sentiment_counts": sentiment_counts,
             "performance": {"precision": precision, "recall": recall, "f1_score": f1},
-            "word_cloud": [{"word": word, "count": count} for word, count in top_words]
+            "word_cloud": normalized_words
          }
 
          save_history(history_entry)

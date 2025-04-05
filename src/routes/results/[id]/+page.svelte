@@ -10,6 +10,7 @@
    let sentiments = [];
    let sentimentCounts = { positive: 0, negative: 0, neutral: 0};
    let performance = { precision: 0, recall: 0, f1_score: 0};
+   let sort_by = "";
    let word_cloud = [];
    let loading = true;
 
@@ -32,6 +33,7 @@
             sentiments = data.sentiments || [];
             sentimentCounts = data.sentiment_counts || { positive: 0, negative: 0, neutral: 0};
             performance = data.performance || { precision: 0, recall: 0, f1_score: 0};
+            sort_by = data.sort_by || "None";
             word_cloud = data.word_cloud || [];
 
             console.log("Parsed sentiments: ", sentiments)
@@ -66,7 +68,7 @@
       <div class="panel-heading text-center m-0">RESULTS</div>
       <div id="sentiment-results" class="panel-group row my-3 mx-5">
          <div class="panel panel-default d-block col">
-            <SentimentResult {sentiments}/>
+            <SentimentResult {sentiments} sortBy={sort_by}/>
          </div>
       </div>
       <div class="panel-heading text-center m-0">CHART</div>
@@ -84,7 +86,7 @@
       <div class="panel-heading text-center">WORD CLOUD</div>
       <div id="wordcloud-results" class="panel-group row my-3 mx-5">
          <div class="panel panel-default d-block col">
-            <WordCloud {word_cloud}/>
+            <WordCloud wordCloud={word_cloud}/>
          </div>
       </div>
    </section>

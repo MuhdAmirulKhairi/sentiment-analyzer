@@ -1,14 +1,14 @@
 <script>
-   // Store number of runs and selected domain
-   export let num_runs;
+   // Declare variables for number of runs and domain selection
+   //export let num_runs;
    export let domain_select;
 </script>
 
 <div id="analyzer-settings">
    <table>
       <tbody>
-         <!-- Number of runs -->
-         <tr>
+         <!-- Input field for specifying the number of runs -->
+         <!-- <tr>
             <td class="fs-4 col-7">
                Number of runs 
                <p style="font-size:24px;
@@ -24,8 +24,8 @@
                   max="20"
                   bind:value={num_runs}/>
             </td>
-         </tr>
-         <!-- Domain selection -->
+         </tr> -->
+         <!-- Dropdown for selecting the domain -->
          <tr>
             <td class="fs-4 col-7">
                Domain
