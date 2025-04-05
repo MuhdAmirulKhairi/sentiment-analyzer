@@ -2,9 +2,26 @@
    import DownloadButton from "./downloadButton.svelte";
 
    export let sentiments = [];
-   let sortBy = "all";
+   export let sortBy = "all";
 
-   $: filteredSentiments = sentiments.filter(s => sortBy === "all" || s.sentiment === sortBy)
+   // Sort based on sorting settings
+   $: sortedSentiments = [...sentiments]
+
+   $: if (sortBy === "Positive") {
+      sortedSentiments.sort((a, b) => {
+         return a.sentiment === "positive" ? -1 : b.sentiment === "positive" ? 1 : 0;
+      });
+   }
+   else if (sortBy === "Negative") {
+      sortedSentiments.sort((a, b) => {
+         return a.sentiment === "negative" ? -1 : b.sentiment === "negative" ? 1 : 0;
+      });
+   }
+   else if (sortBy === "Neutral") {
+      sortedSentiments.sort((a, b) => {
+         return a.sentiment === "neutral" ? -1 : b.sentiment === "neutral" ? 1 : 0;
+      });
+   }
 
    function downloadCSV() {
       let table = document.getElementById("sentiment-results-table");
@@ -38,7 +55,7 @@
                </tr>
             </thead>
             <tbody class="table-light">
-               {#each filteredSentiments as s}
+               {#each sortedSentiments as s}
                   <tr>
                      <td>{s.text}</td>
                      <td>{s.sentiment}</td>
