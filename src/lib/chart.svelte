@@ -1,4 +1,5 @@
 <script>
+   import DownloadButton from "./downloadButton.svelte";
    import { onMount } from "svelte";
    import Chart from "chart.js/auto";
 
@@ -34,12 +35,19 @@
          }
       });  
    });
+
+   function downloadChart() {
+      const link = document.createElement('a');
+      link.download = 'chart.png';
+      link.href = chartCanvas.toDataURL("image/png");
+      link.click();
+   }
 </script>
 
 <div id="chart">
    <!-- Canvas element for rendering the chart -->
    <canvas bind:this={chartCanvas}></canvas>
-   <p class="text-center">Right click on the image to save to device.</p>
+   <DownloadButton download_link={downloadChart} />
 </div>
 
 <style>
@@ -60,11 +68,6 @@
       padding-bottom: 25px;
    }
 
-   p {
-      font-size: 25px;
-      font-weight: bold;
-   }
-
    /* Responsive design for smaller screens */
    @media screen and (max-width: 768px) {
       #chart {
@@ -74,10 +77,6 @@
 
       canvas {
          padding: 5px;
-      }
-
-      p {
-         font-size: 13px;
       }
    }
 </style>

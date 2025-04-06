@@ -1,8 +1,10 @@
+# Django libraries for requests, responses, file uploads, and CSRF
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.files.storage import default_storage
 
+# Standard libraries
 import os
 import json
 import torch
@@ -18,8 +20,10 @@ from datetime import datetime
 # Ensures NLTK stopwords are downloaded
 nltk.download('stopwords')
 
+# JSON file to store history
 HISTORY_FILE = ("history.json")
 
+# Sentiment analyzer class
 class SentimentAnalyzer:
    def __init__(self, model_name):
       # Load a pre-trained BERT model and tokenizer
@@ -29,6 +33,7 @@ class SentimentAnalyzer:
       self.model.eval()
 
    def predict(self, text):
+      # Tokenize and prepare input
       inputs = self.tokenizer(text,
                               return_tensors='pt',
                               truncation = True,
@@ -36,12 +41,14 @@ class SentimentAnalyzer:
                               max_length = 512,
                               is_split_into_words=False)
       
+      # Disable gradient computation
       with torch.no_grad():
                outputs = self.model(**inputs)
                prediction = torch.argmax(outputs.logits, dim = 1).item()
       
       return prediction
 
+# Upload dataset
 @csrf_exempt
 def upload_dataset(request):
    if request.method == 'POST' and request.FILES.get('file'):
@@ -57,6 +64,7 @@ def upload_dataset(request):
       
    return JsonResponse({'error': 'Invalid request'}, status = 400)
 
+# Predefined analyzers
 analyzers = {
    "Social Media": SentimentAnalyzer("finiteautomata/bertweet-base-sentiment-analysis"),
    "Customer Reviews": SentimentAnalyzer("nlptown/bert-base-multilingual-uncased-sentiment"),
@@ -64,6 +72,7 @@ analyzers = {
    "Fiction": SentimentAnalyzer("distilbert-base-uncased")
 }
 
+# Analyze sentiment
 @csrf_exempt
 def analyze_sentiment(request):
    if request.method == 'POST':
@@ -74,6 +83,7 @@ def analyze_sentiment(request):
          if not texts:
             return JsonResponse({'error': 'No text provided'}, status = 400)
          
+         # Determines selected model based on domain
          if data.get("domain_select", "None") == "Social media":
             model = data.get('model', 'Social Media')
             analyzer = analyzers[model]
@@ -88,17 +98,20 @@ def analyze_sentiment(request):
             analyzer = analyzers[model]
          
          if model not in analyzers:
-            return JsonResponse({'error': 'Invalid model'}, status = 400)
+            return JsonResponse({'error': 'Invalid model'}, status = 400) # Throws invalid model error
          
+         # Initialize result containers
          sentiments = []
          predictions = []
          sentiment_counts = {"positive": 0, "negative": 0, "neutral": 0}
          all_words = []
          result_id = str(uuid.uuid4())
 
+         # Perform predictions for each input
          for text in texts:
             prediction = analyzer.predict(text)
          
+            # Map predictions with selected label
             if prediction == 2:
                sentiment = 'positive'
             elif prediction == 0:
@@ -125,6 +138,7 @@ def analyze_sentiment(request):
          max_count = top_words[0][1] if top_words else 1
          normalized_words = [{"word": word, "count": count / max_count * 100} for word, count in top_words]
 
+         # Build history entry
          history_entry = {
             "id": result_id, # Assigns unique history ID
             "date": datetime.now().isoformat(), # Will replace with actual time
@@ -146,6 +160,7 @@ def analyze_sentiment(request):
       
    return JsonResponse({'error': 'Invalid request'}, status = 400)
 
+# Save analysis history
 def save_history(entry):
    # Save history entry into a file
    try:
@@ -155,7 +170,7 @@ def save_history(entry):
       else:
          history = []
 
-      history.append(entry)
+      history.append(entry) # Append entry and overwrite file
 
       with open(HISTORY_FILE, "w") as file:
          json.dump(history, file, indent = 4)
@@ -163,6 +178,7 @@ def save_history(entry):
    except Exception as exp:
       print(f"Error saving history: {exp}")
 
+# Fetch history
 @csrf_exempt
 def get_history(request, entry_id = None):
    # Returns the saved analysis history
@@ -187,6 +203,7 @@ def get_history(request, entry_id = None):
    except Exception as exp:
       return JsonResponse({"error": str(exp)}, status = 500)
 
+# Fetch specific history
 @csrf_exempt
 def get_history_entry(request, entry_id):
    # Fetches specific history entry
@@ -204,6 +221,7 @@ def get_history_entry(request, entry_id):
 
    return JsonResponse({"error": "History not found"}, status = 404)
 
+# Deletes history entry
 @csrf_exempt
 def delete_history_entry(request, entry_id):
    # Deletes a specific history id
@@ -225,7 +243,8 @@ def delete_history_entry(request, entry_id):
    
    except Exception as exp:
       return JsonResponse({"error": str(exp)}, status = 500)
-   
+
+# Deletes all history entries
 @csrf_exempt
 def clear_all_history(request):
    # Deletes all history entries

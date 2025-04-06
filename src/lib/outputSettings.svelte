@@ -1,9 +1,10 @@
 <script>
    // Store sorting and word cloud settings
-   export let sort_by;
-   export let word_cloud;
+   export let sort_by; // Controls the sorting order of sentiment results
+   export let word_cloud; // Controls how many words to appear on word cloud
 </script>
 
+<!-- Output settings -->
 <div id="output-settings">
    <table>
       <tbody>
@@ -11,6 +12,7 @@
          <tr>
             <td class="fs-4 col-9">
                Sort by
+               <!-- Tooltip -->
                <p style="font-size:24px;
                          display: inline;"
                   title="Sort the sentiment outputs in different order">&#63;</p>
@@ -31,6 +33,7 @@
          <tr>
             <td class="fs-4 col-9">
                Number of words
+               <!-- Tooltip -->
                <p style="font-size:24px;
                          display: inline;"
                   title="Displays the top most common sentiment in the word cloud">

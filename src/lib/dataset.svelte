@@ -1,23 +1,25 @@
 <script>
-   import Papa from "papaparse";
-   import { CSVdata, datasetName } from "$lib/stores";
+   import Papa from "papaparse"; // For CSV handling
+   import { CSVdata, datasetName } from "$lib/stores"; // To hold parsed CSV data and dataset name
 
    let selectedColumns = ["text", "sentiment"] // Specified the columns to be displayed
 
+   // Handle file input when user uploads dataset
    function handleFileUploads(event) {
       const uploadedFile = event.target.files[0];
 
       if (uploadedFile) {
-         datasetName.set(uploadedFile.name);
+         datasetName.set(uploadedFile.name); // Stores file name
 
-         const reader = new FileReader();
+         const reader = new FileReader(); // Create new file reader
          
          reader.onload = (x) => {
             const CSVtexts = x.target.result;
-
+            
+            // Parse CSV file
             Papa.parse(CSVtexts, {
-               header: true,
-               skipEmptyLines: true,
+               header: true, // Treat the first rows as headers
+               skipEmptyLines: true, // Ignore empty rows
                complete: function(result) {
                   // Filter unwanted columns
                   CSVdata.set(result.data
@@ -31,11 +33,12 @@
             });
          };
 
-         reader.readAsText(uploadedFile);
+         reader.readAsText(uploadedFile); // Read dataset as text
       }
    }
 </script>
 
+<!-- Input to upload dataset -->
 <input
    type="file" 
    id="csv-file-upload"
@@ -44,7 +47,7 @@
    required
    on:change={handleFileUploads}
 />
-<div id="CSVTable">
+<div id="CSVTable"> <!-- Table to display dataset -->
    {#if $CSVdata.length > 0}
    <div class="table-responsive">
       <div class="scrollable-table">

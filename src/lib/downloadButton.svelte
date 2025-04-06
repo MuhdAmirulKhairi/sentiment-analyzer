@@ -1,7 +1,8 @@
 <script>
-   export let download_link = "";
+   export let download_link = ""; // Recieves download function from the parent component
 </script>
 
+<!-- Download button -->
 <div class="text-center p-2">
    <button
       class="px-4 py-1 download-button"

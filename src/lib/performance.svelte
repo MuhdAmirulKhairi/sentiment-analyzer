@@ -1,12 +1,14 @@
 <script>
-   import DownloadButton from "./downloadButton.svelte";
+   import DownloadButton from "./downloadButton.svelte"; // Import download button
 
-   export let performance;
+   export let performance; // Stores precision, recall, f1 score
 
+   // Function to download as a CSV file
    function downloadCSV() {
       let table = document.getElementById("performance-table");
       let rows = Array.from(table.querySelectorAll("tr"));
 
+      // Converts each row and cell into CSV format
       let csv_content = "data:text/csv;charset=utf-8,";
       csv_content = csv_content + rows.map(row => {
          let cells = Array.from(row.querySelectorAll("th, td"));
@@ -16,6 +18,7 @@
       let encoded = encodeURI(csv_content);
       let link = document.createElement("a");
 
+      // Trigger download
       link.setAttribute("href", encoded);
       link.setAttribute("download", "performance_results.csv");
       document.body.appendChild(link);
@@ -24,6 +27,7 @@
    }
 </script>
 
+<!-- Performance section -->
 <div id="performance-table">
    <table>
       <thead>
@@ -34,7 +38,8 @@
       </thead>
       <tbody>
          <tr>
-            <td class="fs-2">Precision 
+            <td class="fs-2">Precision
+               <!-- Tooltip --> 
                <p style="font-size:26px; display: inline;"
                   title="Measures how many predicted positives are correct">&#63;</p>
             </td>
@@ -42,6 +47,7 @@
          </tr>
          <tr>
             <td class="fs-2">Recall 
+               <!-- Tooltip --> 
                <p style="font-size:26px; display: inline;"
                   title="Measures how many actual positives are correctly identified">&#63;</p>
             </td>
@@ -49,6 +55,7 @@
          </tr>
          <tr>
             <td class="fs-2">F1 Score 
+               <!-- Tooltip --> 
                <p style="font-size:26px; display: inline;"
                   title="Evaluates system correctness and completeness in prediction">&#63;</p>
             </td>
@@ -56,7 +63,7 @@
          </tr>
       </tbody>
    </table>
-   <DownloadButton download_link={downloadCSV}/>
+   <DownloadButton download_link={downloadCSV}/> <!-- Download button that triggers CSV export -->
 </div>
 
 <style>

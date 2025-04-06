@@ -1,12 +1,13 @@
 <script>
-   export let history = [];
+   export let history = []; // History array passed from parent component
 
+   // Fetches all history from the backend DJango
    async function fetchHistory() {
       try {
          const response = await fetch("http://127.0.0.1:8000/api/get_history");
          if (response.ok) {
             const data = await response.json();
-            history = data.history;
+            history = data.history; // Sets the history data
          }
          else {
             console.error("Failed to fetch history");
@@ -17,6 +18,7 @@
       }
    }
 
+   // Deletes a specific history using its ID
    async function deleteHistoryEntry(entryID) {
       try {
          const response = await fetch(`http://127.0.0.1:8000/api/delete_history/${entryID}`, {
@@ -35,6 +37,7 @@
       }
    }
 
+   // Deletes all history entry from DJango
    async function clearAllHistory() {
       try {
          const response = await fetch("http://127.0.0.1:8000/api/clear_all_history", {
@@ -53,6 +56,7 @@
       }
    }
 
+   // Formats a date string from the system time
    function formatDate(dateString) {
       if (!dateString) return "Unknown date"; // Handles missing dates
       const date = new Date(dateString);
@@ -64,13 +68,14 @@
    }
 </script>
 
+<!-- The entire history list -->
 <div id="history-list">
    <button on:click={clearAllHistory} class="delete-btn px-4 py-1">Clear All</button>
 
    {#if history.length === 0}
-      <p class="fw-bold fs-5 px-2">No history available</p>
+      <p class="fw-bold fs-5 px-2">No history available</p> <!-- If there are no history -->
    {:else}
-      {#each history as entry}
+      {#each history as entry} <!-- Loop through each history -->
       <div id="history" class="panel p-2 mx-2 my-4">
          <div class="panel-heading d-inline-block fw-bold fs-5">
             <a href="/results/{entry.id}">History ({formatDate(entry.date)})</a>

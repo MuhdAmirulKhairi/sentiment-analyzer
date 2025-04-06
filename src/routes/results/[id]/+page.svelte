@@ -2,18 +2,21 @@
    import { onMount } from 'svelte';
    import { page } from "$app/stores";
    
+   // Import components to render each result
    import SentimentResult from '$lib/sentimentResult.svelte';
    import Chart from "$lib/chart.svelte";
    import Performance from '$lib/performance.svelte';
    import WordCloud from '$lib/wordCloud.svelte';
 
-   let sentiments = [];
-   let sentimentCounts = { positive: 0, negative: 0, neutral: 0};
-   let performance = { precision: 0, recall: 0, f1_score: 0};
-   let sort_by = "";
-   let word_cloud = [];
-   let loading = true;
+   // Default values
+   let sentiments = []; // List of sentiment results
+   let sentimentCounts = { positive: 0, negative: 0, neutral: 0}; // Chart counts
+   let performance = { precision: 0, recall: 0, f1_score: 0}; // Performance metrics
+   let sort_by = ""; // Sort by setting
+   let word_cloud = []; // Word cloud data
+   let loading = true; // Flag to show loading state
 
+   // Fetch results using ID
    async function fetchResults() {
       loading = true;
       let id;
@@ -24,12 +27,14 @@
       console.log("Fetching ID: ", id);
 
       try {
+         // Backend call
          let response = await fetch(`http://127.0.0.1:8000/api/get_history/${id}`);
 
          if (response.ok) {
             let data = await response.json();
             console.log("Fetched: ", data);
 
+            // Assign attached values
             sentiments = data.sentiments || [];
             sentimentCounts = data.sentiment_counts || { positive: 0, negative: 0, neutral: 0};
             performance = data.performance || { precision: 0, recall: 0, f1_score: 0};
@@ -50,9 +55,11 @@
       }
    }
 
+   // Trigger fetch on page mount
    onMount(fetchResults);
 </script>
 
+<!-- Home button -->
 <a href="/">
    <button id="homeButton" type="button">
       <img src="/home.png" alt="home">
@@ -64,26 +71,27 @@
       <p>Loading results...</p>
    </section>
 {:else}
+   <!-- Main results page -->
    <section id="results-main" class="p-4">
       <div class="panel-heading text-center m-0">RESULTS</div>
-      <div id="sentiment-results" class="panel-group row my-3 mx-5">
+      <div id="sentiment-results" class="panel-group row my-3 mx-5"> <!-- Sentiment Results -->
          <div class="panel panel-default d-block col">
             <SentimentResult {sentiments} sortBy={sort_by}/>
          </div>
       </div>
-      <div class="panel-heading text-center m-0">CHART</div>
+      <div class="panel-heading text-center m-0">CHART</div> <!-- Chart -->
       <div id="chart-results" class="panel-group row my-3 mx-5">
          <div class="panel panel-default d-block col">
             <Chart {sentimentCounts}/>
          </div>
       </div>
-      <div class="panel-heading text-center">PERFORMANCE</div>
+      <div class="panel-heading text-center">PERFORMANCE</div> <!-- Performance-->
       <div id="performance-results" class="panel-group row my-3 mx-5">
          <div class="panel panel-default d-block col">
             <Performance {performance}/>
          </div>
       </div>
-      <div class="panel-heading text-center">WORD CLOUD</div>
+      <div class="panel-heading text-center">WORD CLOUD</div> <!-- Word cloud -->
       <div id="wordcloud-results" class="panel-group row my-3 mx-5">
          <div class="panel panel-default d-block col">
             <WordCloud wordCloud={word_cloud}/>

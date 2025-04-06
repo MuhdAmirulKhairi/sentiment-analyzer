@@ -1,9 +1,11 @@
 <script>
    import { onMount } from "svelte";
-   import { goto } from "$app/navigation";
+   import { goto } from "$app/navigation"; // Enables site navigation
 
    import Dataset from "$lib/dataset.svelte";
-   import { CSVdata, datasetName } from "$lib/stores";
+   import { CSVdata, datasetName } from "$lib/stores"; // Shared across components
+
+   // Input UIs
    import History from "$lib/history.svelte";
    import AnalyzerSettings from "$lib/analyzerSettings.svelte";
    import OutputSettings from "$lib/outputSettings.svelte";
