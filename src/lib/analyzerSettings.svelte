@@ -39,8 +39,8 @@
                   id="domain-select"
                   bind:value={domain_select}>
                   <option value="Social media">Social media</option>
-                  <option value="Customer reviews">Customer reviews</option>
-                  <option value="Education">Education</option>
+                  <option value="Reviews">Reviews</option>
+                  <option value="Education/News">Education/News</option>
                   <option value="Fiction">Fiction</option>
                </select>
             </td>

@@ -105,6 +105,7 @@
 
    .sub-history {
       margin-left: 10px;
+      overflow: hidden;
    }
 
    .delete-btn {

@@ -11,14 +11,21 @@ import torch
 import collections
 import nltk
 import uuid
+import traceback
+import re
 
 from nltk.corpus import stopwords
+from nltk import pos_tag, word_tokenize
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from sklearn.metrics import precision_score, recall_score, f1_score
 from datetime import datetime
 
-# Ensures NLTK stopwords are downloaded
+# Ensures NLTK stuff are downloaded
 nltk.download('stopwords')
+nltk.download('punkt')
+nltk.download('punkt_tab')
+nltk.download('average_perceptron_tagger')
+nltk.download('averaged_perceptron_tagger_eng')
 
 # JSON file to store history
 HISTORY_FILE = ("history.json")
@@ -87,10 +94,10 @@ def analyze_sentiment(request):
          if data.get("domain_select", "None") == "Social media":
             model = data.get('model', 'Social Media')
             analyzer = analyzers[model]
-         elif data.get("domain_select", "None") == "Customer reviews":
+         elif data.get("domain_select", "None") == "Reviews":
             model = data.get('model', 'Customer Reviews')
             analyzer = analyzers[model]
-         elif data.get("domain_select", "None") == "Education":
+         elif data.get("domain_select", "None") == "Education/News":
             model = data.get('model', 'Education')
             analyzer = analyzers[model]
          elif data.get("domain_select", "None") == "Fiction":
@@ -123,9 +130,22 @@ def analyze_sentiment(request):
             predictions.append(prediction)
             sentiment_counts[sentiment] = sentiment_counts[sentiment] + 1
 
+            # Tokenize and tag POS
+            tokens = word_tokenize(text)
+            tagged_words = pos_tag(tokens)
+
+            # Keep adjectives, nouns and interjections
+            allowed_tags = {'JJ', 'JJR', 'JJS', 'NN', 'NNS', 'NNP', 'NNPS', 'UH'}
+
             # Process words for word cloud
-            words = [word.lower() for word in text.split() if word.lower() not in stopwords.words("english")]
-            all_words.extend(words)
+            filtered_words = [
+               re.sub(r'[^\w\s]', '', word.lower())
+               for word, tag in tagged_words
+               if tag in allowed_tags
+               and word.lower() not in stopwords.words("english")
+               and re.sub(r'[^\w\s]', '', word) != ''
+            ]
+            all_words.extend(filtered_words)
 
          # Process the performance metrics
          precision = precision_score(predictions, [1] * len(predictions), average = "macro", zero_division = 0)
@@ -156,6 +176,8 @@ def analyze_sentiment(request):
          return JsonResponse(history_entry)
       
       except Exception as exp:
+         print("Exception Traceback: ")
+         traceback.print_exc()
          return JsonResponse({'error': str(exp)}, status = 500)
       
    return JsonResponse({'error': 'Invalid request'}, status = 400)
@@ -176,6 +198,8 @@ def save_history(entry):
          json.dump(history, file, indent = 4)
 
    except Exception as exp:
+      print("Exception Traceback: ")
+      traceback.print_exc()
       print(f"Error saving history: {exp}")
 
 # Fetch history
@@ -201,6 +225,8 @@ def get_history(request, entry_id = None):
       return JsonResponse({"history": history})
 
    except Exception as exp:
+      print("Exception Traceback: ")
+      traceback.print_exc()
       return JsonResponse({"error": str(exp)}, status = 500)
 
 # Fetch specific history
@@ -242,6 +268,8 @@ def delete_history_entry(request, entry_id):
       return JsonResponse({"message": "History file not found."})
    
    except Exception as exp:
+      print("Exception Traceback: ")
+      traceback.print_exc()
       return JsonResponse({"error": str(exp)}, status = 500)
 
 # Deletes all history entries
@@ -249,10 +277,12 @@ def delete_history_entry(request, entry_id):
 def clear_all_history(request):
    # Deletes all history entries
    try:
-      if os.path.exists(HISTORY_FILE):
-         os.remove(HISTORY_FILE)
+      with open(HISTORY_FILE, 'w') as file:
+         json.dump([], file, indent = 4)
       
       return JsonResponse({"message": "All history cleared."})
    
    except Exception as exp:
+      print("Exception Traceback: ")
+      traceback.print_exc()
       return JsonResponse({"error": str(exp)}, status = 500)

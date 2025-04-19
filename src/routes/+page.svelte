@@ -291,7 +291,7 @@
       padding: 20px;
    }
 
-   #header-main, #body-main.no-scroll {
+   #header-main/*, #body-main.no-scroll*/ {
       overflow: hidden;
    }
 
@@ -301,14 +301,14 @@
    }
 
    @media screen and (max-width: 768px) {
-      .sidebarNav[data-open = "true"] {
+      /* .sidebarNav[data-open = "true"] {
          width: 100% !important;
-      }
+      } */
    }
 
-   body.no-scroll {
+   /* body.no-scroll {
       overflow: hidden;
-   }
+   } */
 
    #openBtn {
       position: absolute;

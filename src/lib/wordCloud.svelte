@@ -22,22 +22,27 @@
          ctx.scale(dpr, dpr);
 
          // Render word cloud
-         WordCloud(cloudCanvas, {
-            list: wordCloud.map(w => [w.word, w.count]),
-            gridSize: Math.round(16 * (rect.width / 1024)),
-            weightFactor: (count) => Math.log2(count + 2) * 10,
-            fontFamily: "Roboto, Helvetica, san-serif",
-            color: function (word, weight) {
-               // Add gradient
-               const hue = Math.round(240 - weight * 2);
-               return `hsl(${hue}, 80%, 50%)`;
-            },
-            backgroundColor: "#d9d9d9",
-            rotateRatio: 0.1,
-            rotationSteps: 2,
-            drawOutOfBound: false,
-            shrinkToFit: true
-         });
+         if (typeof WordCloud === "function") {
+            WordCloud(cloudCanvas, {
+               list: wordCloud.map(w => [w.word, w.count]),
+               gridSize: Math.round(16 * (rect.width / 1024)),
+               weightFactor: (count) => Math.pow(count, 1.1) + 10,
+               fontFamily: "Roboto, Helvetica, san-serif",
+               color: function (word, weight) {
+                  // Add gradient
+                  const colors = [
+                     "#0070FF", "#FFD900", "#100000", "#D2270C", "#FF4574"
+                  ];
+                  return colors[Math.floor(Math.random() * colors.length)]
+               },
+               backgroundColor: "#636363",
+               rotateRatio: 0.5,
+               rotationSteps: 6,
+               drawOutOfBound: false,
+               shrinkToFit: true,
+               origin: [rect.width / 2, rect.height / 2]
+            });
+         }
       }
    }
 
@@ -83,10 +88,11 @@
       width: 100%;
       max-width: 800px;
       height: 500px;
-      border: 1px solid #ddd;
+      border: 5px solid;
       border-radius: 10px;
-      background-color: #d9d9d9;
+      background-color: #636363;
       margin-bottom: 20px;
+      padding: 30px;
    }
 
    p {

@@ -11,7 +11,7 @@
          <!-- Sort by -->
          <tr>
             <td class="fs-4 col-9">
-               Sort by
+               Sort sentiments by
                <!-- Tooltip -->
                <p style="font-size:24px;
                          display: inline;"
@@ -32,11 +32,11 @@
          <!-- Number of words in cloud -->
          <tr>
             <td class="fs-4 col-9">
-               Number of words
+               Number of words in word cloud
                <!-- Tooltip -->
                <p style="font-size:24px;
                          display: inline;"
-                  title="Displays the top most common sentiment in the word cloud">
+                  title="Displays the top most common text in the word cloud">
                   &#63;</p>
             </td>
             <td class="right-align fs-4 col-3">
