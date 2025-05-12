@@ -1,50 +1,69 @@
 <script>
    // Declare variables for number of runs and domain selection
-   //export let num_runs;
    export let domain_select;
+   export let process;
 </script>
 
 <div id="analyzer-settings">
    <table>
       <tbody>
-         <!-- Input field for specifying the number of runs -->
-         <!-- <tr>
-            <td class="fs-4 col-7">
-               Number of runs 
-               <p style="font-size:24px;
-                         display: inline;"
-                  title="Runs the data through the system at a number of times to increase accuracy (can take longer if used a higher number)">&#63;</p>
-            </td>
-            <td class="right-align fs-4 col-5">
-               <input 
-                  class="analyzer-inputs col-11"
-                  type="number"
-                  id="num-runs"
-                  min="1"
-                  max="20"
-                  bind:value={num_runs}/>
-            </td>
-         </tr> -->
-         <!-- Dropdown for selecting the domain -->
+         <!-- Choose process -->
          <tr>
             <td class="fs-4 col-7">
-               Domain
+               Choose a process
                <p style="font-size:24px;
                          display: inline;"
-                  title="Select which domain is suitable for this dataset">&#63;</p>
+                  title="Select a process whether to perform training or testing">&#63;</p>
             </td>
             <td class="right-align fs-4 col-5">
                <select
                   class="analyzer-inputs col-11"
                   id="domain-select"
-                  bind:value={domain_select}>
-                  <option value="Social media">Social media</option>
-                  <option value="Reviews">Reviews</option>
-                  <option value="Education/News">Education/News</option>
-                  <option value="Fiction">Fiction</option>
+                  bind:value={process}>
+                  <option value="Training and Testing">Training and Testing</option>
+                  <option value="Testing only">Testing only</option>
                </select>
             </td>
          </tr>
+         <!-- Dropdown for selecting the domain -->
+         {#if process === "Testing only"}
+            <tr>
+               <td class="fs-4 col-7">
+                  Domain
+                  <p style="font-size:24px;
+                           display: inline;"
+                     title="Select which domain is suitable for this dataset">&#63;</p>
+               </td>
+               <td class="right-align fs-4 col-5">
+                  <select
+                     class="analyzer-inputs col-11"
+                     id="domain-select"
+                     bind:value={domain_select}>
+                     <option value="Social media">Social media</option>
+                     <option value="Reviews">Reviews</option>
+                     <option value="Education/News">Education/News</option>
+                     <option value="Fiction">Fiction</option>
+                  </select>
+               </td>
+            </tr>
+         {:else if process === "Training and Testing"}
+            <tr>
+               <td class="fs-4 col-7">
+                  Placeholder
+                  <p style="font-size:24px;
+                           display: inline;"
+                     title="Select which domain is suitable for this dataset">&#63;</p>
+               </td>
+               <td class="right-align fs-4 col-5">
+                  <select
+                     class="analyzer-inputs col-11"
+                     id="domain-select"
+                     bind:value={domain_select}>
+                     <option value="Social media">Placeholder</option>
+                  </select>
+               </td>
+            </tr>
+         {/if}
       </tbody>
    </table>
 </div>
@@ -73,7 +92,7 @@
       padding: 5px;
    }
 
-   input, select {
+   select {
       border-radius: 50px;
    }
 </style>

@@ -13,12 +13,18 @@ import nltk
 import uuid
 import traceback
 import re
+import numpy as np
+import pandas as pd
 
 from nltk.corpus import stopwords
 from nltk import pos_tag, word_tokenize
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from sklearn.metrics import precision_score, recall_score, f1_score
+from sklearn.metrics import classification_report
 from datetime import datetime
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn import svm
 
 # Ensures NLTK stuff are downloaded
 nltk.download('stopwords')
@@ -79,7 +85,113 @@ analyzers = {
    "Fiction": SentimentAnalyzer("distilbert-base-uncased")
 }
 
-# Analyze sentiment
+# # Analyze sentiment through training and testing
+@csrf_exempt
+def analyze_sentiment_deux(request):
+   if request.method == 'POST':
+      try:
+         data = json.loads(request.body)
+         texts = pd.DataFrame(data.get('texts', [])) # Expect text and sentiment array
+
+         if not data:
+            return JsonResponse({'error': 'No text provided'}, status = 400)
+         
+         # Initialize result containers
+         sentiments = []
+         predictions = []
+         sentiment_counts = {"positive": 0, "negative": 0, "neutral": 0}
+         all_words = []
+         result_id = str(uuid.uuid4())
+         
+         # Filter stop words, and texts
+         stop_words = set(stopwords.words('english'))
+         texts['text'] = texts['text'].apply(lambda x: ' '.join([word for word in x.split() if word not in (stop_words)]))
+         texts['text'] = texts['text'].apply(lambda x: x.lower())
+         texts['text'] = texts['text'].apply((lambda x: re.sub('[^a-zA-z0-9\s]', '', x)))
+
+         # Train test split
+         train_set, test_set = np.split(texts, [int(.8*len(texts))])
+
+         # Count feature vectors
+         vectorizer = TfidfVectorizer(min_df = 5,
+                                      max_df = 0.8,
+                                      sublinear_tf=True,
+                                      use_idf=True)
+         trainVectors = vectorizer.fit_transform(train_set['text'])
+         testVectors = vectorizer.transform(test_set['text'])
+         
+         # Train and predict
+         classifier = svm.SVC(kernel="linear")
+         classifier.fit(trainVectors, train_set['sentiment'])
+         prediction = classifier.predict(testVectors)
+
+         for text in texts:
+            text_vector = vectorizer.transform([text])
+
+            if classifier.predict(text_vector) == "['pos']":
+               sentiment = "postiive"
+            elif classifier.predict(text_vector) == "['neg']":
+               sentiment = "negative"
+            else:
+               sentiment = "neutral"
+               
+            sentiments.append({"text": text, "sentiment": sentiment})
+            predictions.append(prediction)
+            sentiment_counts[sentiment] = sentiment_counts[sentiment] + 1
+
+            # Tagging for word cloud
+            tokens = word_tokenize(text)
+            tagged_words = pos_tag(tokens)
+
+            # Keep adjectives, nouns and interjections
+            allowed_tags = {'JJ', 'JJR', 'JJS', 'NN', 'NNS', 'NNP', 'NNPS', 'UH'}
+
+            # Process words for word cloud
+            filtered_words = [
+               re.sub(r'[^\w\s]', '', word.lower())
+               for word, tag in tagged_words
+               if tag in allowed_tags
+               and word.lower() not in stopwords.words("english")
+               and re.sub(r'[^\w\s]', '', word) != ''
+            ]
+            all_words.extend(filtered_words)
+
+         # Process the performance metrics
+         precision = precision_score(predictions, [1] * len(predictions), average = "macro", zero_division = 0)
+         recall = recall_score(predictions, [1] * len(predictions), average = "macro", zero_division = 0)
+         f1 = f1_score(predictions, [1] * len(predictions), average = "macro", zero_division = 0)
+
+         # Process word cloud frequencies
+         word_freq = collections.Counter(all_words)
+         top_words = word_freq.most_common(data.get("word_cloud", 20))
+         max_count = top_words[0][1] if top_words else 1
+         normalized_words = [{"word": word, "count": count / max_count * 100} for word, count in top_words]
+
+         # Build history entry
+         history_entry = {
+            "id": result_id, # Assigns unique history ID
+            "date": datetime.now().isoformat(), # Will replace with actual time
+            "dataset": data.get("dataset_name", "Unnamed Dataset"),
+            "domain": data.get("domain_select", "None"),
+            "sort_by": data.get("sort_by", "None"),
+            "sentiments": sentiments,
+            "sentiment_counts": sentiment_counts,
+            "performance": {"precision": precision, "recall": recall, "f1_score": f1},
+            "word_cloud": normalized_words
+         }
+
+         save_history(history_entry)
+
+         return JsonResponse(history_entry)
+
+      except Exception as exp:
+         print("Exception Traceback: ")
+         traceback.print_exc()
+         return JsonResponse({'error': str(exp)}, status = 500)
+         
+   return JsonResponse({'error': 'Invalid request'}, status = 400)
+
+# Analyze sentiment using pre-trained models
 @csrf_exempt
 def analyze_sentiment(request):
    if request.method == 'POST':

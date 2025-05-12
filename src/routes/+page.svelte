@@ -11,7 +11,7 @@
    import OutputSettings from "$lib/outputSettings.svelte";
 
    // Set default values
-   //let num_runs = 1;
+   let process = "none";
    let domain_select = "none";
    let sort_by = "none";
    let word_cloud = 20;
@@ -54,6 +54,7 @@
    async function runAnalyzer(event) {
       event.preventDefault(); // Prevent default form submission
 
+      // If a user pressed the button without a dataset
       const dataset = $CSVdata;
       if (!dataset.length) {
          alert("No dataset uploaded!");
@@ -61,21 +62,35 @@
       }
 
       isLoading = true; // Show loading popup
+      let settings;
 
       //Retrieve values from dataset, analyzer settings, output settings
-      let settings = {
-         dataset_name: dataset_name || "Unnamed Dataset",
-         //num_runs: num_runs,
-         domain_select: domain_select,
-         sort_by: sort_by,
-         word_cloud: word_cloud,
-         texts: dataset.map(row => row.text)
-      };
-
+      if (process === "Testing only") {
+         settings = {
+            dataset_name: dataset_name || "Unnamed Dataset",
+            domain_select: domain_select,
+            sort_by: sort_by,
+            word_cloud: word_cloud,
+            texts: dataset.map(row => row.text)
+         };
+      }
+      else if (process === "Training and Testing") {
+         settings = {
+            dataset_name: dataset_name || "Unnamed Dataset",
+            domain_select: domain_select,
+            sort_by: sort_by,
+            word_cloud: word_cloud,
+            texts: dataset.map(row => ({text: row.text, sentiment: row.sentiment}))
+         };
+      }
       console.log("Running analysis with: ", settings)
 
       try {
-         let response = await fetch("http://127.0.0.1:8000/api/analyze_sentiment/", {
+         let endpoint = 
+            process === "Testing only" 
+            ? "http://127.0.0.1:8000/api/analyze_sentiment/" 
+            : "http://127.0.0.1:8000/api/analyze_sentiment_deux/";
+         let response = await fetch(endpoint, {
             method: 'POST',
             headers: {
                "Content-Type": "application/json",
@@ -167,8 +182,7 @@
          <form class="form-group" on:submit="{runAnalyzer}">
             <div class="panel-heading text-center">ANALYZER SETTINGS</div>
                <div class="panel-body justify-content-center">
-                  <AnalyzerSettings bind:domain_select />
-                  <!-- bind:num_runs -->
+                  <AnalyzerSettings bind:process bind:domain_select />
                </div>
             <div class="panel-heading text-center">OUTPUT SETTINGS</div>
                <div class="panel-body d-block justify-content-center">
@@ -244,17 +258,16 @@
       padding-right: 20px;
    }
 
-   /* The side navigation menu */
    .sidebarNav {
-      height: 100vh; /* 100% Full-height */
-      width: 0; /* 0 width - change this with JavaScript */
-      position: fixed; /* Stay in place */
-      top: 0; /* Stay at the top */
+      height: 100vh;
+      width: 0;
+      position: fixed;
+      top: 0;
       left: 0;
       background-color: #6A42C2; 
-      overflow-y: auto; /* Disable horizontal scroll */
-      padding-top: 20px; /* Place content 60px from the top */
-      transition: 0.5s ease-in-out; /* 0.5 second transition effect to slide in the sidenav */
+      overflow-y: auto;
+      padding-top: 20px;
+      transition: 0.5s ease-in-out;
       z-index: 999;
    }
 
@@ -299,16 +312,6 @@
    @media screen and (max-height: 450px) {
       .sidebarNav {padding-top: 15px;}
    }
-
-   @media screen and (max-width: 768px) {
-      /* .sidebarNav[data-open = "true"] {
-         width: 100% !important;
-      } */
-   }
-
-   /* body.no-scroll {
-      overflow: hidden;
-   } */
 
    #openBtn {
       position: absolute;
