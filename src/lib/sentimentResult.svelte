@@ -2,27 +2,13 @@
    import DownloadButton from "./downloadButton.svelte"; // Imports download button
 
    export let sentiments = []; // Holds sentiment array of text and sentiments
-   export let sortBy = "all"; // Determines which sentiment to show first
+   export let showOnly = "all"; // Determines which sentiment to show first
 
    // Reactive component to sort the array
-   $: sortedSentiments = [...sentiments]
-
-   // Sort based on the settings
-   $: if (sortBy === "Positive") {
-      sortedSentiments.sort((a, b) => {
-         return a.sentiment === "positive" ? -1 : b.sentiment === "positive" ? 1 : 0;
-      });
-   }
-   else if (sortBy === "Negative") {
-      sortedSentiments.sort((a, b) => {
-         return a.sentiment === "negative" ? -1 : b.sentiment === "negative" ? 1 : 0;
-      });
-   }
-   else if (sortBy === "Neutral") {
-      sortedSentiments.sort((a, b) => {
-         return a.sentiment === "neutral" ? -1 : b.sentiment === "neutral" ? 1 : 0;
-      });
-   }
+   $: sortedSentiments = 
+      showOnly === "All"
+         ? [...sentiments]
+         : [...sentiments].filter(s => s.sentiment.toLowerCase() === showOnly.toLowerCase());
 
    // Convert table into a CSV file
    function downloadCSV() {

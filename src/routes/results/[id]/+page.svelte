@@ -12,9 +12,14 @@
    let sentiments = []; // List of sentiment results
    let sentimentCounts = { positive: 0, negative: 0, neutral: 0}; // Chart counts
    let performance = { precision: 0, recall: 0, f1_score: 0}; // Performance metrics
-   let sort_by = ""; // Sort by setting
+   let show_only = "All"; // Sort by setting
    let word_cloud = []; // Word cloud data
+   let display_WC = [];
+   let num_words = 20; // Number of words in word cloud
    let loading = true; // Flag to show loading state
+
+   // Update displayed word cloud whenever num_words changes
+   $: display_WC = word_cloud.slice(0, num_words);
 
    // Fetch results using ID
    async function fetchResults() {
@@ -38,8 +43,10 @@
             sentiments = data.sentiments || [];
             sentimentCounts = data.sentiment_counts || { positive: 0, negative: 0, neutral: 0};
             performance = data.performance || { precision: 0, recall: 0, f1_score: 0};
-            sort_by = data.sort_by || "None";
+            show_only = data.show_only || "None";
             word_cloud = data.word_cloud || [];
+            console.log("Fetched word cloud:", word_cloud);
+            console.log("Word cloud length:", word_cloud.length);
 
             console.log("Parsed sentiments: ", sentiments)
          }
@@ -76,7 +83,16 @@
       <div class="panel-heading text-center m-0">RESULTS</div>
       <div id="sentiment-results" class="panel-group row my-3 mx-5"> <!-- Sentiment Results -->
          <div class="panel panel-default d-block col">
-            <SentimentResult {sentiments} sortBy={sort_by}/>
+            <div class="text-center my-2">
+               <label for="sort-dropdown" class="me-2 fs-5">Show only:</label>
+               <select id="sort-dropdown" bind:value={show_only} class="fs-5 w-auto d-inline-block">
+                  <option value="All" selected>All</option>
+                  <option value="Positive">Positive</option>
+                  <option value="Negative">Negative</option>
+                  <option value="Neutral">Neutral</option>
+               </select>
+            </div>
+            <SentimentResult {sentiments} showOnly={show_only}/>
          </div>
       </div>
       <div class="panel-heading text-center m-0">CHART</div> <!-- Chart -->
@@ -94,7 +110,17 @@
       <div class="panel-heading text-center">WORD CLOUD</div> <!-- Word cloud -->
       <div id="wordcloud-results" class="panel-group row my-3 mx-5">
          <div class="panel panel-default d-block col">
-            <WordCloud wordCloud={word_cloud}/>
+            <div class="text-center my-2">
+               <label for="num-words" class="me-2 fs-5">Number of words:</label>
+               <input
+                  class="fs-5 w-auto d-inline-block"
+                  type="number"
+                  id="num-words"
+                  min="20"
+                  max="45"
+                  bind:value={num_words}/>
+            </div>
+            <WordCloud wordCloud={display_WC}/>
          </div>
       </div>
    </section>
@@ -153,6 +179,19 @@
       text-align: center;
       padding: 25px;
       font-weight: bold;
+   }
+
+   label {
+      color: #D9D9D9;
+      font-size: 20px;
+      -webkit-text-stroke-width: 0.25px;
+      -webkit-text-stroke-color: #000000;
+      text-shadow: 1px 2px 4px #000000;
+      padding-bottom: 10px;
+   }
+
+   input, select {
+      border-radius: 10px;
    }
 
    @media screen and (max-width: 768px) {

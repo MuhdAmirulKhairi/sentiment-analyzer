@@ -125,22 +125,23 @@ def analyze_sentiment_deux(request):
          classifier.fit(trainVectors, train_set['sentiment'])
          prediction = classifier.predict(testVectors)
 
-         for text in texts:
-            text_vector = vectorizer.transform([text])
+         for _, row in texts.iterrows():
+            text_vector = vectorizer.transform([row['text']])
+            label = classifier.predict(text_vector)[0]
 
-            if classifier.predict(text_vector) == "['pos']":
-               sentiment = "postiive"
-            elif classifier.predict(text_vector) == "['neg']":
+            if label == "positive":
+               sentiment = "positive"
+            elif label == "negative":
                sentiment = "negative"
             else:
                sentiment = "neutral"
                
-            sentiments.append({"text": text, "sentiment": sentiment})
-            predictions.append(prediction)
+            sentiments.append({"text": row['text'], "sentiment": sentiment})
+            predictions.append(label)
             sentiment_counts[sentiment] = sentiment_counts[sentiment] + 1
 
             # Tagging for word cloud
-            tokens = word_tokenize(text)
+            tokens = word_tokenize(row['text'])
             tagged_words = pos_tag(tokens)
 
             # Keep adjectives, nouns and interjections
@@ -155,11 +156,12 @@ def analyze_sentiment_deux(request):
                and re.sub(r'[^\w\s]', '', word) != ''
             ]
             all_words.extend(filtered_words)
-
+         
          # Process the performance metrics
-         precision = precision_score(predictions, [1] * len(predictions), average = "macro", zero_division = 0)
-         recall = recall_score(predictions, [1] * len(predictions), average = "macro", zero_division = 0)
-         f1 = f1_score(predictions, [1] * len(predictions), average = "macro", zero_division = 0)
+         true_labels = test_set['sentiment']
+         precision = precision_score(true_labels, prediction, average = "macro", zero_division = 0)
+         recall = recall_score(true_labels, prediction, average = "macro", zero_division = 0)
+         f1 = f1_score(true_labels, prediction, average = "macro", zero_division = 0)
 
          # Process word cloud frequencies
          word_freq = collections.Counter(all_words)
@@ -171,9 +173,10 @@ def analyze_sentiment_deux(request):
          history_entry = {
             "id": result_id, # Assigns unique history ID
             "date": datetime.now().isoformat(), # Will replace with actual time
+            "process": data.get("process", "None"),
             "dataset": data.get("dataset_name", "Unnamed Dataset"),
             "domain": data.get("domain_select", "None"),
-            "sort_by": data.get("sort_by", "None"),
+            "show_only": data.get("show_only", "None"),
             "sentiments": sentiments,
             "sentiment_counts": sentiment_counts,
             "performance": {"precision": precision, "recall": recall, "f1_score": f1},
@@ -274,9 +277,10 @@ def analyze_sentiment(request):
          history_entry = {
             "id": result_id, # Assigns unique history ID
             "date": datetime.now().isoformat(), # Will replace with actual time
+            "process": data.get("process", "None"),
             "dataset": data.get("dataset_name", "Unnamed Dataset"),
             "domain": data.get("domain_select", "None"),
-            "sort_by": data.get("sort_by", "None"),
+            "show_only": data.get("show_only", "None"),
             "sentiments": sentiments,
             "sentiment_counts": sentiment_counts,
             "performance": {"precision": precision, "recall": recall, "f1_score": f1},

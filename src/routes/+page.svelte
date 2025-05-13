@@ -13,7 +13,7 @@
    // Set default values
    let process = "none";
    let domain_select = "none";
-   let sort_by = "none";
+   let show_only = "All";
    let word_cloud = 20;
    let history = [];
    let dataset_array = [];
@@ -67,18 +67,20 @@
       //Retrieve values from dataset, analyzer settings, output settings
       if (process === "Testing only") {
          settings = {
+            process: process,
             dataset_name: dataset_name || "Unnamed Dataset",
             domain_select: domain_select,
-            sort_by: sort_by,
+            show_only: show_only,
             word_cloud: word_cloud,
             texts: dataset.map(row => row.text)
          };
       }
       else if (process === "Training and Testing") {
          settings = {
+            process: process,
             dataset_name: dataset_name || "Unnamed Dataset",
             domain_select: domain_select,
-            sort_by: sort_by,
+            show_only: show_only,
             word_cloud: word_cloud,
             texts: dataset.map(row => ({text: row.text, sentiment: row.sentiment}))
          };
@@ -183,10 +185,6 @@
             <div class="panel-heading text-center">ANALYZER SETTINGS</div>
                <div class="panel-body justify-content-center">
                   <AnalyzerSettings bind:process bind:domain_select />
-               </div>
-            <div class="panel-heading text-center">OUTPUT SETTINGS</div>
-               <div class="panel-body d-block justify-content-center">
-                  <OutputSettings bind:sort_by bind:word_cloud />
                </div>
                <div class="text-center p-2">
                   <button
