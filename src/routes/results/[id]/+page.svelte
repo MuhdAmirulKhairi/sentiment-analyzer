@@ -15,11 +15,16 @@
    let show_only = "All"; // Sort by setting
    let word_cloud = []; // Word cloud data
    let display_WC = [];
-   let num_words = 20; // Number of words in word cloud
+   let num_words = 45; // Number of words in word cloud
    let loading = true; // Flag to show loading state
 
    // Update displayed word cloud whenever num_words changes
-   $: display_WC = word_cloud.slice(0, num_words);
+   $: if (word_cloud && word_cloud.length > 0 && num_words) {
+         const clamp = Math.max(20, Math.min(num_words, word_cloud.length))
+         display_WC = word_cloud.slice(0, clamp);
+      }
+
+   $: max = word_cloud.length || 45;
 
    // Fetch results using ID
    async function fetchResults() {
@@ -117,7 +122,7 @@
                   type="number"
                   id="num-words"
                   min="20"
-                  max="45"
+                  {max}
                   bind:value={num_words}/>
             </div>
             <WordCloud wordCloud={display_WC}/>

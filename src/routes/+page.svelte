@@ -14,7 +14,7 @@
    let process = "none";
    let domain_select = "none";
    let show_only = "All";
-   let word_cloud = 20;
+   let word_cloud = 45;
    let history = [];
    let dataset_array = [];
    let dataset_name = "";
