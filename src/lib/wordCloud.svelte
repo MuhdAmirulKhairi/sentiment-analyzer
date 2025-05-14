@@ -31,7 +31,7 @@
                color: function (word, weight) {
                   // Add gradient
                   const colors = [
-                     "#0070FF", "#FFD900", "#100000", "#D2270C", "#FF4574"
+                     "#302273", "#a02cea", "#9c2efa", "#e292f2", "#f9d7fb"
                   ];
                   return colors[Math.floor(Math.random() * colors.length)]
                },

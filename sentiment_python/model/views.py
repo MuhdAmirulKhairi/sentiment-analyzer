@@ -153,7 +153,7 @@ def analyze_sentiment_deux(request):
                for word, tag in tagged_words
                if tag in allowed_tags
                and word.lower() not in stopwords.words("english")
-               and re.sub(r'[^\w\s]', '', word) != ''
+               and len(re.sub(r'[^\w\s]', '', word)) > 1
             ]
             all_words.extend(filtered_words)
          
@@ -258,7 +258,7 @@ def analyze_sentiment(request):
                for word, tag in tagged_words
                if tag in allowed_tags
                and word.lower() not in stopwords.words("english")
-               and re.sub(r'[^\w\s]', '', word) != ''
+               and len(re.sub(r'[^\w\s]', '', word)) > 1
             ]
             all_words.extend(filtered_words)
 
