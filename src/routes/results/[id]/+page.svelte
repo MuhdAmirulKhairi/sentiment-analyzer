@@ -7,6 +7,7 @@
    import Chart from "$lib/chart.svelte";
    import Performance from '$lib/performance.svelte';
    import WordCloud from '$lib/wordCloud.svelte';
+    import { json } from '@sveltejs/kit';
 
    // Default values
    let sentiments = []; // List of sentiment results
@@ -38,7 +39,8 @@
 
       try {
          // Backend call
-         let response = await fetch(`http://127.0.0.1:8000/api/get_history/${id}`);
+         let user_ID = localStorage.getItem("user_id");
+         let response = await fetch(`http://127.0.0.1:8000/api/get_history/${id}?user_id=${user_ID}`);
 
          if (response.ok) {
             let data = await response.json();

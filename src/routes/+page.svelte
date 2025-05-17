@@ -8,9 +8,9 @@
    // Input UIs
    import History from "$lib/history.svelte";
    import AnalyzerSettings from "$lib/analyzerSettings.svelte";
-   import OutputSettings from "$lib/outputSettings.svelte";
 
    // Set default values
+   let user_ID;
    let process = "none";
    let domain_select = "none";
    let show_only = "All";
@@ -67,6 +67,7 @@
       //Retrieve values from dataset, analyzer settings, output settings
       if (process === "Testing only") {
          settings = {
+            user_id: user_ID,
             process: process,
             dataset_name: dataset_name || "Unnamed Dataset",
             domain_select: domain_select,
@@ -77,6 +78,7 @@
       }
       else if (process === "Training and Testing") {
          settings = {
+            user_id: user_ID,
             process: process,
             dataset_name: dataset_name || "Unnamed Dataset",
             domain_select: domain_select,
@@ -118,9 +120,20 @@
       }
    }
 
+   // Generate UUID
+   function generateUUID() {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+         const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+         return v.toString(16);
+      });
+   }
+
    async function fetchHistory() {
       try {
-         const response = await fetch("http://127.0.0.1:8000/api/get_history");
+         const response = await fetch(`http://127.0.0.1:8000/api/get_history/?user_id=${user_ID}`, {
+            method: 'GET'
+         });
+
          if (response.ok) {
             const data = await response.json();
             history = data.history;
@@ -131,7 +144,16 @@
       }
    }
 
-   onMount(fetchHistory);
+   onMount(() => {
+      user_ID = localStorage.getItem("user_id");
+
+      if (!user_ID) {
+         user_ID = generateUUID();
+         localStorage.setItem("user_id", user_ID);
+      }
+
+      fetchHistory();
+   });
 </script>
 
 <!-- Header of the application -->

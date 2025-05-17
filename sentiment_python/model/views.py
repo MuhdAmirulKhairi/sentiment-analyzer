@@ -102,6 +102,7 @@ def analyze_sentiment_deux(request):
          sentiment_counts = {"positive": 0, "negative": 0, "neutral": 0}
          all_words = []
          result_id = str(uuid.uuid4())
+         user_id = data.get("user_id")
          
          # Filter stop words, and texts
          stop_words = set(stopwords.words('english'))
@@ -171,6 +172,7 @@ def analyze_sentiment_deux(request):
 
          # Build history entry
          history_entry = {
+            "user_id": user_id,
             "id": result_id, # Assigns unique history ID
             "date": datetime.now().isoformat(), # Will replace with actual time
             "process": data.get("process", "None"),
@@ -228,6 +230,7 @@ def analyze_sentiment(request):
          sentiment_counts = {"positive": 0, "negative": 0, "neutral": 0}
          all_words = []
          result_id = str(uuid.uuid4())
+         user_id = data.get("user_id")
 
          # Perform predictions for each input
          for text in texts:
@@ -275,6 +278,7 @@ def analyze_sentiment(request):
 
          # Build history entry
          history_entry = {
+            "user_id": user_id,
             "id": result_id, # Assigns unique history ID
             "date": datetime.now().isoformat(), # Will replace with actual time
             "process": data.get("process", "None"),
@@ -300,17 +304,24 @@ def analyze_sentiment(request):
 
 # Save analysis history
 def save_history(entry):
+   # Gather user ID
+   user_id = entry.get("user_id")
+   if not user_id:
+      return
+   
+   filename = f"history_{user_id}.json"
+
    # Save history entry into a file
    try:
-      if os.path.exists(HISTORY_FILE):
-         with open(HISTORY_FILE, "r") as file:
+      if os.path.exists(filename):
+         with open(filename, "r") as file:
             history = json.load(file)
       else:
          history = []
 
       history.append(entry) # Append entry and overwrite file
 
-      with open(HISTORY_FILE, "w") as file:
+      with open(filename, "w") as file:
          json.dump(history, file, indent = 4)
 
    except Exception as exp:
@@ -320,23 +331,24 @@ def save_history(entry):
 
 # Fetch history
 @csrf_exempt
-def get_history(request, entry_id = None):
+def get_history(request):
    # Returns the saved analysis history
    try:
-      if not os.path.exists(HISTORY_FILE):
-         return JsonResponse({"error": "No history found."}, status = 404)
+      if request.method != 'GET':
+         return JsonResponse({"error": "Invalid request."}, status = 400)
       
-      with open(HISTORY_FILE, "r") as file:
+      user_id = request.GET.get("user_id")
+
+      if not user_id:
+         return JsonResponse({"error": "User ID required."}, status = 400)
+
+      filename = f"history_{user_id}.json"
+
+      if not os.path.exists(filename):
+         return JsonResponse({"history": []})
+      
+      with open(filename, "r") as file:
          history = json.load(file)
-
-      if entry_id:
-         # Filter for specific history entry
-         entry = next((h for h in history if h["id"] == entry_id), None)
-
-         if entry:
-            return JsonResponse(entry)
-         else:
-            return JsonResponse({"error": "History entry not found"}, status = 404)
          
       return JsonResponse({"history": history})
 
@@ -349,8 +361,21 @@ def get_history(request, entry_id = None):
 @csrf_exempt
 def get_history_entry(request, entry_id):
    # Fetches specific history entry
-   if os.path.exists(HISTORY_FILE):
-      with open(HISTORY_FILE, "r") as file:
+   try:
+      if request.method != 'GET':
+         return JsonResponse({"error": "Invalid request."}, status = 400)
+
+      user_id = request.GET.get("user_id")
+
+      if not user_id:
+         return JsonResponse({"error": "User ID required."}, status = 400)
+         
+      filename = f"history_{user_id}.json"
+
+      if not os.path.exists(filename):
+         return JsonResponse({"error": "History file not found."}, status = 404)
+         
+      with open(filename, "r") as file:
          history = json.load(file)
 
       # Find the entry with the given ID
@@ -360,29 +385,40 @@ def get_history_entry(request, entry_id):
          return JsonResponse(entry)
       else:
          return JsonResponse({"error": "History entry not found."}, status = 404)
-
-   return JsonResponse({"error": "History not found"}, status = 404)
+         
+   except Exception as exp:
+      print("Exception Traceback: ")
+      traceback.print_exc()
+      return JsonResponse({"error": str(exp)}, status = 500)
 
 # Deletes history entry
 @csrf_exempt
 def delete_history_entry(request, entry_id):
    # Deletes a specific history id
    try:
-      if os.path.exists(HISTORY_FILE):
-         with open(HISTORY_FILE, "r") as file:
-            history = json.load(file)
+      if request.method != "DELETE":
+         return JsonResponse({"error": "Invalid request method."}, status = 405)
+         
+      user_id = request.GET.get("user_id")
+      if not user_id:
+         return JsonResponse({"error": "User ID required."}, status = 400)
+         
+      filename = f"history_{user_id}.json"
 
-         # Filter out the entry given by ID
-         history = [entry for entry in history if entry["id"] != entry_id]
+      if not os.path.exists(filename):
+         return JsonResponse({"error": "History file not found."}, status = 404)
+         
+      with open(filename, "r") as file:
+         history = json.load(file)
 
-         # Save updated history
-         with open(HISTORY_FILE, "w") as file:
-            json.dump(history, file, indent = 4)
+      # Filter out the entry given by ID
+      history = [entry for entry in history if entry["id"] != entry_id]
 
-         return JsonResponse({"message": "History deleted."})
-      
-      return JsonResponse({"message": "History file not found."})
-   
+      with open(filename, "w") as file:
+         json.dump(history, file, indent = 4)
+
+      return JsonResponse({"message": "History deleted."})\
+         
    except Exception as exp:
       print("Exception Traceback: ")
       traceback.print_exc()
@@ -393,7 +429,19 @@ def delete_history_entry(request, entry_id):
 def clear_all_history(request):
    # Deletes all history entries
    try:
-      with open(HISTORY_FILE, 'w') as file:
+      if request.method != "DELETE":
+         return JsonResponse({"error": "Invalid request method."}, status = 405)
+      
+      user_id = request.GET.get("user_id")
+      if not user_id:
+         return JsonResponse({"error": "User ID required."}, status = 400)
+      
+      filename = f"history_{user_id}.json"
+
+      if not os.path.exists(filename):
+         return JsonResponse({"error": "History file not found."}, status = 404)
+         
+      with open(filename, "w") as file:
          json.dump([], file, indent = 4)
       
       return JsonResponse({"message": "All history cleared."})

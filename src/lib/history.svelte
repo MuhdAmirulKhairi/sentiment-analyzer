@@ -4,7 +4,9 @@
    // Fetches all history from the backend DJango
    async function fetchHistory() {
       try {
-         const response = await fetch("http://127.0.0.1:8000/api/get_history");
+         let user_ID = localStorage.getItem("user_id");
+         const response = await fetch(`http://127.0.0.1:8000/api/get_history/${id}?user_id=${user_ID}`);
+         
          if (response.ok) {
             const data = await response.json();
             history = data.history; // Sets the history data
@@ -21,7 +23,8 @@
    // Deletes a specific history using its ID
    async function deleteHistoryEntry(entryID) {
       try {
-         const response = await fetch(`http://127.0.0.1:8000/api/delete_history/${entryID}`, {
+         let user_ID = localStorage.getItem("user_id");
+         const response = await fetch(`http://127.0.0.1:8000/api/delete_history/${entryID}?user_id=${user_ID}`, {
             method: "DELETE",
          });
 
@@ -40,7 +43,8 @@
    // Deletes all history entry from DJango
    async function clearAllHistory() {
       try {
-         const response = await fetch("http://127.0.0.1:8000/api/clear_all_history", {
+         let user_ID = localStorage.getItem("user_id");
+         const response = await fetch(`http://127.0.0.1:8000/api/clear_all_history?user_id=${user_ID}`, {
             method: "DELETE",
          });
 
