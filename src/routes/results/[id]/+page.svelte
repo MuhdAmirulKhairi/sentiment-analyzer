@@ -150,8 +150,7 @@
    }
 
    #loading-results {
-      width: 100vw;
-      height: 100vh;
+      min-height: calc(100vh - 160px);
    }
 
    #sentiment-results, #chart-results, #wordcloud-results, #footer-main {

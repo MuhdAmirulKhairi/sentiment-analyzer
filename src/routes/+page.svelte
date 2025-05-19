@@ -61,7 +61,6 @@
          return;
       }
 
-      isLoading = true; // Show loading popup
       let settings;
 
       //Retrieve values from dataset, analyzer settings, output settings
@@ -70,7 +69,6 @@
             user_id: user_ID,
             process: process,
             dataset_name: dataset_name || "Unnamed Dataset",
-            domain_select: domain_select,
             show_only: show_only,
             word_cloud: word_cloud,
             texts: dataset.map(row => row.text)
@@ -87,6 +85,12 @@
             texts: dataset.map(row => ({text: row.text, sentiment: row.sentiment}))
          };
       }
+      else {
+         alert("No settings updated!");
+         return
+      }
+      
+      isLoading = true; // Show loading popup
       console.log("Running analysis with: ", settings)
 
       try {
@@ -248,7 +252,7 @@
    }
 
    #body-main {
-      height: 75vh;
+      min-height: calc(100vh - 160px);
    }
 
    h1, h5, .panel-heading {
