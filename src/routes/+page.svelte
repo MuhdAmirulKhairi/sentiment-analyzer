@@ -1,3 +1,5 @@
+<title>Sentiment Analyzer</title>
+
 <script>
    import { onMount } from "svelte";
    import { goto } from "$app/navigation"; // Enables site navigation

@@ -1,7 +1,12 @@
 <script>
-   // Declare variables for number of runs and domain selection
+   // Declare variables for different settings
    export let domain_select;
+
+
    export let process;
+   export let min_df;
+   export let max_df;
+   export let scaling;
 </script>
 
 <div id="analyzer-settings">
@@ -9,34 +14,35 @@
       <tbody>
          <!-- Choose process -->
          <tr>
-            <td class="fs-4 col-7">
-               Choose a process
+            <td class="fs-4 col-10">
+               Choose a model
                <p style="font-size:24px;
                          display: inline;"
-                  title="Select a process whether to perform training or testing">&#63;</p>
+                  title="Select a model (SVM for train/test, BERT for test)">&#63;</p>
             </td>
-            <td class="right-align fs-4 col-5">
+            <td class="right-align fs-4 col-2">
                <select
-                  class="analyzer-inputs col-11"
-                  id="domain-select"
+                  class="analyzer-inputs col-12"
+                  id="process"
                   bind:value={process}>
-                  <option value="Training and Testing">Training and Testing</option>
-                  <option value="Testing only">Testing only</option>
+                  <option selected disabled hidden></option>
+                  <option value="Training and Testing">SVM</option>
+                  <option value="Testing only">BERT</option>
                </select>
             </td>
          </tr>
          <!-- Dropdown for selecting the domain -->
          {#if process === "Testing only"}
             <tr>
-               <td class="fs-4 col-7">
+               <td class="fs-4 col-10">
                   Domain
                   <p style="font-size:24px;
                            display: inline;"
                      title="Select which domain is suitable for this dataset">&#63;</p>
                </td>
-               <td class="right-align fs-4 col-5">
+               <td class="right-align fs-4 col-2">
                   <select
-                     class="analyzer-inputs col-11"
+                     class="analyzer-inputs col-12"
                      id="domain-select"
                      bind:value={domain_select}>
                      <option value="Social media">Social media</option>
@@ -48,18 +54,55 @@
             </tr>
          {:else if process === "Training and Testing"}
             <tr>
-               <td class="fs-4 col-7">
-                  Placeholder
+               <td class="fs-4 col-10">
+                  Min documents
                   <p style="font-size:24px;
                            display: inline;"
-                     title="Select which domain is suitable for this dataset">&#63;</p>
+                     title="Filters rare words.">&#63;</p>
                </td>
-               <td class="right-align fs-4 col-5">
+               <td class="right-align fs-4 col-2">
+                  <input
+                     type="number"
+                     class="analyzer-inputs col-12"
+                     id="min-df"
+                     bind:value={min_df}
+                     min="1"
+                     max="10"/>
+               </td>
+            </tr>
+            <tr>
+               <td class="fs-4 col-10">
+                  Max documents
+                  <p style="font-size:24px;
+                           display: inline;"
+                     title="Filters common words.">&#63;</p>
+               </td>
+               <td class="right-align fs-4 col-2">
+                  <input
+                     type="number"
+                     class="analyzer-inputs col-12"
+                     id="min-df"
+                     step="0.1"
+                     bind:value={max_df}
+                     min="0.5"
+                     max="1.0"/>
+               </td>
+            </tr>
+            <tr>
+               <td class="fs-4 col-10">
+                  Allow scaling
+                  <p style="font-size:24px;
+                           display: inline;"
+                     title="Applies scaling to term frequencies.">&#63;</p>
+               </td>
+               <td class="right-align fs-4 col-2">
                   <select
-                     class="analyzer-inputs col-11"
+                     class="analyzer-inputs col-12"
                      id="domain-select"
-                     bind:value={domain_select}>
-                     <option value="Social media">Placeholder</option>
+                     bind:value={scaling}>
+                     <option selected disabled hidden></option>
+                     <option value="True">Yes</option>
+                     <option value="False">No</option>
                   </select>
                </td>
             </tr>
@@ -71,8 +114,8 @@
 <style>
    #analyzer-settings {
       font-family: Roboto, Helvetica, sans-serif;
-      margin-left: 55px;
-      margin-right: 55px;
+      margin-left: 50px;
+      margin-right: 50px;
    }
 
    td {
@@ -94,5 +137,9 @@
 
    select {
       border-radius: 10px;
+   }
+
+   input {
+      border-radius: 15px;
    }
 </style>

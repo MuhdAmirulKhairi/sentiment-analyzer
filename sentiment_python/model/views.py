@@ -98,7 +98,6 @@ def analyze_sentiment_deux(request):
          
          # Initialize result containers
          sentiments = []
-         predictions = []
          sentiment_counts = {"positive": 0, "negative": 0, "neutral": 0}
          all_words = []
          result_id = str(uuid.uuid4())
@@ -114,15 +113,15 @@ def analyze_sentiment_deux(request):
          train_set, test_set = np.split(texts, [int(.8*len(texts))])
 
          # Count feature vectors
-         vectorizer = TfidfVectorizer(min_df = 5,
+         vectorizer = TfidfVectorizer(min_df = 5, # checkcthis one
                                       max_df = 0.8,
                                       sublinear_tf=True,
                                       use_idf=True)
-         trainVectors = vectorizer.fit_transform(train_set['text'])
-         testVectors = vectorizer.transform(test_set['text'])
-         
+         trainVectors = vectorizer.fit_transform(train_set['text']) # check this one
+         testVectors = vectorizer.transform(test_set['text']) # check this one
+
          # Train and predict
-         classifier = svm.SVC(kernel="linear")
+         classifier = svm.SVC(kernel="rbf", gamma="scale")
          classifier.fit(trainVectors, train_set['sentiment'])
          prediction = classifier.predict(testVectors)
 
@@ -138,7 +137,6 @@ def analyze_sentiment_deux(request):
                sentiment = "neutral"
                
             sentiments.append({"text": row['text'], "sentiment": sentiment})
-            predictions.append(label)
             sentiment_counts[sentiment] = sentiment_counts[sentiment] + 1
 
             # Tagging for word cloud
@@ -159,10 +157,10 @@ def analyze_sentiment_deux(request):
             all_words.extend(filtered_words)
          
          # Process the performance metrics
-         true_labels = test_set['sentiment']
-         precision = precision_score(true_labels, prediction, average = "macro", zero_division = 0)
-         recall = recall_score(true_labels, prediction, average = "macro", zero_division = 0)
-         f1 = f1_score(true_labels, prediction, average = "macro", zero_division = 0)
+         report = classification_report(test_set["sentiment"], prediction, output_dict=True)
+         precision = report['macro avg']['precision']
+         recall = report['macro avg']['recall']
+         f1 = report['macro avg']['f1-score']
 
          # Process word cloud frequencies
          word_freq = collections.Counter(all_words)

@@ -1,3 +1,5 @@
+<title>Results</title>
+
 <script>
    import { onMount } from 'svelte';
    import { page } from "$app/stores";
