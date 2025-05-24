@@ -15,6 +15,7 @@ import traceback
 import re
 import numpy as np
 import pandas as pd
+import joblib
 
 from nltk.corpus import stopwords
 from nltk import pos_tag, word_tokenize
@@ -87,11 +88,67 @@ analyzers = {
 
 # # Analyze sentiment through training and testing
 @csrf_exempt
-def analyze_sentiment_deux(request):
+def analyze_sentiment_train(request):
    if request.method == 'POST':
       try:
          data = json.loads(request.body)
          texts = pd.DataFrame(data.get('texts', [])) # Expect text and sentiment array
+         min_df = data.get("min_df", 5)
+         max_df = data.get("max_df", 0.8)
+         scaling = data.get("scaling", True)
+
+         if isinstance(scaling, str):
+            scaling = scaling.lower() == "true"
+         
+         print(f"{min_df}, {max_df}, {scaling}")
+         
+         # Get user ID
+         user_id = data.get("user_id")
+
+         if not data:
+            return JsonResponse({'error': 'No text provided'}, status = 400)
+         
+         # Filter stop words, and texts
+         stop_words = set(stopwords.words('english'))
+         texts['text'] = texts['text'].apply(lambda x: ' '.join([word for word in x.split() if word not in (stop_words)]))
+         texts['text'] = texts['text'].apply(lambda x: x.lower())
+         texts['text'] = texts['text'].apply((lambda x: re.sub('[^a-zA-z0-9\s]', '', x)))
+
+         # Count feature vectors
+         vectorizer = TfidfVectorizer(min_df = min_df,
+                                      max_df = max_df,
+                                      sublinear_tf=scaling,
+                                      use_idf=True)
+         trainVectors = vectorizer.fit_transform(texts['text'])
+
+         # Train and predict
+         classifier = svm.SVC(kernel="rbf", gamma="scale")
+         classifier.fit(trainVectors, texts['sentiment'])
+
+         # Save vectorizer and clasifier
+         joblib.dump(vectorizer, f'vectorizer_{user_id}.pkl')
+         joblib.dump(classifier, f'classifier_{user_id}.pkl')
+         joblib.dump(texts["sentiment"], f'train_set_{user_id}.pkl')
+
+         return JsonResponse({'message': 'Training success.'})
+
+      except Exception as exp:
+         print("Exception Traceback: ")
+         traceback.print_exc()
+         return JsonResponse({'error': str(exp)}, status = 500)
+         
+   return JsonResponse({'error': 'Invalid request'}, status = 400)
+
+@csrf_exempt
+def analyze_sentiment_test(request):
+   if request.method == 'POST':
+      try:
+         data = json.loads(request.body)
+         texts = pd.DataFrame(data.get('texts'), columns=["text"]) # Expects text array
+         min_df = data.get("min_df", 5)
+         max_df = data.get("max_df", 0.8)
+         scaling = eval(data.get("scaling", True))
+         print(f"{min_df}, {max_df}, {scaling}")
 
          if not data:
             return JsonResponse({'error': 'No text provided'}, status = 400)
@@ -102,28 +159,26 @@ def analyze_sentiment_deux(request):
          all_words = []
          result_id = str(uuid.uuid4())
          user_id = data.get("user_id")
-         
+
          # Filter stop words, and texts
          stop_words = set(stopwords.words('english'))
          texts['text'] = texts['text'].apply(lambda x: ' '.join([word for word in x.split() if word not in (stop_words)]))
          texts['text'] = texts['text'].apply(lambda x: x.lower())
          texts['text'] = texts['text'].apply((lambda x: re.sub('[^a-zA-z0-9\s]', '', x)))
 
-         # Train test split
-         train_set, test_set = np.split(texts, [int(.8*len(texts))])
+         # Load previously trained model and vectorizer
+         vectorizer_path = f'vectorizer_{user_id}.pkl'
+         classifier_path = f'classifier_{user_id}.pkl'
 
-         # Count feature vectors
-         vectorizer = TfidfVectorizer(min_df = 5, # checkcthis one
-                                      max_df = 0.8,
-                                      sublinear_tf=True,
-                                      use_idf=True)
-         trainVectors = vectorizer.fit_transform(train_set['text']) # check this one
-         testVectors = vectorizer.transform(test_set['text']) # check this one
-
-         # Train and predict
-         classifier = svm.SVC(kernel="rbf", gamma="scale")
-         classifier.fit(trainVectors, train_set['sentiment'])
+         if not os.path.exists(vectorizer_path) or not os.path.exists(classifier_path):
+            return JsonResponse({"error": "Please train first"}, status = 404)
+         
+         vectorizer = joblib.load(vectorizer_path)
+         classifier = joblib.load(classifier_path)
+      
+         testVectors = vectorizer.transform(texts)
          prediction = classifier.predict(testVectors)
+         pred_labels = []
 
          for _, row in texts.iterrows():
             text_vector = vectorizer.transform([row['text']])
@@ -135,6 +190,8 @@ def analyze_sentiment_deux(request):
                sentiment = "negative"
             else:
                sentiment = "neutral"
+
+            pred_labels.append(sentiment)
                
             sentiments.append({"text": row['text'], "sentiment": sentiment})
             sentiment_counts[sentiment] = sentiment_counts[sentiment] + 1
@@ -157,10 +214,15 @@ def analyze_sentiment_deux(request):
             all_words.extend(filtered_words)
          
          # Process the performance metrics
-         report = classification_report(test_set["sentiment"], prediction, output_dict=True)
-         precision = report['macro avg']['precision']
-         recall = report['macro avg']['recall']
-         f1 = report['macro avg']['f1-score']
+         train_set = f'train_set_{user_id}.pkl'
+
+         if os.path.exists(train_set):
+            report = classification_report(joblib.load(train_set), pred_labels, output_dict=True)
+            precision = report['macro avg']['precision']
+            recall = report['macro avg']['recall']
+            f1 = report['macro avg']['f1-score']
+         else:
+            precision = recall = f1 = 0.0
 
          # Process word cloud frequencies
          word_freq = collections.Counter(all_words)
@@ -175,7 +237,6 @@ def analyze_sentiment_deux(request):
             "date": datetime.now().isoformat(), # Will replace with actual time
             "process": data.get("process", "None"),
             "dataset": data.get("dataset_name", "Unnamed Dataset"),
-            "domain": data.get("domain_select", "None"),
             "show_only": data.get("show_only", "None"),
             "sentiments": sentiments,
             "sentiment_counts": sentiment_counts,
@@ -186,17 +247,17 @@ def analyze_sentiment_deux(request):
          save_history(history_entry)
 
          return JsonResponse(history_entry)
-
+         
       except Exception as exp:
          print("Exception Traceback: ")
          traceback.print_exc()
          return JsonResponse({'error': str(exp)}, status = 500)
-         
+      
    return JsonResponse({'error': 'Invalid request'}, status = 400)
 
 # Analyze sentiment using pre-trained models
 @csrf_exempt
-def analyze_sentiment(request):
+def analyze_sentiment_BERT(request):
    if request.method == 'POST':
       try:
          data = json.loads(request.body)
@@ -281,7 +342,6 @@ def analyze_sentiment(request):
             "date": datetime.now().isoformat(), # Will replace with actual time
             "process": data.get("process", "None"),
             "dataset": data.get("dataset_name", "Unnamed Dataset"),
-            "domain": data.get("domain_select", "None"),
             "show_only": data.get("show_only", "None"),
             "sentiments": sentiments,
             "sentiment_counts": sentiment_counts,

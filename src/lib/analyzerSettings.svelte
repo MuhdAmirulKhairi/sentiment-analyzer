@@ -1,9 +1,9 @@
 <script>
    // Declare variables for different settings
-   export let domain_select;
-
-
    export let process;
+
+   export let domain_select;
+   
    export let min_df;
    export let max_df;
    export let scaling;

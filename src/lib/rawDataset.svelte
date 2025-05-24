@@ -1,8 +1,8 @@
 <script>
    import Papa from "papaparse"; // For CSV handling
-   import { CSVdata1, datasetName } from "$lib/stores"; // To hold parsed CSV data and dataset name
+   import { CSVdata2, datasetName } from "$lib/stores"; // To hold parsed CSV data and dataset name
 
-   let selectedColumns = ["text", "sentiment"] // Specified the columns to be displayed
+   let selectedColumns = ["text"] // Specified the columns to be displayed
 
    // Handle file input when user uploads dataset
    function handleFileUploads(event) {
@@ -22,7 +22,7 @@
                skipEmptyLines: true, // Ignore empty rows
                complete: function(result) {
                   // Filter unwanted columns
-                  CSVdata1.set(result.data
+                  CSVdata2.set(result.data
                                  .filter(row => row.text && row.sentiment)
                                  .map(row => ({
                                     text: row.text,
@@ -48,21 +48,19 @@
    on:change={handleFileUploads}
 />
 <div id="CSVTable"> <!-- Table to display dataset -->
-   {#if $CSVdata1.length > 0}
+   {#if $CSVdata2.length > 0}
    <div class="table-responsive">
       <div class="scrollable-table">
          <table class="table table-striped table-bordered">
             <thead class="table-dark">
                <tr>
                   <th>Text</th>
-                  <th>Sentiment</th>
                </tr>
             </thead>
             <tbody class="table-light">
-               {#each $CSVdata1 as row}
+               {#each $CSVdata2 as row}
                   <tr>
                      <td>{row.text}</td>
-                     <td>{row.sentiment}</td>
                   </tr>
                {/each}
             </tbody>

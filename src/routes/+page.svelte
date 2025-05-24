@@ -5,7 +5,8 @@
    import { goto } from "$app/navigation"; // Enables site navigation
 
    import Dataset from "$lib/dataset.svelte";
-   import { CSVdata, datasetName } from "$lib/stores"; // Shared across components
+   import RawDataset from "$lib/rawDataset.svelte";
+   import { CSVdata1, CSVdata2, datasetName } from "$lib/stores"; // Shared across components
 
    // Input UIs
    import History from "$lib/history.svelte";
@@ -15,12 +16,21 @@
    let user_ID;
    let process = "none";
    let domain_select = "none";
+
    let show_only = "All";
    let word_cloud = 45;
+
    let history = [];
    let dataset_array = [];
+   let raw_data_array = [];
    let dataset_name = "";
+
+   let min_df = 0;
+   let max_df = 0;
+   let scaling = true;
+
    let isLoading = false;
+   let isTrained = false;
    
    // Set the width of the side navigation to 300px when opening the nav bar
    function openNav() {
@@ -49,7 +59,8 @@
       sidebar.setAttribute("data-open", "false");
    }
 
-   CSVdata.subscribe(value => dataset_array = value);
+   CSVdata1.subscribe(value => dataset_array = value);
+   CSVdata2.subscribe(value => raw_data_array = value);
    datasetName.subscribe(value => dataset_name = value);
 
    // Handles data submission to the Python backend
@@ -57,7 +68,7 @@
       event.preventDefault(); // Prevent default form submission
 
       // If a user pressed the button without a dataset
-      const dataset = $CSVdata;
+      const dataset = $CSVdata1;
       if (!dataset.length) {
          alert("No dataset uploaded!");
          return;
@@ -71,6 +82,7 @@
             user_id: user_ID,
             process: process,
             dataset_name: dataset_name || "Unnamed Dataset",
+            domain_select: domain_select,
             show_only: show_only,
             word_cloud: word_cloud,
             texts: dataset.map(row => row.text)
@@ -81,7 +93,9 @@
             user_id: user_ID,
             process: process,
             dataset_name: dataset_name || "Unnamed Dataset",
-            domain_select: domain_select,
+            min_df: min_df,
+            max_df: max_df,
+            scaling: scaling,
             show_only: show_only,
             word_cloud: word_cloud,
             texts: dataset.map(row => ({text: row.text, sentiment: row.sentiment}))
@@ -98,8 +112,8 @@
       try {
          let endpoint = 
             process === "Testing only" 
-            ? "http://127.0.0.1:8000/api/analyze_sentiment/" 
-            : "http://127.0.0.1:8000/api/analyze_sentiment_deux/";
+            ? "http://127.0.0.1:8000/api/analyze_sentiment_BERT/" 
+            : "http://127.0.0.1:8000/api/analyze_sentiment_train/";
          let response = await fetch(endpoint, {
             method: 'POST',
             headers: {
@@ -109,8 +123,66 @@
          });
 
          if (response.ok) {
+            if (process === "Testing only") {
+               let data = await response.json();
+               console.log("Analysis completed!");
+               goto(`/results/${data.id}`); // Redirect after success
+            }
+            else if (process === "Training and Testing") {
+               isTrained = true;
+               return;
+            }
+         }
+         else {
+            let error_data = await response.json()
+            console.error("Error: ", response.status, error_data);
+         }
+      }
+      catch (error) {
+         console.error("Fetch failed: ", error);
+      }
+      finally {
+         isLoading = false;
+      }
+   }
+
+   async function runTest(event) {
+      const dataset = $CSVdata2;
+      let new_data;
+      isTrained = false;
+
+      new_data = {
+         user_id: user_ID,
+         process: process,
+         dataset_name: dataset_name || "Unnamed Dataset",
+         min_df: min_df,
+         max_df: max_df,
+         scaling: scaling,
+         show_only: show_only,
+         word_cloud: word_cloud,
+         texts: dataset.map(row => row.text)
+      };
+      
+      if (!dataset.length) {
+         alert("No dataset uploaded!");
+         return;
+      }
+
+      isLoading = true;
+      console.log("Running tests with: ", new_data)
+
+      try {
+         let response = await fetch("http://127.0.0.1:8000/api/analyze_sentiment_test/", {
+            method: 'POST',
+            headers: {
+               "Content-Type": "application/json",
+            },
+            body: JSON.stringify(new_data)
+         });
+
+         if (response.ok) {
             let data = await response.json();
-            console.log("Analysis completed!");
+            console.log("Testing completed!");
             goto(`/results/${data.id}`); // Redirect after success
          }
          else {
@@ -212,7 +284,12 @@
          <form class="form-group" on:submit="{runAnalyzer}">
             <div class="panel-heading text-center">ANALYZER SETTINGS</div>
                <div class="panel-body justify-content-center">
-                  <AnalyzerSettings bind:process bind:domain_select />
+                  <AnalyzerSettings 
+                     bind:process 
+                     bind:domain_select
+                     bind:min_df
+                     bind:max_df
+                     bind:scaling />
                </div>
                <div class="text-center p-2">
                   <button
@@ -227,10 +304,31 @@
       </div>
    </div>
    {#if isLoading}
-      <div class="loading-overlay">
+      <div class="overlay">
          <div class="loading-popup fs-2">
             <p>Processing...</p>
             <div class="loader"></div>
+         </div>
+      </div>
+   {/if}
+   {#if isTrained}
+      <div class="overlay">
+         <div id="raw-data-panel" class="panel panel-default d-block col-md-5 col-10">
+            <div class="panel-heading text-center">Training Complete</div>
+               <div class="panel-body justify-content-center">
+                  <label class="panel-texts col-12 text-center" for="csv-file-upload">Upload new text data</label>
+                  <RawDataset />
+               </div>
+               <div class="text-center p-2">
+                  <button
+                     class="px-4 py-1"
+                     id="run-analyzer"
+                     type="submit"
+                     on:click={runTest}
+                     >
+                     Run Test
+                  </button>
+               </div>
          </div>
       </div>
    {/if}
@@ -272,11 +370,11 @@
       font-size: 33px;
    }
 
-   #main-sidebar, #footer-main, #dataset-panel, #settings-panel {
+   #main-sidebar, #footer-main, #dataset-panel, #settings-panel, #raw-data-panel {
       background-color: #6A42C2;
    }
 
-   #dataset-panel, #settings-panel {
+   #dataset-panel, #settings-panel, #raw-data-panel {
       border-radius: 25px;
       padding-top: 40px;
       padding-bottom: 40px;
@@ -376,7 +474,7 @@
       margin-right: 10px;
    }
 
-   .loading-overlay {
+   .overlay {
       position: fixed;
       top: 0;
       left: 0;
@@ -420,5 +518,12 @@
    @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
+   }
+
+   @media screen and (max-width: 768px) {
+      #raw-data-panel {
+         margin-left: 50px;
+         margin-right: 50px;
+      }
    }
 </style>
