@@ -14,33 +14,33 @@
       <tbody>
          <!-- Choose process -->
          <tr>
-            <td class="fs-4 col-10">
+            <td class="fs-4 col-8">
                Choose a model
                <p style="font-size:24px;
                          display: inline;"
                   title="Select a model (SVM for train/test, BERT for test)">&#63;</p>
             </td>
-            <td class="right-align fs-4 col-2">
+            <td class="right-align fs-4 col-4">
                <select
                   class="analyzer-inputs col-12"
                   id="process"
                   bind:value={process}>
                   <option selected disabled hidden></option>
-                  <option value="Training and Testing">SVM</option>
-                  <option value="Testing only">BERT</option>
+                  <option value="SVM">SVM</option>
+                  <option value="BERT">BERT</option>
                </select>
             </td>
          </tr>
          <!-- Dropdown for selecting the domain -->
-         {#if process === "Testing only"}
+         {#if process === "BERT"}
             <tr>
-               <td class="fs-4 col-10">
+               <td class="fs-4 col-8">
                   Domain
                   <p style="font-size:24px;
                            display: inline;"
                      title="Select which domain is suitable for this dataset">&#63;</p>
                </td>
-               <td class="right-align fs-4 col-2">
+               <td class="right-align fs-4 col-4">
                   <select
                      class="analyzer-inputs col-12"
                      id="domain-select"
@@ -52,15 +52,15 @@
                   </select>
                </td>
             </tr>
-         {:else if process === "Training and Testing"}
+         {:else if process === "SVM"}
             <tr>
-               <td class="fs-4 col-10">
+               <td class="fs-4 col-8">
                   Min documents
                   <p style="font-size:24px;
                            display: inline;"
                      title="Filters rare words.">&#63;</p>
                </td>
-               <td class="right-align fs-4 col-2">
+               <td class="right-align fs-4 col-4">
                   <input
                      type="number"
                      class="analyzer-inputs col-12"
@@ -71,13 +71,13 @@
                </td>
             </tr>
             <tr>
-               <td class="fs-4 col-10">
+               <td class="fs-4 col-8">
                   Max documents
                   <p style="font-size:24px;
                            display: inline;"
                      title="Filters common words.">&#63;</p>
                </td>
-               <td class="right-align fs-4 col-2">
+               <td class="right-align fs-4 col-4">
                   <input
                      type="number"
                      class="analyzer-inputs col-12"
@@ -89,13 +89,13 @@
                </td>
             </tr>
             <tr>
-               <td class="fs-4 col-10">
+               <td class="fs-4 col-8">
                   Allow scaling
                   <p style="font-size:24px;
                            display: inline;"
                      title="Applies scaling to term frequencies.">&#63;</p>
                </td>
-               <td class="right-align fs-4 col-2">
+               <td class="right-align fs-4 col-4">
                   <select
                      class="analyzer-inputs col-12"
                      id="domain-select"
@@ -116,6 +116,11 @@
       font-family: Roboto, Helvetica, sans-serif;
       margin-left: 50px;
       margin-right: 50px;
+   }
+
+   table {
+      width: 100%;
+      table-layout: fixed;
    }
 
    td {

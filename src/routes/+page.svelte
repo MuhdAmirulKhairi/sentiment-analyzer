@@ -25,8 +25,8 @@
    let raw_data_array = [];
    let dataset_name = "";
 
-   let min_df = 0;
-   let max_df = 0;
+   let min_df = 1;
+   let max_df = 0.5;
    let scaling = true;
 
    let isLoading = false;
@@ -77,7 +77,7 @@
       let settings;
 
       //Retrieve values from dataset, analyzer settings, output settings
-      if (process === "Testing only") {
+      if (process === "BERT") {
          settings = {
             user_id: user_ID,
             process: process,
@@ -88,7 +88,7 @@
             texts: dataset.map(row => row.text)
          };
       }
-      else if (process === "Training and Testing") {
+      else if (process === "SVM") {
          settings = {
             user_id: user_ID,
             process: process,
@@ -111,7 +111,7 @@
 
       try {
          let endpoint = 
-            process === "Testing only" 
+            process === "BERT" 
             ? "http://127.0.0.1:8000/api/analyze_sentiment_BERT/" 
             : "http://127.0.0.1:8000/api/analyze_sentiment_train/";
          let response = await fetch(endpoint, {
@@ -123,12 +123,12 @@
          });
 
          if (response.ok) {
-            if (process === "Testing only") {
+            if (process === "BERT") {
                let data = await response.json();
                console.log("Analysis completed!");
                goto(`/results/${data.id}`); // Redirect after success
             }
-            else if (process === "Training and Testing") {
+            else if (process === "SVM") {
                isTrained = true;
                return;
             }

@@ -177,7 +177,6 @@ def analyze_sentiment_test(request):
          classifier = joblib.load(classifier_path)
       
          testVectors = vectorizer.transform(texts)
-         prediction = classifier.predict(testVectors)
          pred_labels = []
 
          for _, row in texts.iterrows():
