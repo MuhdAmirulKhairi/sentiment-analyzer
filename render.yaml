@@ -6,6 +6,14 @@ services:
     startCommand: gunicorn sentiment_python.wsgi:application
     envVars:
       - key: DJANGO_SETTINGS_MODULE
-        value: sentiment_python.settings
+        value: sentiment_python.sentiment_python.settings
       - key: SECRET_KEY
         value: django-insecure-&8!4e^(s$&t1wpp1fg=%+#*^u+ak3q*7%85zo^^0=ap^#ar$pz
+
+services:
+  - type: web
+    name: sentiment-frontend
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm run preview
+    staticPublishPath: build
