@@ -1,1 +1,1 @@
-const BASE_URL = 'https://sentiment-analyzer-iu3f.onrender.com';
+const BASE_URL = 'https://sentiment-analyzer-uxxm.onrender.com';
