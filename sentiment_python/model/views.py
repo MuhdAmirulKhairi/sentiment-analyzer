@@ -122,7 +122,7 @@ def analyze_sentiment_train(request):
          trainVectors = vectorizer.fit_transform(texts['text'])
 
          # Train and predict
-         classifier = svm.SVC(kernel="rbf", gamma="scale")
+         classifier = svm.SVC(kernel="rbf", gamma="scale", class_weight="balanced")
          classifier.fit(trainVectors, texts['sentiment'])
 
          # Save vectorizer and clasifier
@@ -175,8 +175,6 @@ def analyze_sentiment_test(request):
          
          vectorizer = joblib.load(vectorizer_path)
          classifier = joblib.load(classifier_path)
-      
-         testVectors = vectorizer.transform(texts)
          pred_labels = []
 
          for _, row in texts.iterrows():
@@ -216,7 +214,14 @@ def analyze_sentiment_test(request):
          train_set = f'train_set_{user_id}.pkl'
 
          if os.path.exists(train_set):
-            report = classification_report(joblib.load(train_set), pred_labels, output_dict=True)
+            train_labels = joblib.load(train_set)
+
+            # Match length to testing set or vice versa
+            min_length = min(len(train_labels), len(pred_labels))
+            train_labels = train_labels[:min_length]
+            pred_labels = pred_labels[:min_length]
+
+            report = classification_report(train_labels, pred_labels, output_dict=True)
             precision = report['macro avg']['precision']
             recall = report['macro avg']['recall']
             f1 = report['macro avg']['f1-score']
