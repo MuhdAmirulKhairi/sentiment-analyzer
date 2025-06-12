@@ -1,12 +1,11 @@
 <script>
    export let history = []; // History array passed from parent component
-   const api_base = import.meta.env.VITE_API_BASE || "http://127.0.0.1:8000"
 
    // Fetches all history from the backend DJango
    async function fetchHistory() {
       try {
          let user_ID = localStorage.getItem("user_id");
-         const response = await fetch(`${api_base}/api/get_history/${id}?user_id=${user_ID}`);
+         const response = await fetch(`http://127.0.0.1:8000/api/get_history/${id}?user_id=${user_ID}`);
          
          if (response.ok) {
             const data = await response.json();
@@ -25,7 +24,7 @@
    async function deleteHistoryEntry(entryID) {
       try {
          let user_ID = localStorage.getItem("user_id");
-         const response = await fetch(`${api_base}/api/delete_history/${entryID}?user_id=${user_ID}`, {
+         const response = await fetch(`http://127.0.0.1:8000/api/delete_history/${entryID}?user_id=${user_ID}`, {
             method: "DELETE",
          });
 
@@ -45,7 +44,7 @@
    async function clearAllHistory() {
       try {
          let user_ID = localStorage.getItem("user_id");
-         const response = await fetch(`${api_base}/api/clear_all_history?user_id=${user_ID}`, {
+         const response = await fetch(`http://127.0.0.1:8000/api/clear_all_history?user_id=${user_ID}`, {
             method: "DELETE",
          });
 
