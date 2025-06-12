@@ -38,8 +38,6 @@ def NLTK_sources():
    except Exception as e:
       print("Failed to download NLTK sources: ", str(e))
 
-nltk.metrics.association = None
-
 os.environ["TRANSFORMERS_OFFLINE"] = "1"
 
 # JSON file to store history
