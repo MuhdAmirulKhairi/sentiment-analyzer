@@ -1,5 +1,6 @@
 <script>
    export let history = []; // History array passed from parent component
+   const api_base = import.meta.env.VITE_API_BASE || "http://127.0.0.1:8000"
 
    // Fetches all history from the backend DJango
    async function fetchHistory() {

@@ -9,7 +9,9 @@
    import Chart from "$lib/chart.svelte";
    import Performance from '$lib/performance.svelte';
    import WordCloud from '$lib/wordCloud.svelte';
-    import { json } from '@sveltejs/kit';
+   import { json } from '@sveltejs/kit';
+
+   const api_base = import.meta.env.VITE_API_BASE || "http://127.0.0.1:8000"
 
    // Default values
    let sentiments = []; // List of sentiment results
