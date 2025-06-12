@@ -42,7 +42,7 @@
       try {
          // Backend call
          let user_ID = localStorage.getItem("user_id");
-         let response = await fetch(`http://127.0.0.1:8000/api/get_history/${id}?user_id=${user_ID}`);
+         let response = await fetch(`${api_base}/api/get_history/${id}?user_id=${user_ID}`);
 
          if (response.ok) {
             let data = await response.json();

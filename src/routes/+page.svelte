@@ -12,6 +12,8 @@
    import History from "$lib/history.svelte";
    import AnalyzerSettings from "$lib/analyzerSettings.svelte";
 
+   const api_base = import.meta.env.VITE_API_BASE || "http://127.0.0.1:8000"
+
    // Set default values
    let user_ID;
    let process = "none";
@@ -112,8 +114,8 @@
       try {
          let endpoint = 
             process === "BERT" 
-            ? "http://127.0.0.1:8000/api/analyze_sentiment_BERT/" 
-            : "http://127.0.0.1:8000/api/analyze_sentiment_train/";
+            ? `${api_base}/api/analyze_sentiment_BERT/` 
+            : `${api_base}/api/analyze_sentiment_train/`;
          let response = await fetch(endpoint, {
             method: 'POST',
             headers: {
@@ -172,7 +174,7 @@
       console.log("Running tests with: ", new_data)
 
       try {
-         let response = await fetch("http://127.0.0.1:8000/api/analyze_sentiment_test/", {
+         let response = await fetch(`${api_base}/api/analyze_sentiment_test/`, {
             method: 'POST',
             headers: {
                "Content-Type": "application/json",
@@ -208,7 +210,7 @@
 
    async function fetchHistory() {
       try {
-         const response = await fetch(`http://127.0.0.1:8000/api/get_history/?user_id=${user_ID}`, {
+         const response = await fetch(`${api_base}/api/get_history/?user_id=${user_ID}`, {
             method: 'GET'
          });
 
