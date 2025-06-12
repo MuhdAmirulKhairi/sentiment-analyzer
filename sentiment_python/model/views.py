@@ -83,8 +83,8 @@ def upload_dataset(request):
 
 # Predefined analyzers
 models = {
-   "social_media": "finiteautomata/bertweet-base-sentiment-analysis",
-   "reviews": "nlptown/bert-base-multilingual-uncased-sentiment",
+   "social_media": "cardiffnlp/twitter-roberta-base-sentiment",
+   "reviews": "cardiffnlp/twitter-roberta-base-sentiment",
    "education": "bert-base-uncased",
    "fiction": "distilbert-base-uncased"
 }
