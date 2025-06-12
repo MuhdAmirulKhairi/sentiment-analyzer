@@ -5,40 +5,9 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.files.storage import default_storage
 
 # Standard libraries
-import os
-import json
-import torch
-import collections
-import nltk
-import uuid
-import traceback
-import re
-import numpy as np
-import pandas as pd
-import joblib
-
-from nltk.corpus import stopwords
-from nltk import pos_tag, word_tokenize
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
-from sklearn.metrics import precision_score, recall_score, f1_score
-from sklearn.metrics import classification_report
+import traceback
 from datetime import datetime
-
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn import svm
-
-# Ensures NLTK stuff are downloaded
-def NLTK_sources():
-   try:
-      nltk.download('stopwords', quiet=True)
-      nltk.download('punkt', quiet=True)
-      nltk.download('punkt_tab', quiet=True)
-      nltk.download('average_perceptron_tagger', quiet=True)
-      nltk.download('averaged_perceptron_tagger_eng', quiet=True)
-   except Exception as e:
-      print("Failed to download NLTK sources: ", str(e))
-
-os.environ["TRANSFORMERS_OFFLINE"] = "1"
 
 # JSON file to store history
 HISTORY_FILE = ("history.json")
@@ -46,6 +15,8 @@ HISTORY_FILE = ("history.json")
 # Sentiment analyzer class
 class SentimentAnalyzer:
    def __init__(self, model_name):
+      from transformers import AutoTokenizer, AutoModelForSequenceClassification
+
       # Load a pre-trained BERT model and tokenizer
       self.model_name = model_name
       self.tokenizer = AutoTokenizer.from_pretrained(model_name)
@@ -53,6 +24,8 @@ class SentimentAnalyzer:
       self.model.eval()
 
    def predict(self, text):
+      import torch
+
       # Tokenize and prepare input
       inputs = self.tokenizer(text,
                               return_tensors='pt',
@@ -71,6 +44,7 @@ class SentimentAnalyzer:
 # Upload dataset
 @csrf_exempt
 def upload_dataset(request):
+   import os
    if request.method == 'POST' and request.FILES.get('file'):
       file = request.FILES['file']
       file_name = file.name # Ensures file is defined
@@ -106,7 +80,24 @@ for folder, model in models.items():
 # # Analyze sentiment through training and testing
 @csrf_exempt
 def analyze_sentiment_train(request):
-   NLTK_sources()
+   import nltk
+
+   # Ensures NLTK stuff are downloaded
+   nltk.download('stopwords', quiet=True)
+   nltk.download('punkt', quiet=True)
+   nltk.download('punkt_tab', quiet=True)
+   nltk.download('average_perceptron_tagger', quiet=True)
+   nltk.download('averaged_perceptron_tagger_eng', quiet=True)
+
+   from nltk.corpus import stopwords
+   from sklearn.feature_extraction.text import TfidfVectorizer
+   from sklearn import svm
+
+   import pandas as pd
+   import re
+   import json
+   import joblib
+
    if request.method == 'POST':
       try:
          data = json.loads(request.body)
@@ -159,7 +150,27 @@ def analyze_sentiment_train(request):
 
 @csrf_exempt
 def analyze_sentiment_test(request):
-   NLTK_sources()
+   import nltk
+
+   # Ensures NLTK stuff are downloaded
+   nltk.download('stopwords', quiet=True)
+   nltk.download('punkt', quiet=True)
+   nltk.download('punkt_tab', quiet=True)
+   nltk.download('average_perceptron_tagger', quiet=True)
+   nltk.download('averaged_perceptron_tagger_eng', quiet=True)
+
+   from nltk.corpus import stopwords
+   from nltk import pos_tag, word_tokenize
+   from sklearn.metrics import classification_report
+
+   import pandas as pd
+   import re
+   import json
+   import joblib
+   import uuid
+   import os
+   import collections
+
    if request.method == 'POST':
       try:
          data = json.loads(request.body)
@@ -281,7 +292,24 @@ def analyze_sentiment_test(request):
 # Analyze sentiment using pre-trained models
 @csrf_exempt
 def analyze_sentiment_BERT(request):
-   NLTK_sources()
+   import nltk
+
+   # Ensures NLTK stuff are downloaded
+   nltk.download('stopwords', quiet=True)
+   nltk.download('punkt', quiet=True)
+   nltk.download('punkt_tab', quiet=True)
+   nltk.download('average_perceptron_tagger', quiet=True)
+   nltk.download('averaged_perceptron_tagger_eng', quiet=True)
+
+   from nltk.corpus import stopwords
+   from nltk import pos_tag, word_tokenize
+   from sklearn.metrics import precision_score, recall_score, f1_score
+
+   import re
+   import json
+   import uuid
+   import collections
+
    if request.method == 'POST':
       try:
          data = json.loads(request.body)
@@ -381,6 +409,8 @@ def analyze_sentiment_BERT(request):
 
 # Save analysis history
 def save_history(entry):
+   import os
+   import json
    # Gather user ID
    user_id = entry.get("user_id")
    if not user_id:
@@ -409,6 +439,8 @@ def save_history(entry):
 # Fetch history
 @csrf_exempt
 def get_history(request):
+   import os
+   import json
    # Returns the saved analysis history
    try:
       if request.method != 'GET':
@@ -437,6 +469,8 @@ def get_history(request):
 # Fetch specific history
 @csrf_exempt
 def get_history_entry(request, entry_id):
+   import os
+   import json
    # Fetches specific history entry
    try:
       if request.method != 'GET':
@@ -471,6 +505,8 @@ def get_history_entry(request, entry_id):
 # Deletes history entry
 @csrf_exempt
 def delete_history_entry(request, entry_id):
+   import os
+   import json
    # Deletes a specific history id
    try:
       if request.method != "DELETE":
@@ -504,6 +540,8 @@ def delete_history_entry(request, entry_id):
 # Deletes all history entries
 @csrf_exempt
 def clear_all_history(request):
+   import os
+   import json
    # Deletes all history entries
    try:
       if request.method != "DELETE":
