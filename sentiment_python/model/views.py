@@ -82,12 +82,23 @@ def upload_dataset(request):
    return JsonResponse({'error': 'Invalid request'}, status = 400)
 
 # Predefined analyzers
-analyzers = {
-   "Social Media": SentimentAnalyzer("finiteautomata/bertweet-base-sentiment-analysis"),
-   "Customer Reviews": SentimentAnalyzer("nlptown/bert-base-multilingual-uncased-sentiment"),
-   "Education": SentimentAnalyzer("bert-base-uncased"),
-   "Fiction": SentimentAnalyzer("distilbert-base-uncased")
+models = {
+   "social_media": "finiteautomata/bertweet-base-sentiment-analysis",
+   "reviews": "nlptown/bert-base-multilingual-uncased-sentiment",
+   "education": "bert-base-uncased",
+   "fiction": "distilbert-base-uncased"
 }
+
+analyzers = {
+   "Social Media": SentimentAnalyzer("hf_models/social_media"),
+   "Customer Reviews": SentimentAnalyzer("hf_models/reviews"),
+   "Education": SentimentAnalyzer("hf_models/education"),
+   "Fiction": SentimentAnalyzer("hf_models/fiction")
+}
+
+for folder, model in models.items():
+   AutoTokenizer.from_pretrained(model, cache_dir=f"hf_models/{folder}")
+   AutoModelForSequenceClassification.from_pretrained(model, cache_dir=f"hf_models/{folder}")
 
 # # Analyze sentiment through training and testing
 @csrf_exempt
