@@ -54,6 +54,10 @@ MIDDLEWARE = [
 
 CORS_ALLOW_ALL_ORIGINS = True
 
+CORS_ALLOWED_ORIGINS = [
+    "https://sentiment-analyzer-kyt2.onrender.com",
+]
+
 APPEND_SLASH = True
 
 ROOT_URLCONF = 'sentiment_python.urls'
