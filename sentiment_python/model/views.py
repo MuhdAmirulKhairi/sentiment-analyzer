@@ -294,7 +294,7 @@ def analyze_sentiment_BERT(request):
          model_key = {
             "Social Media": "social_media",
             "Reviews": "reviews",
-            "Education/News": "eucation",
+            "Education/News": "education",
             "Fiction": "fiction"
          }.get(data.get("domain_select"))
 
