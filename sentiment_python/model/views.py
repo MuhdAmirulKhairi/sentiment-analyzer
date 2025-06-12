@@ -28,15 +28,12 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn import svm
 
 # Ensures NLTK stuff are downloaded
-def NLTK_sources():
-   try:
-      nltk.download('stopwords', quiet=True)
-      nltk.download('punkt', quiet=True)
-      nltk.download('punkt_tab', quiet=True)
-      nltk.download('average_perceptron_tagger', quiet=True)
-      nltk.download('averaged_perceptron_tagger_eng', quiet=True)
-   except Exception as e:
-      print("Failed to download NLTK sources: ", str(e))
+nltk.download('stopwords')
+nltk.download('punkt')
+nltk.download('punkt_tab')
+nltk.download('average_perceptron_tagger')
+nltk.download('averaged_perceptron_tagger_eng')
+nltk.metrics.association = None
 
 os.environ["TRANSFORMERS_OFFLINE"] = "1"
 
@@ -92,12 +89,12 @@ models = {
    "fiction": "distilbert-base-uncased"
 }
 
-analyzers = {}
-
-def get_analzyer(model):
-   if model not in analyzers:
-      analyzers[model] = SentimentAnalyzer(f"hf_models/{model}")
-   return analyzers[model]
+analyzers = {
+   "Social Media": SentimentAnalyzer("hf_models/social_media"),
+   "Customer Reviews": SentimentAnalyzer("hf_models/reviews"),
+   "Education": SentimentAnalyzer("hf_models/education"),
+   "Fiction": SentimentAnalyzer("hf_models/fiction")
+}
 
 for folder, model in models.items():
    AutoTokenizer.from_pretrained(model, cache_dir=f"hf_models/{folder}")
@@ -106,7 +103,6 @@ for folder, model in models.items():
 # # Analyze sentiment through training and testing
 @csrf_exempt
 def analyze_sentiment_train(request):
-   NLTK_sources()
    if request.method == 'POST':
       try:
          data = json.loads(request.body)
@@ -159,7 +155,6 @@ def analyze_sentiment_train(request):
 
 @csrf_exempt
 def analyze_sentiment_test(request):
-   NLTK_sources()
    if request.method == 'POST':
       try:
          data = json.loads(request.body)
@@ -281,7 +276,6 @@ def analyze_sentiment_test(request):
 # Analyze sentiment using pre-trained models
 @csrf_exempt
 def analyze_sentiment_BERT(request):
-   NLTK_sources()
    if request.method == 'POST':
       try:
          data = json.loads(request.body)
@@ -291,16 +285,21 @@ def analyze_sentiment_BERT(request):
             return JsonResponse({'error': 'No text provided'}, status = 400)
          
          # Determines selected model based on domain
-         model_key = {
-            "Social Media": "social_media",
-            "Reviews": "reviews",
-            "Education/News": "eucation",
-            "Fiction": "fiction"
-         }.get(data.get("domain_select"))
-
-         if model_key is None:
+         if data.get("domain_select", "None") == "Social media":
+            model = data.get('model', 'Social Media')
+            analyzer = analyzers[model]
+         elif data.get("domain_select", "None") == "Reviews":
+            model = data.get('model', 'Customer Reviews')
+            analyzer = analyzers[model]
+         elif data.get("domain_select", "None") == "Education/News":
+            model = data.get('model', 'Education')
+            analyzer = analyzers[model]
+         elif data.get("domain_select", "None") == "Fiction":
+            model = data.get('model', 'Fiction')
+            analyzer = analyzers[model]
+         
+         if model not in analyzers:
             return JsonResponse({'error': 'Invalid model'}, status = 400) # Throws invalid model error
-         analyzer = get_analzyer(model_key)
          
          # Initialize result containers
          sentiments = []
