@@ -7,6 +7,8 @@
    export let min_df;
    export let max_df;
    export let scaling;
+   export let pattern_method;
+   export let sensi;
 </script>
 
 <div id="analyzer-settings">
@@ -55,10 +57,10 @@
          {:else if process === "SVM"}
             <tr>
                <td class="fs-4 col-8">
-                  Min documents
+                  Min document count
                   <p style="font-size:24px;
                            display: inline;"
-                     title="Filters rare words.">&#63;</p>
+                     title="Ignores rare words in text that are fewer than the specified value.">&#63;</p>
                </td>
                <td class="right-align fs-4 col-4">
                   <input
@@ -72,10 +74,10 @@
             </tr>
             <tr>
                <td class="fs-4 col-8">
-                  Max documents
+                  Max document count
                   <p style="font-size:24px;
                            display: inline;"
-                     title="Filters common words.">&#63;</p>
+                     title="Ignores words in text that appear more than the specified percentage.">&#63;</p>
                </td>
                <td class="right-align fs-4 col-4">
                   <input
@@ -93,7 +95,7 @@
                   Allow scaling
                   <p style="font-size:24px;
                            display: inline;"
-                     title="Applies scaling to term frequencies.">&#63;</p>
+                     title="Allows softening of common text impact.">&#63;</p>
                </td>
                <td class="right-align fs-4 col-4">
                   <select
@@ -104,6 +106,44 @@
                      <option value="True">Yes</option>
                      <option value="False">No</option>
                   </select>
+               </td>
+            </tr>
+            <tr>
+               <td class="fs-4 col-8">
+                  Recognition method
+                  <p style="font-size:24px;
+                           display: inline;"
+                     title="Changes how SVM 'interprets' the data.">&#63;</p>
+               </td>
+               <td class="right-align fs-4 col-4">
+                  <select
+                     class="analyzer-inputs col-12"
+                     id="domain-select"
+                     bind:value={pattern_method}>
+                     <option selected disabled hidden></option>
+                     <option value="rbf">Natural</option>
+                     <option value="linear">Basic</option>
+                     <option value="poly">Complex</option>
+                     <option value="sigmoid">Soft</option>
+                  </select>
+               </td>
+            </tr>
+            <tr>
+               <td class="fs-4 col-8">
+                  Sensitivity
+                  <p style="font-size:24px;
+                           display: inline;"
+                     title="Changes how each piece of data affects the overall model.">&#63;</p>
+               </td>
+               <td class="right-align fs-4 col-4">
+                  <input
+                     type="number"
+                     class="analyzer-inputs col-12"
+                     id="min-df"
+                     step="0.1"
+                     bind:value={sensi}
+                     min="0.1"
+                     max="1.0"/>
                </td>
             </tr>
          {/if}

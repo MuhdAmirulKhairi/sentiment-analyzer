@@ -96,11 +96,13 @@ def analyze_sentiment_train(request):
          min_df = data.get("min_df", 5)
          max_df = data.get("max_df", 0.8)
          scaling = data.get("scaling", True)
+         pattern_method = data.get("pattern_method", "rbf")
+         sensi = data.get("sensi", 0.1)
 
          if isinstance(scaling, str):
             scaling = scaling.lower() == "true"
          
-         print(f"{min_df}, {max_df}, {scaling}")
+         print(f"{min_df}, {max_df}, {scaling}, {pattern_method}, {sensi}")
          
          # Get user ID
          user_id = data.get("user_id")
@@ -122,7 +124,7 @@ def analyze_sentiment_train(request):
          trainVectors = vectorizer.fit_transform(texts['text'])
 
          # Train and predict
-         classifier = svm.SVC(kernel="rbf", gamma="scale", class_weight="balanced")
+         classifier = svm.SVC(kernel=pattern_method, gamma=sensi, class_weight="balanced")
          classifier.fit(trainVectors, texts['sentiment'])
 
          # Save vectorizer and clasifier
@@ -145,10 +147,6 @@ def analyze_sentiment_test(request):
       try:
          data = json.loads(request.body)
          texts = pd.DataFrame(data.get('texts'), columns=["text"]) # Expects text array
-         min_df = data.get("min_df", 5)
-         max_df = data.get("max_df", 0.8)
-         scaling = eval(data.get("scaling", True))
-         print(f"{min_df}, {max_df}, {scaling}")
 
          if not data:
             return JsonResponse({'error': 'No text provided'}, status = 400)

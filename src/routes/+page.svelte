@@ -28,6 +28,8 @@
    let min_df = 1;
    let max_df = 0.5;
    let scaling = true;
+   let pattern_method = "rbf";
+   let sensi = 0.1;
 
    let isLoading = false;
    let isTrained = false;
@@ -96,6 +98,8 @@
             min_df: min_df,
             max_df: max_df,
             scaling: scaling,
+            pattern_method: pattern_method,
+            sensi: sensi,
             show_only: show_only,
             word_cloud: word_cloud,
             texts: dataset.map(row => ({text: row.text, sentiment: row.sentiment}))
@@ -289,7 +293,9 @@
                      bind:domain_select
                      bind:min_df
                      bind:max_df
-                     bind:scaling />
+                     bind:scaling
+                     bind:pattern_method
+                     bind:sensi />
                </div>
                <div class="text-center p-2">
                   <button
