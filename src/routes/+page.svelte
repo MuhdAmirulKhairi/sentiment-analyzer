@@ -37,6 +37,7 @@
 
    let trainTime = 0;
    let performance = { precision: 0, recall: 0, f1_score: 0};
+   let showRaw = false;
    
    // Set the width of the side navigation to 300px when opening the nav bar
    function openNav() {
@@ -161,6 +162,7 @@
       const dataset = $CSVdata2;
       let new_data;
       isTrained = false;
+      showRaw = false;
 
       new_data = {
          user_id: user_ID,
@@ -327,8 +329,6 @@
                   <p class="panel-texts text-center">
                      Time taken: {trainTime} milliseconds
                   </p>
-                  <!-- <label class="panel-texts col-12 text-center" for="csv-file-upload">Upload new text data</label>
-                  <RawDataset /> -->
                   <Performance {performance}/>
                </div>
                <div class="text-center p-2 btn-row">
@@ -336,19 +336,47 @@
                      class="px-4 py-1 btn-flex"
                      id="run-analyzer"
                      type="submit"
-                     on:click={runTest}
+                     on:click={() => isTrained = false}
                      >
-                     Return
+                     Go Back
                   </button>
                   <button
                      class="px-4 py-1 btn-flex"
                      id="run-analyzer"
                      type="submit"
-                     on:click={runTest}
+                     on:click={() => showRaw = true}
                      >
                      Proceed
                   </button>
                </div>
+         </div>
+      </div>
+   {/if}
+   {#if showRaw}
+      <div class="overlay">
+         <div id="raw-data-panel" class="panel panel-default d-block col-md-5 col-10">
+            <div class="panel-body justify-content-center">
+               <label class="panel-texts col-12 text-center fs-4" for="csv-file-upload">Upload raw text</label>
+               <RawDataset />
+            </div>
+            <div class="text-center p-2 btn-row">
+               <button
+                  class="px-4 py-1 btn-flex"
+                  id="run-analyzer"
+                  type="submit"
+                  on:click={() => showRaw = false}
+                  >
+                  Go Back
+               </button>
+               <button
+                  class="px-4 py-1 btn-flex"
+                  id="run-analyzer"
+                  type="submit"
+                  on:click={runTest}
+                  >
+                  Run Test
+               </button>
+            </div>
          </div>
       </div>
    {/if}

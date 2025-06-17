@@ -7,7 +7,6 @@
    // Import components to render each result
    import SentimentResult from '$lib/sentimentResult.svelte';
    import Chart from "$lib/chart.svelte";
-   import Performance from '$lib/performance.svelte';
    import WordCloud from '$lib/wordCloud.svelte';
     import { json } from '@sveltejs/kit';
 
@@ -51,7 +50,6 @@
             // Assign attached values
             sentiments = data.sentiments || [];
             sentimentCounts = data.sentiment_counts || { positive: 0, negative: 0, neutral: 0};
-            performance = data.performance || { precision: 0, recall: 0, f1_score: 0};
             show_only = data.show_only || "None";
             word_cloud = data.word_cloud || [];
             console.log("Fetched word cloud:", word_cloud);
@@ -89,7 +87,7 @@
 {:else}
    <!-- Main results page -->
    <section id="results-main" class="p-4">
-      <div class="panel-heading text-center m-0">RESULTS</div>
+      <div class="panel-heading text-center m-0 py-2">RESULTS</div>
       <div id="sentiment-results" class="panel-group row my-3 mx-5"> <!-- Sentiment Results -->
          <div class="panel panel-default d-block col">
             <div class="text-center my-2">
@@ -104,19 +102,13 @@
             <SentimentResult {sentiments} showOnly={show_only}/>
          </div>
       </div>
-      <div class="panel-heading text-center m-0">CHART</div> <!-- Chart -->
+      <div class="panel-heading text-center m-0 py-2">CHART</div> <!-- Chart -->
       <div id="chart-results" class="panel-group row my-3 mx-5">
          <div class="panel panel-default d-block col">
             <Chart {sentimentCounts}/>
          </div>
       </div>
-      <div class="panel-heading text-center">PERFORMANCE</div> <!-- Performance-->
-      <div id="performance-results" class="panel-group row my-3 mx-5">
-         <div class="panel panel-default d-block col">
-            <Performance {performance}/>
-         </div>
-      </div>
-      <div class="panel-heading text-center">WORD CLOUD</div> <!-- Word cloud -->
+      <div class="panel-heading text-center py-2">WORD CLOUD</div> <!-- Word cloud -->
       <div id="wordcloud-results" class="panel-group row my-3 mx-5">
          <div class="panel panel-default d-block col">
             <div class="text-center my-2">
@@ -203,7 +195,7 @@
    }
 
    @media screen and (max-width: 768px) {
-      #sentiment-results, #chart-results, #performance-results, #wordcloud-results {
+      #sentiment-results, #chart-results, #wordcloud-results {
          padding-right: 0;
          padding-left: 0;
          padding-top: 2px;
