@@ -16,6 +16,7 @@ import re
 import numpy as np
 import pandas as pd
 import joblib
+import time
 
 from nltk.corpus import stopwords
 from nltk import pos_tag, word_tokenize
@@ -116,23 +117,43 @@ def analyze_sentiment_train(request):
          texts['text'] = texts['text'].apply(lambda x: x.lower())
          texts['text'] = texts['text'].apply((lambda x: re.sub('[^a-zA-z0-9\s]', '', x)))
 
+         # Train test split
+         train_set, test_set = np.split(texts, [int(.8*len(texts))])
+
          # Count feature vectors
          vectorizer = TfidfVectorizer(min_df = min_df,
                                       max_df = max_df,
                                       sublinear_tf=scaling,
                                       use_idf=True)
-         trainVectors = vectorizer.fit_transform(texts['text'])
+         trainVectors = vectorizer.fit_transform(train_set['text'])
+         testVectors = vectorizer.transform(test_set['text'])
 
          # Train and predict
          classifier = svm.SVC(kernel=pattern_method, gamma=sensi, class_weight="balanced")
-         classifier.fit(trainVectors, texts['sentiment'])
+         t0 = time.time()
+         classifier.fit(trainVectors, train_set['sentiment'])
+         prediction = classifier.predict(testVectors)
+         t1 = time.time()
+         time_to_train = t1 - t0
+         time_to_train = time_to_train * 1000
+         time_to_train = round(time_to_train, 2)
+
+         # Classification report
+         report = classification_report(test_set["sentiment"], prediction, output_dict=True)
+         precision = report['macro avg']['precision'] * 100
+         recall = report['macro avg']['recall'] * 100
+         f1 = report['macro avg']['f1-score'] * 100
 
          # Save vectorizer and clasifier
          joblib.dump(vectorizer, f'vectorizer_{user_id}.pkl')
          joblib.dump(classifier, f'classifier_{user_id}.pkl')
          joblib.dump(texts["sentiment"], f'train_set_{user_id}.pkl')
 
-         return JsonResponse({'message': 'Training success.'})
+         return JsonResponse({
+            'message': 'Training success.',
+            'time_to_train': time_to_train,
+            "performance": {"precision": precision, "recall": recall, "f1_score": f1},
+         })
 
       except Exception as exp:
          print("Exception Traceback: ")

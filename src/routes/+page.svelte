@@ -11,6 +11,7 @@
    // Input UIs
    import History from "$lib/history.svelte";
    import AnalyzerSettings from "$lib/analyzerSettings.svelte";
+   import Performance from "$lib/performance.svelte";
 
    // Set default values
    let user_ID;
@@ -33,6 +34,9 @@
 
    let isLoading = false;
    let isTrained = false;
+
+   let trainTime = 0;
+   let performance = { precision: 0, recall: 0, f1_score: 0};
    
    // Set the width of the side navigation to 300px when opening the nav bar
    function openNav() {
@@ -133,6 +137,9 @@
                goto(`/results/${data.id}`); // Redirect after success
             }
             else if (process === "SVM") {
+               let data = await response.json();
+               trainTime = data.time_to_train;
+               performance = data.performance || { precision: 0, recall: 0, f1_score: 0};
                isTrained = true;
                return;
             }
@@ -263,11 +270,6 @@
             class="text-center m-0">
             SENTIMENT ANALYZER
          </h1>
-         <h5 
-            style="font-family: Roboto, Helvetica, sans-serif" 
-            class="text-center m-0">
-            By: Amirul Khairi
-         </h5>
       </div>
    </header>
 </section>
@@ -320,19 +322,31 @@
    {#if isTrained}
       <div class="overlay">
          <div id="raw-data-panel" class="panel panel-default d-block col-md-5 col-10">
-            <div class="panel-heading text-center">Training Complete</div>
+            <div class="panel-heading text-center">Processing Complete</div>
                <div class="panel-body justify-content-center">
-                  <label class="panel-texts col-12 text-center" for="csv-file-upload">Upload new text data</label>
-                  <RawDataset />
+                  <p class="panel-texts text-center">
+                     Time taken: {trainTime} milliseconds
+                  </p>
+                  <!-- <label class="panel-texts col-12 text-center" for="csv-file-upload">Upload new text data</label>
+                  <RawDataset /> -->
+                  <Performance {performance}/>
                </div>
-               <div class="text-center p-2">
+               <div class="text-center p-2 btn-row">
                   <button
-                     class="px-4 py-1"
+                     class="px-4 py-1 btn-flex"
                      id="run-analyzer"
                      type="submit"
                      on:click={runTest}
                      >
-                     Run Test
+                     Return
+                  </button>
+                  <button
+                     class="px-4 py-1 btn-flex"
+                     id="run-analyzer"
+                     type="submit"
+                     on:click={runTest}
+                     >
+                     Proceed
                   </button>
                </div>
          </div>
@@ -347,7 +361,7 @@
          style="font-family: Roboto, Helvetica, sans-serif;
                 color: #2C2C2C;"
          class="d-block text-center m-0">
-         2025 | Sentiment Analyzer by Amirul Khairi
+         2025 | Sentiment Analyzer
       </p>
    </footer>
 </section>
@@ -361,15 +375,11 @@
       min-height: calc(100vh - 160px);
    }
 
-   h1, h5, .panel-heading {
+   h1, .panel-heading {
       color: #FFF7D1;
       -webkit-text-stroke-width: 1px;
       -webkit-text-stroke-color: #000000;
       text-shadow: 1px 2px 4px #000000;
-   }
-
-   h5 {
-      -webkit-text-stroke-width: 0.6px;
    }
 
    .panel-heading {
@@ -519,6 +529,29 @@
       height: 40px;
       animation: spin 1s linear infinite;
       margin: 10px auto;
+   }
+
+   .btn-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 50px;
+      margin-top: 20px;
+   }
+
+   .btn-flex {
+      flex: 1;
+      padding: 10px;
+      background-color: #2C2C2C;
+      color: #F5F5F5;
+      border-radius: 11px;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+   }
+
+   .btn-flex:hover {
+      background-color: #444;
    }
 
    @keyframes spin {
