@@ -74,8 +74,12 @@
    async function runAnalyzer(event) {
       event.preventDefault(); // Prevent default form submission
 
+      let dataset;
+
       // If a user pressed the button without a dataset
-      const dataset = $CSVdata1;
+      if (process === "SVM") { dataset = $CSVdata1; }
+      else if (process === "BERT") { dataset = $CSVdata2; }
+
       if (!dataset.length) {
          alert("No dataset uploaded!");
          return;
@@ -282,8 +286,15 @@
       <div id="dataset-panel" class="panel panel-default d-block col-md-5 col-12">
          <div class="panel-heading text-center">DATASET</div>
             <div class="panel-body justify-content-center">
-               <label class="panel-texts col-12 text-center" for="csv-file-upload">Upload your dataset...</label>
-               <Dataset />
+               {#if process === "SVM"}
+                  <label class="panel-texts col-12 text-center" for="csv-file-upload">Upload your dataset...</label>
+                  <Dataset />
+               {:else if process === "BERT"}
+                  <label class="panel-texts col-12 text-center" for="csv-file-upload">Upload your dataset...</label>
+                  <RawDataset />
+               {:else}
+                  <label class="panel-texts col-12 text-center" for="csv-file-upload">Choose a model first</label>
+               {/if}
             </div>
       </div>
       <div class="panel panel-default col-md-1 d-none d-md-block"></div>
@@ -344,7 +355,10 @@
                      class="px-4 py-1 btn-flex"
                      id="run-analyzer"
                      type="submit"
-                     on:click={() => showRaw = true}
+                     on:click={() => {
+                        showRaw = true;
+                        isTrained = false;
+                     }}
                      >
                      Proceed
                   </button>
@@ -356,7 +370,7 @@
       <div class="overlay">
          <div id="raw-data-panel" class="panel panel-default d-block col-md-5 col-10">
             <div class="panel-body justify-content-center">
-               <label class="panel-texts col-12 text-center fs-4" for="csv-file-upload">Upload raw text</label>
+               <label class="panel-texts col-12 text-center fs-4" for="csv-file-upload">Upload raw data</label>
                <RawDataset />
             </div>
             <div class="text-center p-2 btn-row">
@@ -364,7 +378,10 @@
                   class="px-4 py-1 btn-flex"
                   id="run-analyzer"
                   type="submit"
-                  on:click={() => showRaw = false}
+                  on:click={() => {
+                     showRaw = false;
+                     isTrained = true;
+                  }}
                   >
                   Go Back
                </button>

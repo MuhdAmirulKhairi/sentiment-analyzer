@@ -41,7 +41,7 @@
          <table class="table table-striped table-bordered">
             <thead class="table-dark">
                <tr>
-                  <th class="col-8">Texts (from testing data)</th>
+                  <th class="col-8">Texts (from raw data)</th>
                   <th>Assigned Labels</th>
                </tr>
             </thead>
