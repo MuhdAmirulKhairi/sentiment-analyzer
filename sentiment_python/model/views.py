@@ -147,7 +147,6 @@ def analyze_sentiment_train(request):
          # Save vectorizer and clasifier
          joblib.dump(vectorizer, f'vectorizer_{user_id}.pkl')
          joblib.dump(classifier, f'classifier_{user_id}.pkl')
-         joblib.dump(texts["sentiment"], f'train_set_{user_id}.pkl')
 
          return JsonResponse({
             'message': 'Training success.',
@@ -228,24 +227,6 @@ def analyze_sentiment_test(request):
                and len(re.sub(r'[^\w\s]', '', word)) > 1
             ]
             all_words.extend(filtered_words)
-         
-         # Process the performance metrics
-         train_set = f'train_set_{user_id}.pkl'
-
-         if os.path.exists(train_set):
-            train_labels = joblib.load(train_set)
-
-            # Match length to testing set or vice versa
-            min_length = min(len(train_labels), len(pred_labels))
-            train_labels = train_labels[:min_length]
-            pred_labels = pred_labels[:min_length]
-
-            report = classification_report(train_labels, pred_labels, output_dict=True)
-            precision = report['macro avg']['precision']
-            recall = report['macro avg']['recall']
-            f1 = report['macro avg']['f1-score']
-         else:
-            precision = recall = f1 = 0.0
 
          # Process word cloud frequencies
          word_freq = collections.Counter(all_words)
@@ -263,7 +244,6 @@ def analyze_sentiment_test(request):
             "show_only": data.get("show_only", "None"),
             "sentiments": sentiments,
             "sentiment_counts": sentiment_counts,
-            "performance": {"precision": precision, "recall": recall, "f1_score": f1},
             "word_cloud": normalized_words
          }
 
@@ -346,11 +326,6 @@ def analyze_sentiment_BERT(request):
                and len(re.sub(r'[^\w\s]', '', word)) > 1
             ]
             all_words.extend(filtered_words)
-
-         # Process the performance metrics
-         precision = precision_score(predictions, [1] * len(predictions), average = "macro", zero_division = 0)
-         recall = recall_score(predictions, [1] * len(predictions), average = "macro", zero_division = 0)
-         f1 = f1_score(predictions, [1] * len(predictions), average = "macro", zero_division = 0)
          
          # Process word cloud frequencies
          word_freq = collections.Counter(all_words)
@@ -368,7 +343,6 @@ def analyze_sentiment_BERT(request):
             "show_only": data.get("show_only", "None"),
             "sentiments": sentiments,
             "sentiment_counts": sentiment_counts,
-            "performance": {"precision": precision, "recall": recall, "f1_score": f1},
             "word_cloud": normalized_words
          }
 
