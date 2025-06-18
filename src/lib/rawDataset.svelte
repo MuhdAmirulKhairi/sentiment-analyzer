@@ -23,10 +23,9 @@
                complete: function(result) {
                   // Filter unwanted columns
                   CSVdata2.set(result.data
-                                 .filter(row => row.text && row.sentiment)
+                                 .filter(row => row.text)
                                  .map(row => ({
-                                    text: row.text,
-                                    sentiment: row.sentiment || "Unknown"
+                                    text: row.text
                                  }))
                   );
                },
